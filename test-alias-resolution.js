@@ -13,5 +13,8 @@ if (aliasTargets[0] !== expectedTarget) {
   throw new Error(`@/* alias should map to ${expectedTarget}`);
 }
 
-const resolvedSample = path.resolve(__dirname, aliasTargets[0].replace("*", "index"));
+const resolvedSample = path.resolve(
+  __dirname,
+  aliasTargets[0].replace(/\*/g, "index")
+);
 console.log(`Alias mapping verified. Resolved sample path: ${resolvedSample}`);
