@@ -1,0 +1,79 @@
+{
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "css.lint.unknownAtRules": "ignore",
+  "css.customData": [
+    ".vscode/tailwind.css-data.json"
+  ],
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "emmet.includeLanguages": {
+    "postcss": "css"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["tsconfig.json"],
+      "url": "./schemas/tsconfig.schema.json"
+    }
+  ],
+  "json.schemaDownload.enable": false,
+  "kiroAgent.configureMCP": "Disabled",
+  "typescript.autoClosingTags": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "kiroAgent.trustedCommands": [
+    "npm run build",
+    "npm run type-check",
+    "",
+    "npm run lint",
+    "find app -name \"*.tsx\" -o -name \"*.ts\" | head -10 | xargs grep -l \"import.*{.*}\" | head -5",
+    "npm run lint 2>&1 | grep -c \"warning\"",
+    "npm run lint 2>&1 | grep \"error\"",
+    "npm run lint 2>&1 | grep \"HTML entity\"",
+    "tail -5 app/components/RealtimeSandbox.tsx",
+    "npx tsc --noEmit --skipLibCheck app/components/RealtimeSandbox.tsx",
+    "wc -l app/components/RealtimeSandbox.tsx && tail -10 app/components/RealtimeSandbox.tsx",
+    "grep -o '(' app/components/RealtimeSandbox.tsx | wc -l && grep -o ')' app/components/RealtimeSandbox.tsx | wc -l",
+    "npm run build 2>&1 | head -20",
+    "wc -l app/components/RealtimeSandbox.tsx",
+    "head -n 380 app/components/RealtimeSandbox.tsx > temp_sandbox.tsx && echo '          />\n        </div>\n      </div>\n    </div>\n  )\n}' >> temp_sandbox.tsx && mv temp_sandbox.tsx app/components/RealtimeSandbox.tsx",
+    "tail -10 app/components/RealtimeSandbox.tsx",
+    "chmod +x scripts/deploy-perfect.sh",
+    "./scripts/deploy-perfect.sh",
+    "head -n 370 app/components/RealtimeSandbox.tsx > temp_sandbox_clean.tsx",
+    "mv temp_sandbox_clean.tsx app/components/RealtimeSandbox.tsx",
+    "chmod +x scripts/deploy-perfect.sh && ./scripts/deploy-perfect.sh",
+    "npm run lint -- --fix",
+    "npm run dev",
+    "node scripts/fix-dynamic-pages.js",
+    "cp public/favicon.svg public/favicon.ico",
+    "curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001",
+    "node scripts/fix-navigation-issues.cjs",
+    "node scripts/comprehensive-course-system-audit.js",
+    "node scripts/fix-all-course-system-errors.js",
+    "chmod +x scripts/test-topics-implementation.js",
+    "node scripts/test-topics-implementation.js",
+    "mv scripts/test-topics-implementation.js scripts/test-topics-implementation.cjs",
+    "node scripts/test-topics-implementation.cjs",
+    "npx tsc --noEmit --skipLibCheck",
+    "npx prisma db push",
+    "npm install react-quill",
+    "node scripts/seed-hierarchical-course.cjs",
+    "rm -rf app/admin/lessons/[slug]",
+    "rm -rf \"app/admin/lessons/[slug]\""
+  ]
+}

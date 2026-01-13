@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://local/schemas/tsconfig.schema.json",
+  "title": "Local TSConfig Schema (trimmed)",
+  "type": "object",
+  "properties": {
+    "compilerOptions": {
+      "type": "object",
+      "properties": {
+        "target": { "type": "string" },
+        "module": { "type": "string" },
+        "lib": { "type": "array", "items": { "type": "string" } },
+        "jsx": { "type": "string" },
+        "moduleResolution": { "type": "string" },
+        "esModuleInterop": { "type": "boolean" },
+        "resolveJsonModule": { "type": "boolean" },
+        "forceConsistentCasingInFileNames": { "type": "boolean" },
+        "skipLibCheck": { "type": "boolean" },
+        "strict": { "type": "boolean" },
+        "baseUrl": { "type": "string" },
+        "paths": {
+          "type": "object",
+          "additionalProperties": { "type": "array", "items": { "type": "string" } }
+        },
+        "isolatedModules": { "type": "boolean" },
+        "types": { "type": "array", "items": { "type": "string" } },
+        "allowJs": { "type": "boolean" },
+        "noEmit": { "type": "boolean" },
+        "incremental": { "type": "boolean" },
+        "plugins": { "type": "array", "items": { "type": "object" } },
+        "strictNullChecks": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    },
+    "include": { "type": "array", "items": { "type": "string" } },
+    "exclude": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

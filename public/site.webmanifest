@@ -1,0 +1,21 @@
+{
+  "name": "Veeru's Pro Academy",
+  "short_name": "VeeruPro",
+  "description": "Learn programming for FREE with clear examples and practical projects",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#1e3a8a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ]
+}

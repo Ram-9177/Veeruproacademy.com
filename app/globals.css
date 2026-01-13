@@ -1,0 +1,709 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark Educational Theme - W3Schools/GeeksforGeeks Structure */
+    --background: #1a1a1a;
+    --surface: #2d2d2d;
+    --surface-elevated: #3a3a3a;
+    --surface-hover: #4a4a4a;
+    --surface-glass: rgba(45, 45, 45, 0.95);
+
+    /* Clean Color Palette for Dark Theme */
+    --primary: #4f9eff;
+    --primary-hover: #3d8bfd;
+    --primary-light: #6bb6ff;
+    --primary-dark: #2563eb;
+
+    --secondary: #10b981;
+    --secondary-hover: #059669;
+    --secondary-light: #34d399;
+
+    --accent: #06b6d4;
+    --accent-hover: #0891b2;
+    --accent-light: #22d3ee;
+
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+
+    /* Dark Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #e5e7eb;
+    --text-muted: #9ca3af;
+    --text-subtle: #6b7280;
+
+    /* Dark Border Colors */
+    --border: #374151;
+    --border-light: #4b5563;
+    --border-accent: rgba(79, 158, 255, 0.3);
+
+    /* Clean Dark Colors */
+    --color-primary: #4f9eff;
+    --color-primary-hover: #3d8bfd;
+    --color-secondary: #10b981;
+    --color-secondary-hover: #059669;
+    --color-accent: #06b6d4;
+    --color-accent-hover: #0891b2;
+    --color-success: #10b981;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-gray-900 text-white font-sans;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+      sans-serif;
+    line-height: 1.6;
+    background-color: #1a1a1a;
+  }
+
+  /* Clean Typography for Dark Theme */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold text-white;
+    line-height: 1.3;
+  }
+
+  h1 {
+    @apply text-3xl md:text-4xl;
+  }
+  h2 {
+    @apply text-2xl md:text-3xl;
+  }
+  h3 {
+    @apply text-xl md:text-2xl;
+  }
+  h4 {
+    @apply text-lg md:text-xl;
+  }
+  h5 {
+    @apply text-base md:text-lg;
+  }
+  h6 {
+    @apply text-sm md:text-base;
+  }
+
+  p {
+    @apply text-gray-300 leading-relaxed;
+  }
+
+  /* Clean Links for Dark Theme */
+  a {
+    @apply text-blue-400 hover:text-blue-300 transition-colors;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Clean Buttons for Dark Theme */
+  .btn {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200 border inline-flex items-center justify-center gap-2 text-center;
+    min-height: 44px; /* Better touch target */
+  }
+
+  .btn-primary {
+    @apply bg-blue-600 text-white border-blue-600 hover:bg-blue-700 hover:border-blue-700 hover:shadow-lg transform hover:scale-105;
+  }
+
+  .btn-secondary {
+    @apply bg-green-600 text-white border-green-600 hover:bg-green-700 hover:border-green-700 hover:shadow-lg transform hover:scale-105;
+  }
+
+  .btn-outline {
+    @apply bg-transparent text-blue-400 border-blue-600 hover:bg-blue-600 hover:text-white hover:shadow-lg transform hover:scale-105;
+  }
+
+  .btn:disabled {
+    @apply opacity-50 cursor-not-allowed transform-none hover:scale-100;
+  }
+
+  /* Clean Cards for Dark Theme */
+  .card {
+    @apply bg-gray-800 border border-gray-700 rounded-lg shadow-sm;
+  }
+
+  .card-header {
+    @apply px-6 py-4 border-b border-gray-700 bg-gray-800;
+  }
+
+  .card-body {
+    @apply px-6 py-4;
+  }
+
+  /* Clean Navigation for Dark Theme */
+  .nav-link {
+    @apply text-gray-300 hover:text-blue-400 px-3 py-2 transition-colors;
+  }
+
+  .nav-link.active {
+    @apply text-blue-400 font-medium;
+  }
+
+  /* Clean Forms for Dark Theme */
+  .form-control {
+    @apply w-full px-3 py-2 border border-gray-600 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-300 mb-1;
+  }
+
+  /* Clean Tables for Dark Theme */
+  .table {
+    @apply w-full border-collapse;
+  }
+
+  .table th {
+    @apply px-4 py-3 text-left text-sm font-semibold text-white bg-gray-800 border-b border-gray-700;
+  }
+
+  .table td {
+    @apply px-4 py-3 text-sm text-gray-300 border-b border-gray-700;
+  }
+
+  .table tr:hover {
+    @apply bg-gray-800;
+  }
+
+  /* Clean Alerts for Dark Theme */
+  .alert {
+    @apply px-4 py-3 rounded border;
+  }
+
+  .alert-success {
+    @apply bg-green-900 text-green-200 border-green-700;
+  }
+
+  .alert-warning {
+    @apply bg-yellow-900 text-yellow-200 border-yellow-700;
+  }
+
+  .alert-error {
+    @apply bg-red-900 text-red-200 border-red-700;
+  }
+
+  .alert-info {
+    @apply bg-blue-900 text-blue-200 border-blue-700;
+  }
+
+  /* Clean Code Blocks for Dark Theme */
+  code {
+    @apply bg-gray-800 text-gray-200 px-1 py-0.5 rounded text-sm font-mono;
+  }
+
+  pre {
+    @apply bg-gray-800 text-gray-200 p-4 rounded overflow-x-auto;
+  }
+
+  pre code {
+    @apply bg-transparent p-0;
+  }
+
+  /* Clean Utilities for Dark Theme */
+  .text-primary {
+    @apply text-blue-400;
+  }
+  .text-secondary {
+    @apply text-green-400;
+  }
+  .text-success {
+    @apply text-green-400;
+  }
+  .text-warning {
+    @apply text-yellow-400;
+  }
+  .text-error {
+    @apply text-red-400;
+  }
+
+  .bg-primary {
+    @apply bg-blue-600;
+  }
+  .bg-secondary {
+    @apply bg-green-600;
+  }
+  .bg-success {
+    @apply bg-green-600;
+  }
+  .bg-warning {
+    @apply bg-yellow-500;
+  }
+  .bg-error {
+    @apply bg-red-600;
+  }
+
+  /* W3Schools/GeeksforGeeks Style Sections */
+  .w3-section {
+    @apply py-16 border-b border-gray-700;
+  }
+
+  .w3-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .w3-card {
+    @apply bg-gray-800 border border-gray-700 rounded-lg shadow-sm p-6;
+  }
+
+  .w3-bar {
+    @apply bg-gray-800 border-b border-gray-700;
+  }
+
+  .w3-bar-item {
+    @apply px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors;
+  }
+
+  /* GeeksforGeeks Style Code Examples */
+  .gfg-code {
+    @apply bg-gray-900 border border-gray-700 rounded p-4 font-mono text-sm;
+  }
+
+  .gfg-output {
+    @apply bg-gray-800 border border-gray-600 rounded p-3 mt-2 text-green-400;
+  }
+
+  /* JavaTpoint Style Lists */
+  .jtp-list {
+    @apply space-y-2;
+  }
+
+  .jtp-list-item {
+    @apply flex items-start gap-3 p-3 bg-gray-800 rounded border-l-4 border-blue-500;
+  }
+
+  /* Educational Content Styles */
+  .tutorial-content {
+    @apply max-w-4xl mx-auto;
+  }
+
+  .tutorial-nav {
+    @apply bg-gray-800 border border-gray-700 rounded p-4 mb-6;
+  }
+
+  .tutorial-section {
+    @apply mb-8 pb-6 border-b border-gray-700;
+  }
+
+  .tutorial-example {
+    @apply bg-gray-900 border border-gray-700 rounded p-4 my-4;
+  }
+
+  /* Course Grid like W3Schools - Mobile Responsive */
+  .course-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6;
+  }
+
+  .course-card {
+    @apply bg-gray-800 border border-gray-700 rounded-lg p-4 sm:p-6 hover:border-blue-500 transition-colors;
+  }
+
+  .course-title {
+    @apply text-lg sm:text-xl font-semibold text-white mb-2;
+  }
+
+  .course-desc {
+    @apply text-gray-400 text-sm mb-4;
+  }
+
+  .course-meta {
+    @apply flex items-center gap-2 sm:gap-4 text-sm text-gray-500;
+  }
+
+  /* Clean Animations */
+  .fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  /* Clean Scrollbar for Dark Theme */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #374151;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+  }
+
+  /* Clean Accessibility - Skip Link */
+  .skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    z-index: 1000;
+    padding: 8px 16px;
+    background: #1f2937;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid #3b82f6;
+    transition: top 0.3s;
+  }
+
+  .skip-to-content:focus {
+    top: 6px;
+  }
+
+  .skip-to-content:hover {
+    background: #374151;
+    color: #60a5fa;
+  }
+
+  /* Clean Focus States */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900;
+  }
+
+  /* Clean Shadows for Dark Theme */
+  .shadow-clean {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .shadow-clean-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  }
+
+  .shadow-clean-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Clean Layout Utilities */
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.section {
+  @apply py-12 md:py-16;
+}
+
+.section-sm {
+  @apply py-8 md:py-12;
+}
+
+.section-lg {
+  @apply py-16 md:py-24;
+}
+
+/* W3Schools Style Layout */
+.w3-main {
+  @apply max-w-6xl mx-auto;
+}
+
+.w3-sidebar {
+  @apply w-64 bg-gray-800 border-r border-gray-700 h-screen fixed left-0 top-0 overflow-y-auto;
+}
+
+.w3-content {
+  @apply ml-64 p-6;
+}
+
+/* GeeksforGeeks Style Header */
+.gfg-header {
+  @apply bg-gray-800 border-b border-gray-700 sticky top-0 z-50;
+}
+
+.gfg-nav {
+  @apply flex items-center justify-between px-6 py-4;
+}
+
+.gfg-logo {
+  @apply text-2xl font-bold text-white;
+}
+
+.gfg-menu {
+  @apply flex items-center space-x-6;
+}
+
+.gfg-menu-item {
+  @apply text-gray-300 hover:text-white transition-colors;
+}
+
+/* Modern Navbar Styles */
+.w3-navbar-modern {
+  @apply bg-gray-900 border-b border-gray-700 sticky top-0 z-50 shadow-lg;
+}
+
+.navbar-main {
+  @apply flex items-center justify-between px-6 py-4;
+}
+
+.navbar-logo {
+  @apply flex items-center text-white hover:text-blue-400 transition-colors;
+}
+
+.logo-text {
+  @apply flex flex-col leading-tight;
+}
+
+.logo-primary {
+  @apply text-xl font-bold text-white;
+}
+
+.logo-secondary {
+  @apply text-sm font-medium text-blue-400 -mt-1;
+}
+
+.navbar-item {
+  @apply px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-all duration-200 font-medium;
+}
+
+.navbar-icon-btn {
+  @apply p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors;
+}
+
+.btn-navbar-outline {
+  @apply px-4 py-2 text-blue-400 border border-blue-600 hover:bg-blue-600 hover:text-white rounded-lg transition-all duration-200 font-medium;
+}
+
+.btn-navbar-primary {
+  @apply px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-all duration-200 font-medium shadow-sm;
+}
+
+.navbar-mobile-btn {
+  @apply p-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors;
+}
+
+.navbar-mobile {
+  @apply border-t border-gray-700 bg-gray-900;
+}
+
+.mobile-menu {
+  @apply flex flex-col py-4;
+}
+
+.mobile-menu-item {
+  @apply px-6 py-3 text-gray-300 hover:text-white hover:bg-gray-800 transition-colors font-medium;
+}
+
+.mobile-actions {
+  @apply flex flex-col space-y-3 px-6 pt-4 border-t border-gray-700 mt-4;
+}
+
+.btn-mobile-outline {
+  @apply px-4 py-3 text-center text-blue-400 border border-blue-600 hover:bg-blue-600 hover:text-white rounded-lg transition-all duration-200 font-medium;
+}
+
+.btn-mobile-primary {
+  @apply px-4 py-3 text-center bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-all duration-200 font-medium;
+}
+
+/* Courses Navigation Bar */
+.courses-navbar {
+  @apply bg-gray-800 border-t border-gray-700;
+}
+
+.courses-nav-content {
+  @apply flex items-center px-6 py-3 overflow-x-auto scrollbar-hide;
+}
+
+.courses-label {
+  @apply flex items-center gap-2 text-sm font-medium text-gray-400 pr-4 border-r border-gray-600 mr-6 whitespace-nowrap;
+}
+
+.courses-list {
+  @apply flex items-center space-x-3;
+}
+
+.course-nav-item {
+  @apply flex items-center gap-2 px-3 py-1.5 text-sm text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg transition-all duration-200 whitespace-nowrap border border-transparent hover:border-gray-600 h-8;
+}
+
+.course-nav-item:hover .course-icon {
+  @apply scale-110;
+}
+
+.course-icon {
+  @apply w-5 h-5 flex items-center justify-center text-blue-400 transition-transform;
+}
+
+.course-title {
+  @apply font-medium text-sm;
+}
+
+.course-free-badge {
+  @apply px-2 py-0.5 bg-green-500 text-white text-xs rounded-full font-medium ml-2 inline-flex items-center justify-center;
+}
+
+.view-all-courses {
+  @apply ml-4 px-4 py-1.5 bg-blue-600 text-white hover:bg-blue-700 rounded-lg text-sm font-medium transition-colors whitespace-nowrap border border-blue-500 hover:border-blue-400 inline-flex items-center justify-center h-8;
+}
+
+/* JavaTpoint Style Content */
+.jtp-content {
+  @apply max-w-5xl mx-auto p-6;
+}
+
+.jtp-breadcrumb {
+  @apply flex items-center space-x-2 text-sm text-gray-400 mb-6;
+}
+
+.jtp-title {
+  @apply text-3xl font-bold text-white mb-6;
+}
+
+.jtp-section {
+  @apply mb-8;
+}
+
+.jtp-section-title {
+  @apply text-xl font-semibold text-white mb-4 border-b border-gray-700 pb-2;
+}
+
+/* Clean Grid System */
+.grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.grid-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+/* Responsive Grid Utilities */
+@media (max-width: 768px) {
+  .grid-auto-fit,
+  .grid-auto-fill {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Admin Header Specific Fixes */
+.admin-header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background-color: rgb(55 65 81);
+  border-radius: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.admin-header-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.admin-header-title {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: white;
+  line-height: 1.25;
+}
+
+.admin-header-subtitle {
+  font-size: 0.75rem;
+  color: rgb(96 165 250);
+  line-height: 1.25;
+}
+
+@media (max-width: 640px) {
+  .admin-header-text {
+    display: none;
+  }
+}
+
+/* Clean Responsive Utilities */
+@media (max-width: 768px) {
+  .mobile-hidden {
+    display: none;
+  }
+
+  .w3-sidebar {
+    @apply transform -translate-x-full transition-transform;
+  }
+
+  .w3-sidebar.open {
+    @apply transform translate-x-0;
+  }
+
+  .w3-content {
+    @apply ml-0;
+  }
+}
+
+@media (min-width: 769px) {
+  .desktop-hidden {
+    display: none;
+  }
+}
+
+/* Clean Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    @apply text-black bg-white;
+  }
+
+  a {
+    @apply text-black no-underline;
+  }
+
+  .card {
+    @apply border border-gray-400;
+  }
+}

@@ -1,0 +1,6 @@
+# Exclude Netlify-specific artifacts from Vercel builds
+netlify/
+
+# Local scripts/tests for Netlify functions
+scripts/run-verifySandbox-local.js
+__tests__/verifySandbox.test.ts
