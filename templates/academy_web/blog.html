@@ -1,0 +1,136 @@
+{% extends 'academy_web/base.html' %}
+{% load i18n %}
+
+{% block title %}Blog - Veeru's Pro Academy{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="bg-brand-orange text-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <span class="inline-block bg-white/10 text-white px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
+        <i class="fas fa-blog mr-2"></i>Learn & Grow
+      </span>
+      <h1 class="text-4xl lg:text-5xl font-bold mb-4">Our Blog</h1>
+      <p class="text-xl text-white/80 max-w-2xl mx-auto">
+        Tips, tutorials, and insights to help you on your coding journey
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Post -->
+<section class="py-16 bg-white dark:bg-dark-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">Featured Post</h2>
+    <div class="bg-gray-50 dark:bg-dark-700 rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-dark-600">
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+        <div class="h-64 lg:h-auto">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop" alt="Featured post" class="w-full h-full object-cover" loading="lazy">
+        </div>
+        <div class="p-8 flex flex-col justify-center">
+          <span class="bg-brand-orange/10 text-brand-orange px-3 py-1 rounded-full text-sm font-medium w-fit mb-4">
+            <i class="fas fa-fire mr-1"></i>Featured
+          </span>
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Getting Started with Python: A Complete Beginner's Guide</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-6">
+            Learn the fundamentals of Python programming from scratch. This comprehensive guide covers everything you need to know to start your coding journey.
+          </p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <div class="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center text-white font-bold mr-3">V</div>
+              <div>
+                <p class="font-medium text-gray-900 dark:text-white">Veeru</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Jan 15, 2025</p>
+              </div>
+            </div>
+            <a href="#" class="text-brand-orange hover:text-brand-blue font-medium inline-flex items-center">
+              Read More <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Posts Grid -->
+<section class="py-16 bg-gray-50 dark:bg-dark-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">Latest Posts</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Post 1 -->
+      <div class="bg-white dark:bg-dark-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-dark-700 card-hover">
+        <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=200&fit=crop" alt="Blog post" class="w-full h-48 object-cover" loading="lazy">
+        <div class="p-6">
+          <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-full text-xs font-medium">Python</span>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mt-3 mb-2">Understanding Python Data Types</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">A deep dive into Python's built-in data types and when to use each one...</p>
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-500 dark:text-gray-400">Jan 10, 2025</span>
+            <a href="#" class="text-brand-orange hover:text-brand-blue font-medium text-sm">Read →</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Post 2 -->
+      <div class="bg-white dark:bg-dark-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-dark-700 card-hover">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop" alt="Blog post" class="w-full h-48 object-cover" loading="lazy">
+        <div class="p-6">
+          <span class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 px-3 py-1 rounded-full text-xs font-medium">Tips</span>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mt-3 mb-2">10 Tips for Effective Learning</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Maximize your learning potential with these proven study techniques...</p>
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-500 dark:text-gray-400">Jan 5, 2025</span>
+            <a href="#" class="text-brand-orange hover:text-brand-blue font-medium text-sm">Read →</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Post 3 -->
+      <div class="bg-white dark:bg-dark-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-dark-700 card-hover">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=200&fit=crop" alt="Blog post" class="w-full h-48 object-cover" loading="lazy">
+        <div class="p-6">
+          <span class="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-3 py-1 rounded-full text-xs font-medium">Career</span>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mt-3 mb-2">Building Your Developer Portfolio</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Stand out from the crowd with an impressive portfolio that showcases your skills...</p>
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-500 dark:text-gray-400">Dec 28, 2024</span>
+            <a href="#" class="text-brand-orange hover:text-brand-blue font-medium text-sm">Read →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="mt-12 flex justify-center">
+      <nav class="flex items-center space-x-2">
+        <button class="px-4 py-2 rounded-lg bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-dark-700" disabled>
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="px-4 py-2 rounded-lg bg-brand-orange text-white font-medium">1</button>
+        <button class="px-4 py-2 rounded-lg bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-dark-700">2</button>
+        <button class="px-4 py-2 rounded-lg bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-dark-700">3</button>
+        <button class="px-4 py-2 rounded-lg bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-dark-700">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="py-16 bg-brand-orange">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold text-white mb-4">Stay Updated</h2>
+    <p class="text-white/80 mb-8">Subscribe to our newsletter for the latest tutorials, tips, and course updates.</p>
+    <form class="flex flex-col sm:flex-row gap-4 justify-center max-w-xl mx-auto">
+      <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-3 rounded-xl border-0 focus:ring-2 focus:ring-white text-gray-900">
+      <button type="submit" class="bg-white text-brand-orange px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition shadow-lg">
+        Subscribe
+      </button>
+    </form>
+  </div>
+</section>
+{% endblock %}

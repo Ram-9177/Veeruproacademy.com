@@ -1,0 +1,102 @@
+{% extends 'academy_web/base.html' %}
+{% load i18n %}
+
+{% block title %}Careers - Veeru's Pro Academy{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="bg-brand-orange text-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <span class="inline-block bg-white/10 text-white px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
+        <i class="fas fa-briefcase mr-2"></i>Join Our Team
+      </span>
+      <h1 class="text-4xl lg:text-5xl font-bold mb-4">Careers at Veeru's Pro Academy</h1>
+      <p class="text-xl text-white/80 max-w-2xl mx-auto">
+        Help us transform education and empower the next generation of developers
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Why Join Us -->
+<section class="py-16 bg-white dark:bg-dark-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Why Join Us?</h2>
+      <p class="text-gray-600 dark:text-gray-400">Be part of something meaningful</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="text-center p-6 bg-gray-50 dark:bg-dark-700 rounded-2xl border border-gray-100 dark:border-dark-600">
+        <div class="w-16 h-16 bg-brand-orange rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+          <i class="fas fa-heart text-white text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Impactful Work</h3>
+        <p class="text-gray-600 dark:text-gray-400">Your work directly helps students learn, grow, and achieve their dreams in tech.</p>
+      </div>
+      
+      <div class="text-center p-6 bg-gray-50 dark:bg-dark-700 rounded-2xl border border-gray-100 dark:border-dark-600">
+        <div class="w-16 h-16 bg-brand-orange rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+          <i class="fas fa-clock text-white text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Flexible Hours</h3>
+        <p class="text-gray-600 dark:text-gray-400">Work when you're most productive. We believe in work-life balance and flexibility.</p>
+      </div>
+      
+      <div class="text-center p-6 bg-gray-50 dark:bg-dark-700 rounded-2xl border border-gray-100 dark:border-dark-600">
+        <div class="w-16 h-16 bg-brand-orange rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+          <i class="fas fa-graduation-cap text-white text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Continuous Learning</h3>
+        <p class="text-gray-600 dark:text-gray-400">Access to all our courses for free and opportunities to constantly upskill.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Open Positions -->
+<section class="py-16 bg-gray-50 dark:bg-dark-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Open Positions</h2>
+      <p class="text-gray-600 dark:text-gray-400">Find your perfect role</p>
+    </div>
+    
+    <div class="max-w-3xl mx-auto">
+      <!-- No openings currently -->
+      <div class="bg-white dark:bg-dark-800 rounded-2xl p-8 text-center border border-gray-100 dark:border-dark-700">
+        <div class="w-20 h-20 bg-gray-100 dark:bg-dark-700 rounded-full flex items-center justify-center mx-auto mb-6">
+          <i class="fas fa-search text-gray-400 dark:text-gray-500 text-3xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">No Open Positions Currently</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">
+          We don't have any open positions at the moment, but we're always looking for talented individuals. Feel free to send us your resume for future opportunities.
+        </p>
+        <a href="mailto:careers@veeruproacademy.com" class="inline-flex items-center bg-brand-orange text-white px-6 py-3 rounded-xl font-semibold hover:bg-brand-blue transition shadow-lg">
+          <i class="fas fa-envelope mr-2"></i>Send Your Resume
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-16 bg-brand-orange">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold text-white mb-4">Stay Connected</h2>
+    <p class="text-white/80 mb-8">Follow us on social media to be notified about new opportunities</p>
+    <div class="flex justify-center space-x-4">
+      <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition backdrop-blur-sm">
+        <i class="fab fa-linkedin-in text-xl"></i>
+      </a>
+      <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition backdrop-blur-sm">
+        <i class="fab fa-twitter text-xl"></i>
+      </a>
+      <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition backdrop-blur-sm">
+        <i class="fab fa-instagram text-xl"></i>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

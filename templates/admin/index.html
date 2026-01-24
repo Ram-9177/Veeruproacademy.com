@@ -1,0 +1,297 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+  /* Custom Dashboard Styles */
+  .dashboard-header {
+    background: linear-gradient(135deg, #0B192C 0%, #1E3E62 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .dashboard-header h2 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  
+  .dashboard-header p {
+    margin: 0;
+    opacity: 0.8;
+  }
+  
+  .app-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  
+  .app-module {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+  
+  .app-module:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+  }
+  
+  .app-module-header {
+    background: linear-gradient(135deg, #1E3E62, #0B192C);
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .app-module-header .icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .app-module-header h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  
+  .app-module-body {
+    padding: 8px;
+  }
+  
+  .model-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    color: #374151 !important;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+  
+  .model-link:hover {
+    background: #FF6500 !important;
+    color: white !important;
+    padding-left: 20px;
+  }
+  
+  .model-link .actions {
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: all 0.2s;
+  }
+  
+  .model-link:hover .actions {
+    opacity: 1;
+  }
+  
+  .model-link .actions a {
+    padding: 4px 10px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 6px;
+    font-size: 11px;
+    color: white !important;
+  }
+  
+  .model-link .actions a:hover {
+    background: rgba(255,255,255,0.3);
+  }
+  
+  /* Quick Stats */
+  .quick-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .stat-card .icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .stat-card.users .icon { background: #dbeafe; color: #3b82f6; }
+  .stat-card.courses .icon { background: #d1fae5; color: #10b981; }
+  .stat-card.enrollments .icon { background: #fef3c7; color: #f59e0b; }
+  .stat-card.payments .icon { background: #fce7f3; color: #ec4899; }
+  
+  .stat-card .info h4 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #0B192C;
+  }
+  
+  .stat-card .info p {
+    margin: 4px 0 0 0;
+    font-size: 13px;
+    color: #6b7280;
+  }
+  
+  /* Recent Actions */
+  #recent-actions-module {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+  }
+  
+  #recent-actions-module h2 {
+    background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+    margin: 0;
+  }
+  
+  #recent-actions-module li {
+    padding: 12px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    transition: all 0.2s;
+  }
+  
+  #recent-actions-module li:hover {
+    background: #f8fafc;
+  }
+  
+  #recent-actions-module .actiontime {
+    color: #6b7280;
+    font-size: 12px;
+  }
+  
+  /* Two column layout for content and sidebar */
+  #content-main {
+    display: grid !important;
+    grid-template-columns: 1fr 350px;
+    gap: 24px;
+    align-items: start;
+  }
+  
+  @media (max-width: 1200px) {
+    #content-main {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  <div class="main-content">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+      <h2>👋 Welcome to Veeru's Pro Academy CMS</h2>
+      <p>Manage your courses, students, enrollments, and content from here.</p>
+    </div>
+    
+    <!-- App Modules -->
+    <div class="app-list">
+      {% for app in app_list %}
+      <div class="app-module">
+        <div class="app-module-header">
+          <div class="icon">
+            {% if 'courses' in app.app_label %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            {% elif 'users' in app.app_label %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            {% elif 'learning' in app.app_label %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            {% elif 'payments' in app.app_label %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            {% elif 'projects' in app.app_label %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            {% elif 'rbac' in app.app_label %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            {% elif 'audit' in app.app_label %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            {% else %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            {% endif %}
+          </div>
+          <h3>{{ app.name }}</h3>
+        </div>
+        <div class="app-module-body">
+          {% for model in app.models %}
+          <a href="{{ model.admin_url }}" class="model-link">
+            <span>{{ model.name }}</span>
+            <span class="actions">
+              {% if model.add_url %}
+              <a href="{{ model.add_url }}">+ Add</a>
+              {% endif %}
+              {% if model.admin_url %}
+              <a href="{{ model.admin_url }}">View</a>
+              {% endif %}
+            </span>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      {% empty %}
+      <p>{% translate "You don't have permission to view or edit anything." %}</p>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <div class="sidebar">
+    {% if user.is_active and user.is_staff %}
+    <div id="recent-actions-module">
+      <h2>{% translate 'Recent actions' %}</h2>
+      {% load log %}
+      {% get_admin_log 10 as admin_log for_user user %}
+      {% if not admin_log %}
+      <p>{% translate 'None available' %}</p>
+      {% else %}
+      <ul>
+        {% for entry in admin_log %}
+        <li>
+          <span class="actiontime">{{ entry.action_time|timesince }} ago</span>
+          <br>
+          {% if entry.is_deletion or not entry.get_admin_url %}
+          {{ entry.object_repr }}
+          {% else %}
+          <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+          {% endif %}
+          <br>
+          {% if entry.content_type %}
+          <span class="mini quiet">{{ entry.content_type.name | capfirst }}</span>
+          {% else %}
+          <span class="mini quiet">{% translate 'Unknown content' %}</span>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

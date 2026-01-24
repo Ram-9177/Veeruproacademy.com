@@ -1,0 +1,304 @@
+{% extends 'academy_web/base.html' %}
+{% load i18n %}
+
+{% block title %}Veeru's Pro Academy - Learn Programming & Web Development{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-bg text-white py-16 lg:py-24 texture-layer">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Hero Content -->
+      <div class="text-center lg:text-left">
+        <h1 class="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+          Master <span class="text-brand-orange">Programming</span><br>
+          Build Your <span class="text-brand-orange">Future</span>
+        </h1>
+        <p class="text-xl text-white/80 mb-8 leading-relaxed">
+          Learn industry-ready skills with expert-led courses in Python, JavaScript, React, and more. 
+          Join thousands of students building successful tech careers.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <a href="{% url 'academy_web:course_list' %}" class="btn-primary px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all">
+            <i class="fas fa-rocket mr-2"></i>Start Learning Free
+          </a>
+          <a href="{% url 'academy_web:about' %}" class="btn-outline px-8 py-4 rounded-xl font-semibold text-lg">
+            <i class="fas fa-play mr-2"></i>Watch Demo
+          </a>
+        </div>
+      </div>
+      
+      <!-- Hero Image -->
+      <div class="relative">
+        <div class="bg-gradient-to-br from-brand-orange to-brand-blue rounded-2xl p-8 shadow-2xl">
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+              </div>
+              <div class="font-mono text-sm text-white/90">
+                <div class="text-blue-300">def</div>
+                <div class="ml-4 text-yellow-300">learn_programming():</div>
+                <div class="ml-8 text-white">skills = ["Python", "JavaScript"]</div>
+                <div class="ml-8 text-white">career = build_future(skills)</div>
+                <div class="ml-8 text-green-300">return success</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Floating Elements -->
+        <div class="absolute -top-4 -right-4 w-20 h-20 bg-brand-orange/20 rounded-full animate-pulse"></div>
+        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-brand-blue/20 rounded-full animate-pulse delay-1000"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-16 bg-white dark:bg-dark-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="text-center">
+        <div class="text-4xl font-bold text-brand-orange mb-2">5000+</div>
+        <div class="text-gray-600 dark:text-gray-400">Students</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl font-bold text-brand-orange mb-2">50+</div>
+        <div class="text-gray-600 dark:text-gray-400">Courses</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl font-bold text-brand-orange mb-2">95%</div>
+        <div class="text-gray-600 dark:text-gray-400">Success Rate</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl font-bold text-brand-orange mb-2">24/7</div>
+        <div class="text-gray-600 dark:text-gray-400">Support</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Courses -->
+<section class="py-16 bg-gray-50 dark:bg-dark-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Popular Courses
+      </h2>
+      <p class="text-xl text-gray-600 dark:text-gray-400">
+        Start your journey with our most loved courses
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      <!-- Course Card 1 -->
+      <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-sm border border-gray-200 dark:border-dark-700 overflow-hidden card-hover">
+        <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+          <i class="fab fa-python text-white text-6xl"></i>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Python for Beginners</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">Learn Python programming from scratch with hands-on projects.</p>
+          <div class="flex items-center justify-between">
+            <span class="text-2xl font-bold text-brand-orange">Free</span>
+            <a href="{% url 'academy_web:course_list' %}" class="btn-primary px-4 py-2 rounded-lg text-sm">
+              Start Learning
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Course Card 2 -->
+      <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-sm border border-gray-200 dark:border-dark-700 overflow-hidden card-hover">
+        <div class="h-48 bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
+          <i class="fab fa-js-square text-white text-6xl"></i>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">JavaScript Mastery</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">Master modern JavaScript and build interactive web applications.</p>
+          <div class="flex items-center justify-between">
+            <span class="text-2xl font-bold text-brand-orange">₹999</span>
+            <a href="{% url 'academy_web:course_list' %}" class="btn-primary px-4 py-2 rounded-lg text-sm">
+              Enroll Now
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Course Card 3 -->
+      <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-sm border border-gray-200 dark:border-dark-700 overflow-hidden card-hover">
+        <div class="h-48 bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+          <i class="fab fa-react text-white text-6xl"></i>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">React Development</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">Build modern web apps with React and advanced patterns.</p>
+          <div class="flex items-center justify-between">
+            <span class="text-2xl font-bold text-brand-orange">₹1499</span>
+            <a href="{% url 'academy_web:course_list' %}" class="btn-primary px-4 py-2 rounded-lg text-sm">
+              Enroll Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="text-center">
+      <a href="{% url 'academy_web:course_list' %}" class="btn-outline px-8 py-3 rounded-xl font-semibold">
+        View All Courses <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-16 bg-white dark:bg-dark-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Why Choose Veeru's Pro Academy?
+      </h2>
+      <p class="text-xl text-gray-600 dark:text-gray-400">
+        Everything you need to succeed in tech
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Feature 1 -->
+      <div class="text-center p-6">
+        <div class="w-16 h-16 bg-brand-orange/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-video text-brand-orange text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">HD Video Lessons</h3>
+        <p class="text-gray-600 dark:text-gray-400">Crystal clear video content with step-by-step explanations.</p>
+      </div>
+      
+      <!-- Feature 2 -->
+      <div class="text-center p-6">
+        <div class="w-16 h-16 bg-brand-orange/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-code text-brand-orange text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Hands-on Projects</h3>
+        <p class="text-gray-600 dark:text-gray-400">Build real-world projects to strengthen your portfolio.</p>
+      </div>
+      
+      <!-- Feature 3 -->
+      <div class="text-center p-6">
+        <div class="w-16 h-16 bg-brand-orange/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-certificate text-brand-orange text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Certificates</h3>
+        <p class="text-gray-600 dark:text-gray-400">Earn industry-recognized certificates upon completion.</p>
+      </div>
+      
+      <!-- Feature 4 -->
+      <div class="text-center p-6">
+        <div class="w-16 h-16 bg-brand-orange/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-users text-brand-orange text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Community Support</h3>
+        <p class="text-gray-600 dark:text-gray-400">Join a community of learners and get help when needed.</p>
+      </div>
+      
+      <!-- Feature 5 -->
+      <div class="text-center p-6">
+        <div class="w-16 h-16 bg-brand-orange/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-mobile-alt text-brand-orange text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Mobile Learning</h3>
+        <p class="text-gray-600 dark:text-gray-400">Learn on the go with our mobile-optimized platform.</p>
+      </div>
+      
+      <!-- Feature 6 -->
+      <div class="text-center p-6">
+        <div class="w-16 h-16 bg-brand-orange/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-infinity text-brand-orange text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Lifetime Access</h3>
+        <p class="text-gray-600 dark:text-gray-400">Once enrolled, access your courses forever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Flow Section -->
+<section class="flow-section texture-layer bg-gradient-to-br from-brand-blue/95 to-brand-dark/90 text-white py-16 lg:py-20">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <p class="text-xs uppercase tracking-[0.4em] text-brand-orange/80 mb-3">Seamless Journey</p>
+      <h2 class="text-3xl lg:text-4xl font-bold mb-4">Every redirect keeps you moving</h2>
+      <p class="text-lg text-white/80 max-w-3xl mx-auto">
+        Explore, enroll, and learn with confidence—each CTA routes you to the next page, and every redirect brings you back to your dashboard or the next lesson without a jarring break in the flow.
+      </p>
+    </div>
+    <div class="flow-steps">
+      <article class="flow-step textured-panel">
+        <div class="flow-step-icon">
+          <i class="fas fa-compass"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-900">Discover & Preview</h3>
+        <p class="text-gray-700 dark:text-gray-200 leading-relaxed">
+          Browse courses and projects; every card links you deeper, so from the course list to detail pages the path feels intentional and redirect-ready.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="{% url 'academy_web:course_list' %}" class="btn-secondary btn-h-10 px-4 rounded-full text-sm shadow-sm">View Courses</a>
+          <a href="{% url 'academy_web:projects_list' %}" class="btn-outline btn-h-10 px-4 rounded-full text-sm">See Projects</a>
+        </div>
+      </article>
+      <article class="flow-step textured-panel">
+        <div class="flow-step-icon">
+          <i class="fas fa-user-check"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-900">Enroll & Redirect</h3>
+        <p class="text-gray-700 dark:text-gray-200 leading-relaxed">
+          Signup and login flows auto-redirect to your dashboard while enrollments and payment-proof submissions send you straight back to the learning hub with confirmation messaging.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="{% url 'academy_web:signup' %}" class="btn-secondary btn-h-10 px-4 rounded-full text-sm shadow-sm">Create Account</a>
+          <a href="{% url 'academy_web:login' %}" class="btn-outline btn-h-10 px-4 rounded-full text-sm">Login</a>
+        </div>
+      </article>
+      <article class="flow-step textured-panel">
+        <div class="flow-step-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-900">Learn & Continue</h3>
+        <p class="text-gray-700 dark:text-gray-200 leading-relaxed">
+          Lesson navigation, progress markers, and real-time updates always redirect you to the next logical checkpoint so you never lose the learning flow.
+        </p>
+        <div class="mt-6">
+          <a href="{% url 'academy_web:dashboard' %}" class="btn-secondary btn-h-10 px-4 rounded-full text-sm shadow-sm">Go to Dashboard</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-16 bg-brand-orange">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">
+      Ready to Start Your Journey?
+    </h2>
+    <p class="text-xl text-white/80 mb-8">
+      Join thousands of students who have transformed their careers
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'academy_web:dashboard' %}" class="bg-white text-brand-orange px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition shadow-lg">
+          <i class="fas fa-tachometer-alt mr-2"></i>Go to Dashboard
+        </a>
+      {% else %}
+        <a href="{% url 'academy_web:signup' %}" class="bg-white text-brand-orange px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition shadow-lg">
+          <i class="fas fa-user-plus mr-2"></i>Sign Up Free
+        </a>
+        <a href="{% url 'academy_web:login' %}" class="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-brand-orange transition">
+          <i class="fas fa-sign-in-alt mr-2"></i>Login
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

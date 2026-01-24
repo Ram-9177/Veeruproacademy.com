@@ -1,7 +1,7 @@
 {
   "recommendations": [
-    "bradlc.vscode-tailwindcss",
-    "esbenp.prettier-vscode",
-    "ms-vscode.vscode-typescript-next"
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "batisteo.vscode-django"
   ]
 }

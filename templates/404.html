@@ -1,0 +1,41 @@
+{% extends 'academy_web/base.html' %}
+{% load i18n static %}
+
+{% block title %}Page Not Found - Veeru's Pro Academy{% endblock %}
+
+{% block content %}
+<section class="min-h-[calc(100vh-4rem)] bg-gray-50 dark:bg-brand-dark py-20 flex items-center">
+  <div class="max-w-lg mx-auto px-4 text-center">
+    <!-- Error Code -->
+    <div class="text-9xl font-bold text-brand-orange mb-6">404</div>
+    
+    <!-- Icon -->
+    <div class="w-24 h-24 bg-brand-orange/10 dark:bg-brand-orange/20 rounded-full flex items-center justify-center mx-auto mb-8">
+      <i class="fas fa-compass text-brand-orange text-4xl"></i>
+    </div>
+    
+    <!-- Message -->
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Page Not Found</h1>
+    <p class="text-gray-600 dark:text-gray-400 text-lg mb-8">
+      Oops! The page you're looking for seems to have wandered off. Don't worry, let's get you back on track.
+    </p>
+    
+    <!-- Actions -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="{% url 'academy_web:home' %}" class="btn-primary inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold">
+        <i class="fas fa-home mr-2"></i>Back to Home
+      </a>
+      <a href="{% url 'academy_web:course_list' %}" class="btn-outline inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold">
+        <i class="fas fa-book mr-2"></i>Browse Courses
+      </a>
+    </div>
+    
+    <!-- Search suggestion -->
+    <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+      <p class="text-gray-500 dark:text-gray-400 text-sm">
+        Looking for something specific? Try our <a href="{% url 'academy_web:course_list' %}" class="text-brand-orange hover:underline">course catalog</a>.
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}

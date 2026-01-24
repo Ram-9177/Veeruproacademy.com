@@ -1,0 +1,79 @@
+{% extends 'academy_web/base.html' %}
+{% load i18n %}
+
+{% block title %}Refund Policy - Veeru's Pro Academy{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="bg-brand-orange text-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h1 class="text-4xl lg:text-5xl font-bold mb-4">Refund Policy</h1>
+      <p class="text-xl text-white/80">Last updated: January 2025</p>
+    </div>
+  </div>
+</section>
+
+<!-- Content -->
+<section class="py-16 bg-white dark:bg-dark-800">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="prose prose-lg dark:prose-invert max-w-none">
+      <div class="bg-brand-orange/10 border border-brand-orange/20 rounded-xl p-6 mb-8">
+        <div class="flex items-start gap-4">
+          <svg class="w-6 h-6 text-brand-orange flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <p class="text-gray-700 dark:text-gray-300">
+            We want you to be completely satisfied with your purchase. Please read our refund policy carefully.
+          </p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">7-Day Money-Back Guarantee</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-6">
+        We offer a 7-day money-back guarantee on all course purchases. If you're not satisfied with your course, you can request a full refund within 7 days of purchase.
+      </p>
+
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Eligibility for Refund</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-4">To be eligible for a refund:</p>
+      <ul class="list-disc pl-6 text-gray-600 dark:text-gray-400 space-y-2 mb-6">
+        <li>Request must be made within 7 days of purchase</li>
+        <li>You must not have completed more than 30% of the course</li>
+        <li>You must not have downloaded course materials</li>
+        <li>No certificate of completion has been issued</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">How to Request a Refund</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-4">To request a refund:</p>
+      <ol class="list-decimal pl-6 text-gray-600 dark:text-gray-400 space-y-2 mb-6">
+        <li>Email us at <a href="mailto:support@veeruproacademy.com" class="text-brand-orange hover:underline">support@veeruproacademy.com</a></li>
+        <li>Include your order ID and reason for refund</li>
+        <li>We will process your request within 5-7 business days</li>
+        <li>Refunds will be credited to the original payment method</li>
+      </ol>
+
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Non-Refundable Items</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-4">The following are not eligible for refunds:</p>
+      <ul class="list-disc pl-6 text-gray-600 dark:text-gray-400 space-y-2 mb-6">
+        <li>Courses purchased during promotional sales</li>
+        <li>Bundle packages (partial refunds may apply)</li>
+        <li>Courses with downloadable content already accessed</li>
+      </ul>
+
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Questions?</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-6">
+        If you have any questions about our refund policy, please contact our support team.
+      </p>
+
+      <div class="mt-8">
+        <a href="{% url 'academy_web:contact' %}" class="inline-flex items-center px-6 py-3 bg-brand-orange text-white font-semibold rounded-lg hover:bg-brand-blue transition shadow-lg">
+          Contact Support
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

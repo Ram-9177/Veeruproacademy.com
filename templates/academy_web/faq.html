@@ -1,0 +1,176 @@
+{% extends 'academy_web/base.html' %}
+{% load i18n %}
+
+{% block title %}FAQ - Veeru's Pro Academy{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="bg-brand-orange text-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <span class="inline-block bg-white/10 text-white px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
+        <i class="fas fa-question-circle mr-2"></i>Help Center
+      </span>
+      <h1 class="text-4xl lg:text-5xl font-bold mb-4">Frequently Asked Questions</h1>
+      <p class="text-xl text-white/80 max-w-2xl mx-auto">
+        Find answers to the most common questions about our courses and platform
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Categories -->
+<section class="py-8 bg-white dark:bg-dark-800 border-b border-gray-100 dark:border-dark-700">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-wrap justify-center gap-3">
+      <button onclick="filterFAQ('all')" class="faq-filter px-4 py-2 rounded-lg text-sm font-medium bg-brand-orange text-white transition" data-category="all">
+        All Questions
+      </button>
+      <button onclick="filterFAQ('courses')" class="faq-filter px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-brand-orange/10 transition" data-category="courses">
+        <i class="fas fa-book mr-1"></i>Courses
+      </button>
+      <button onclick="filterFAQ('payments')" class="faq-filter px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-brand-orange/10 transition" data-category="payments">
+        <i class="fas fa-credit-card mr-1"></i>Payments
+      </button>
+      <button onclick="filterFAQ('technical')" class="faq-filter px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-brand-orange/10 transition" data-category="technical">
+        <i class="fas fa-cog mr-1"></i>Technical
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Items -->
+<section class="py-16 bg-gray-50 dark:bg-dark-900">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="space-y-4" id="faqContainer">
+      <!-- Courses FAQs -->
+      <div class="faq-item bg-white dark:bg-dark-800 rounded-xl border border-gray-100 dark:border-dark-700 overflow-hidden" data-category="courses">
+        <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between p-6 text-left">
+          <span class="font-semibold text-gray-900 dark:text-white pr-4">What courses do you offer?</span>
+          <i class="fas fa-chevron-down text-brand-orange transition-transform"></i>
+        </button>
+        <div class="faq-answer hidden px-6 pb-6">
+          <p class="text-gray-600 dark:text-gray-400">We offer comprehensive courses in Python programming, web development, and other programming topics. All courses are designed to take you from beginner to job-ready with practical, hands-on projects.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white dark:bg-dark-800 rounded-xl border border-gray-100 dark:border-dark-700 overflow-hidden" data-category="courses">
+        <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between p-6 text-left">
+          <span class="font-semibold text-gray-900 dark:text-white pr-4">How long do I have access to a course?</span>
+          <i class="fas fa-chevron-down text-brand-orange transition-transform"></i>
+        </button>
+        <div class="faq-answer hidden px-6 pb-6">
+          <p class="text-gray-600 dark:text-gray-400">Once you enroll in a course, you get lifetime access! This includes all future updates and additions to the course content at no extra cost.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white dark:bg-dark-800 rounded-xl border border-gray-100 dark:border-dark-700 overflow-hidden" data-category="courses">
+        <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between p-6 text-left">
+          <span class="font-semibold text-gray-900 dark:text-white pr-4">Do I get a certificate after completing a course?</span>
+          <i class="fas fa-chevron-down text-brand-orange transition-transform"></i>
+        </button>
+        <div class="faq-answer hidden px-6 pb-6">
+          <p class="text-gray-600 dark:text-gray-400">Yes! Upon successful completion of a course, you'll receive a digital certificate that you can share on LinkedIn and add to your resume.</p>
+        </div>
+      </div>
+
+      <!-- Payments FAQs -->
+      <div class="faq-item bg-white dark:bg-dark-800 rounded-xl border border-gray-100 dark:border-dark-700 overflow-hidden" data-category="payments">
+        <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between p-6 text-left">
+          <span class="font-semibold text-gray-900 dark:text-white pr-4">What payment methods do you accept?</span>
+          <i class="fas fa-chevron-down text-brand-orange transition-transform"></i>
+        </button>
+        <div class="faq-answer hidden px-6 pb-6">
+          <p class="text-gray-600 dark:text-gray-400">We accept payments via UPI (Google Pay, PhonePe, Paytm), bank transfers, and other common payment methods. Simply make the payment and submit a screenshot as proof.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white dark:bg-dark-800 rounded-xl border border-gray-100 dark:border-dark-700 overflow-hidden" data-category="payments">
+        <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between p-6 text-left">
+          <span class="font-semibold text-gray-900 dark:text-white pr-4">How long does payment verification take?</span>
+          <i class="fas fa-chevron-down text-brand-orange transition-transform"></i>
+        </button>
+        <div class="faq-answer hidden px-6 pb-6">
+          <p class="text-gray-600 dark:text-gray-400">We typically verify payments within 24 hours. You'll receive an email notification once your payment is approved and your course access is activated.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white dark:bg-dark-800 rounded-xl border border-gray-100 dark:border-dark-700 overflow-hidden" data-category="payments">
+        <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between p-6 text-left">
+          <span class="font-semibold text-gray-900 dark:text-white pr-4">Do you offer refunds?</span>
+          <i class="fas fa-chevron-down text-brand-orange transition-transform"></i>
+        </button>
+        <div class="faq-answer hidden px-6 pb-6">
+          <p class="text-gray-600 dark:text-gray-400">Yes, we offer refunds within 7 days of purchase if you're not satisfied with the course. Please check our <a href="{% url 'academy_web:refund_policy' %}" class="text-brand-orange hover:underline">refund policy</a> for more details.</p>
+        </div>
+      </div>
+
+      <!-- Technical FAQs -->
+      <div class="faq-item bg-white dark:bg-dark-800 rounded-xl border border-gray-100 dark:border-dark-700 overflow-hidden" data-category="technical">
+        <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between p-6 text-left">
+          <span class="font-semibold text-gray-900 dark:text-white pr-4">Can I access courses on mobile devices?</span>
+          <i class="fas fa-chevron-down text-brand-orange transition-transform"></i>
+        </button>
+        <div class="faq-answer hidden px-6 pb-6">
+          <p class="text-gray-600 dark:text-gray-400">Yes! Our platform is fully responsive and works on all devices including smartphones, tablets, laptops, and desktop computers.</p>
+        </div>
+      </div>
+
+      <div class="faq-item bg-white dark:bg-dark-800 rounded-xl border border-gray-100 dark:border-dark-700 overflow-hidden" data-category="technical">
+        <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between p-6 text-left">
+          <span class="font-semibold text-gray-900 dark:text-white pr-4">What do I need to start learning?</span>
+          <i class="fas fa-chevron-down text-brand-orange transition-transform"></i>
+        </button>
+        <div class="faq-answer hidden px-6 pb-6">
+          <p class="text-gray-600 dark:text-gray-400">All you need is a computer with internet access and a willingness to learn! Our courses are designed for beginners, so no prior programming experience is required.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Still Have Questions -->
+<section class="py-16 bg-brand-orange">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold text-white mb-4">Still Have Questions?</h2>
+    <p class="text-white/80 mb-8">Can't find the answer you're looking for? Reach out to our support team!</p>
+    <a href="{% url 'academy_web:contact' %}" class="inline-flex items-center bg-white text-brand-orange px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition shadow-lg">
+      <i class="fas fa-envelope mr-2"></i>Contact Support
+    </a>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function toggleFAQ(button) {
+  const answer = button.nextElementSibling;
+  const icon = button.querySelector('i');
+  answer.classList.toggle('hidden');
+  icon.classList.toggle('rotate-180');
+}
+
+function filterFAQ(category) {
+  const items = document.querySelectorAll('.faq-item');
+  const buttons = document.querySelectorAll('.faq-filter');
+  
+  buttons.forEach(btn => {
+    if (btn.dataset.category === category) {
+      btn.classList.add('bg-brand-orange', 'text-white');
+      btn.classList.remove('bg-gray-100', 'dark:bg-dark-700', 'text-gray-600', 'dark:text-gray-400');
+    } else {
+      btn.classList.remove('bg-brand-orange', 'text-white');
+      btn.classList.add('bg-gray-100', 'dark:bg-dark-700', 'text-gray-600', 'dark:text-gray-400');
+    }
+  });
+  
+  items.forEach(item => {
+    if (category === 'all' || item.dataset.category === category) {
+      item.classList.remove('hidden');
+    } else {
+      item.classList.add('hidden');
+    }
+  });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,206 @@
+{% extends 'academy_web/base.html' %}
+
+{% block extra_head %}
+{{ block.super }}
+<script>
+// Real-time WebSocket Manager
+class WebSocketManager {
+    constructor() {
+        this.connections = {};
+        this.reconnectAttempts = {};
+        this.maxReconnectAttempts = 5;
+        this.reconnectDelay = 1000;
+    }
+    
+    connect(name, url, handlers = {}) {
+        if (this.connections[name]) {
+            console.log(`WebSocket ${name} already connected`);
+            return this.connections[name];
+        }
+        
+        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const wsUrl = `${protocol}//${window.location.host}${url}`;
+        
+        const ws = new WebSocket(wsUrl);
+        this.connections[name] = ws;
+        this.reconnectAttempts[name] = 0;
+        
+        ws.onopen = () => {
+            console.log(`WebSocket ${name} connected`);
+            this.reconnectAttempts[name] = 0;
+            if (handlers.onOpen) handlers.onOpen();
+        };
+        
+        ws.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                if (handlers.onMessage) handlers.onMessage(data);
+                this.handleMessage(name, data);
+            } catch (e) {
+                console.error(`Error parsing WebSocket message:`, e);
+            }
+        };
+        
+        ws.onerror = (error) => {
+            console.error(`WebSocket ${name} error:`, error);
+            if (handlers.onError) handlers.onError(error);
+        };
+        
+        ws.onclose = () => {
+            console.log(`WebSocket ${name} closed`);
+            delete this.connections[name];
+            
+            if (this.reconnectAttempts[name] < this.maxReconnectAttempts) {
+                const delay = this.reconnectDelay * Math.pow(2, this.reconnectAttempts[name]);
+                console.log(`Reconnecting ${name} in ${delay}ms...`);
+                this.reconnectAttempts[name]++;
+                
+                setTimeout(() => {
+                    this.connect(name, url, handlers);
+                }, delay);
+            } else {
+                console.error(`Max reconnection attempts reached for ${name}`);
+                if (handlers.onMaxReconnect) handlers.onMaxReconnect();
+            }
+        };
+        
+        return ws;
+    }
+    
+    send(name, data) {
+        const ws = this.connections[name];
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify(data));
+            return true;
+        }
+        console.warn(`WebSocket ${name} not connected`);
+        return false;
+    }
+    
+    disconnect(name) {
+        const ws = this.connections[name];
+        if (ws) {
+            ws.close();
+            delete this.connections[name];
+        }
+    }
+    
+    disconnectAll() {
+        Object.keys(this.connections).forEach(name => {
+            this.disconnect(name);
+        });
+    }
+    
+    handleMessage(name, data) {
+        // Global message handler
+        if (data.type === 'error') {
+            this.showNotification('error', data.message);
+        }
+    }
+    
+    showNotification(type, message) {
+        // Create toast notification
+        const toast = document.createElement('div');
+        toast.className = `fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm animate-slide-up ${
+            type === 'error' ? 'bg-red-500' :
+            type === 'success' ? 'bg-green-500' :
+            type === 'warning' ? 'bg-yellow-500' :
+            'bg-blue-500'
+        } text-white`;
+        toast.innerHTML = `
+            <div class="flex items-center justify-between">
+                <span>${message}</span>
+                <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+        }, 5000);
+    }
+}
+
+// Global WebSocket manager instance
+window.wsManager = new WebSocketManager();
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+    window.wsManager.disconnectAll();
+});
+</script>
+
+<style>
+@keyframes slide-up {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+}
+
+/* Real-time indicator */
+.realtime-indicator {
+    position: relative;
+}
+
+.realtime-indicator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+/* Loading skeleton */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.dark .skeleton {
+    background: linear-gradient(90deg, #1f2937 25%, #374151 50%, #1f2937 75%);
+    background-size: 200% 100%;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+{% block realtime_js %}{% endblock %}
+{% endblock %}

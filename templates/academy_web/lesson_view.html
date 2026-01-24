@@ -1,0 +1,185 @@
+{% extends 'academy_web/realtime_base.html' %}
+{% load i18n %}
+
+{% block title %}{{ lesson.title }} - {{ course.title }} - Veeru's Pro Academy{% endblock %}
+
+{% block content %}
+<section class="bg-gray-50 dark:bg-dark-900 min-h-screen">
+  <!-- Course Header -->
+  <div class="bg-brand-dark text-white py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center space-x-2 text-sm text-white/60 mb-2">
+        <a href="{% url 'academy_web:home' %}" class="hover:text-white transition">Home</a>
+        <i class="fas fa-chevron-right text-xs"></i>
+        <a href="{% url 'academy_web:dashboard' %}" class="hover:text-white transition">Dashboard</a>
+        <i class="fas fa-chevron-right text-xs"></i>
+        <a href="{% url 'academy_web:course_detail' course.slug %}" class="hover:text-white transition">{{ course.title|truncatechars:30 }}</a>
+        <i class="fas fa-chevron-right text-xs"></i>
+        <span class="text-white">{{ lesson.title|truncatechars:30 }}</span>
+      </nav>
+      <h1 class="text-2xl font-bold">{{ course.title }}</h1>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <!-- Lesson Content -->
+      <div class="lg:col-span-3">
+        <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-sm border border-gray-200 dark:border-dark-700 overflow-hidden">
+          <!-- Lesson Header -->
+          <div class="p-6 border-b border-gray-200 dark:border-dark-700">
+            <div class="flex items-start justify-between">
+              <div class="flex-1">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">{{ lesson.title }}</h2>
+                <div class="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                  <span><i class="fas fa-folder mr-1 text-brand-orange"></i>{{ lesson.module.title }}</span>
+                  {% if lesson.estimated_minutes %}
+                    <span><i class="fas fa-clock mr-1 text-brand-orange"></i>{{ lesson.estimated_minutes }} min</span>
+                  {% endif %}
+                  {% if lesson.difficulty %}
+                    <span><i class="fas fa-signal mr-1 text-brand-orange"></i>{{ lesson.difficulty }}</span>
+                  {% endif %}
+                </div>
+              </div>
+              {% if lesson_progress.completed %}
+                <span class="inline-flex items-center bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-3 py-1 rounded-full text-sm font-medium">
+                  <i class="fas fa-check-circle mr-2"></i>Completed
+                </span>
+              {% else %}
+                <span class="inline-flex items-center bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 px-3 py-1 rounded-full text-sm font-medium">
+                  <i class="fas fa-circle mr-2"></i>In Progress
+                </span>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Video Player (if YouTube URL exists) -->
+          {% if lesson.youtube_url %}
+            <div class="aspect-video bg-black">
+              <iframe 
+                src="{{ lesson.youtube_url }}" 
+                class="w-full h-full" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen
+              ></iframe>
+            </div>
+          {% endif %}
+
+          <!-- Lesson Description -->
+          {% if lesson.description %}
+            <div class="p-6 border-b border-gray-200 dark:border-dark-700">
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">About this lesson</h3>
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">{{ lesson.description }}</p>
+            </div>
+          {% endif %}
+
+          <!-- Lesson Body Content -->
+          {% if lesson.body %}
+            <div class="p-6 prose dark:prose-invert max-w-none">
+              {{ lesson.body|safe }}
+            </div>
+          {% endif %}
+
+          <!-- Lesson Actions -->
+          <div class="p-6 bg-gray-50 dark:bg-dark-700/50 border-t border-gray-200 dark:border-dark-700">
+            <div class="flex items-center justify-between">
+              <div>
+                {% if previous_lesson %}
+                  <a href="{% url 'academy_web:lesson_view' course.slug previous_lesson.slug %}" class="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-brand-orange transition">
+                    <i class="fas fa-chevron-left mr-2"></i>Previous Lesson
+                  </a>
+                {% endif %}
+              </div>
+              
+              <div class="flex items-center gap-3">
+                {% if not lesson_progress.completed %}
+                  <form method="post" action="{% url 'academy_web:mark_lesson_complete' course.slug lesson.slug %}" class="inline">
+                    {% csrf_token %}
+                    {% if next_lesson %}
+                      <input type="hidden" name="next" value="{% url 'academy_web:lesson_view' course.slug next_lesson.slug %}">
+                    {% endif %}
+                    <button type="submit" class="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold transition shadow-lg">
+                      <i class="fas fa-check mr-2"></i>Mark Complete
+                    </button>
+                  </form>
+                {% endif %}
+                
+                {% if next_lesson %}
+                  <a href="{% url 'academy_web:lesson_view' course.slug next_lesson.slug %}" class="inline-flex items-center bg-brand-orange hover:bg-brand-blue text-white px-6 py-3 rounded-xl font-semibold transition shadow-lg">
+                    Next Lesson<i class="fas fa-chevron-right ml-2"></i>
+                  </a>
+                {% else %}
+                  <a href="{% url 'academy_web:dashboard' %}" class="inline-flex items-center bg-brand-orange hover:bg-brand-blue text-white px-6 py-3 rounded-xl font-semibold transition shadow-lg">
+                    <i class="fas fa-graduation-cap mr-2"></i>Back to Dashboard
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Navigation Sidebar -->
+      <div class="lg:col-span-1">
+        <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-sm border border-gray-200 dark:border-dark-700 overflow-hidden sticky top-4">
+          <div class="p-4 bg-brand-orange text-white">
+            <h3 class="font-semibold">Course Content</h3>
+          </div>
+          
+          <div class="max-h-[calc(100vh-200px)] overflow-y-auto">
+            {% regroup all_lessons by module as lessons_by_module %}
+            {% for module_group in lessons_by_module %}
+              <div class="border-b border-gray-200 dark:border-dark-700">
+                <div class="p-4 bg-gray-50 dark:bg-dark-700/50">
+                  <h4 class="font-semibold text-gray-900 dark:text-white text-sm">{{ module_group.grouper.title }}</h4>
+                </div>
+                <div class="divide-y divide-gray-100 dark:divide-dark-700">
+                  {% for lesson_item in module_group.list %}
+                    <a href="{% url 'academy_web:lesson_view' course.slug lesson_item.slug %}" 
+                       class="block p-3 hover:bg-gray-50 dark:hover:bg-dark-700/50 transition {% if lesson_item.id == lesson.id %}bg-brand-orange/10 border-l-4 border-brand-orange{% endif %}">
+                      <div class="flex items-start gap-2">
+                        <div class="flex-shrink-0 mt-1">
+                          {% with progress=lesson_item.progress.first %}
+                            {% if progress.completed %}
+                              <i class="fas fa-check-circle text-green-500"></i>
+                            {% else %}
+                              <i class="far fa-circle text-gray-400"></i>
+                            {% endif %}
+                          {% endwith %}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                          <p class="text-sm font-medium text-gray-900 dark:text-white truncate">{{ lesson_item.title }}</p>
+                          {% if lesson_item.estimated_minutes %}
+                            <p class="text-xs text-gray-500 dark:text-gray-400">{{ lesson_item.estimated_minutes }} min</p>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </a>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block realtime_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Connect to progress WebSocket
+    window.wsManager.connect('progress_{{ course.id }}', '/ws/progress/{{ course.id }}/', {
+        onMessage: (data) => {
+            if (data.type === 'progress_update') {
+                console.log('Progress updated:', data.progress);
+                // Could update UI here if needed
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

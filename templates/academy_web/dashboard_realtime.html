@@ -1,0 +1,248 @@
+{% extends 'academy_web/realtime_base.html' %}
+{% load i18n %}
+
+{% block title %}Dashboard - Veeru's Pro Academy{% endblock %}
+
+{% block content %}
+<section class="bg-gray-50 dark:bg-dark-900 min-h-screen py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header with Real-time Indicator -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center">
+          Welcome back, <span class="text-brand-orange ml-2">{{ request.user.name|default:request.user.email|truncatechars:20 }}</span>!
+          <span class="realtime-indicator ml-3" title="Real-time updates active"></span>
+        </h1>
+        <p class="text-gray-600 dark:text-gray-400">Track your learning progress and continue where you left off</p>
+      </div>
+      <div class="mt-4 md:mt-0 flex gap-3">
+        <a href="{% url 'academy_web:course_list' %}" class="inline-flex items-center bg-brand-orange text-white px-6 py-3 rounded-xl font-semibold hover:bg-brand-blue transition shadow-lg">
+          <i class="fas fa-plus mr-2"></i>Browse Courses
+        </a>
+      </div>
+    </div>
+    
+    <!-- Stats Grid with Real-time Updates -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" id="stats-grid">
+      <div class="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-dark-700">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center">
+            <i class="fas fa-book text-brand-orange text-xl"></i>
+          </div>
+          <span class="text-xs font-medium text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded-full">Active</span>
+        </div>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Enrolled Courses</p>
+        <p class="text-3xl font-bold text-gray-900 dark:text-white" id="enrolled-count">{{ enrollments|length|default:0 }}</p>
+      </div>
+      
+      <div class="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-dark-700">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center">
+            <i class="fas fa-check-circle text-green-600 dark:text-green-400 text-xl"></i>
+          </div>
+        </div>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Completed</p>
+        <p class="text-3xl font-bold text-gray-900 dark:text-white" id="completed-count">0</p>
+      </div>
+      
+      <div class="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-dark-700">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl flex items-center justify-center">
+            <i class="fas fa-clock text-yellow-600 dark:text-yellow-400 text-xl"></i>
+          </div>
+        </div>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Hours Learned</p>
+        <p class="text-3xl font-bold text-gray-900 dark:text-white" id="hours-learned">0</p>
+      </div>
+      
+      <div class="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-dark-700">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center">
+            <i class="fas fa-certificate text-green-600 dark:text-green-400 text-xl"></i>
+          </div>
+        </div>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Certificates</p>
+        <p class="text-3xl font-bold text-gray-900 dark:text-white" id="certificates-count">0</p>
+      </div>
+    </div>
+    
+    <!-- Rest of dashboard content -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- My Courses with Real-time Progress -->
+      <div class="lg:col-span-2 space-y-6">
+        <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700 overflow-hidden">
+          <div class="px-6 py-4 border-b border-gray-100 dark:border-dark-700 flex items-center justify-between">
+            <h2 class="text-lg font-bold text-gray-900 dark:text-white flex items-center">
+              <i class="fas fa-graduation-cap mr-2 text-brand-orange"></i>My Courses
+            </h2>
+            <a href="{% url 'academy_web:course_list' %}" class="text-brand-orange text-sm font-medium hover:text-brand-blue transition">
+              View All <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+          </div>
+          
+          <div class="p-6" id="courses-container">
+            {% if enrollments %}
+              <div class="space-y-4">
+                {% for enrollment in enrollments %}
+                  <div class="flex items-center gap-4 p-4 bg-gray-50 dark:bg-dark-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-dark-700 transition" data-course-id="{{ enrollment.course.id }}">
+                    <div class="w-16 h-16 bg-brand-orange rounded-xl flex items-center justify-center flex-shrink-0">
+                      {% if enrollment.course.thumbnail %}
+                        <img src="{{ enrollment.course.thumbnail }}" alt="{{ enrollment.course.title }}" class="w-full h-full object-cover rounded-xl" loading="lazy">
+                      {% else %}
+                        <i class="fas fa-book text-white text-xl"></i>
+                      {% endif %}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <h3 class="font-semibold text-gray-900 dark:text-white truncate">{{ enrollment.course.title }}</h3>
+                      <div class="flex items-center gap-4 mt-1">
+                        <span class="text-sm text-gray-500 dark:text-gray-400"><i class="fas fa-layer-group mr-1"></i>{{ enrollment.course.modules.count }} modules</span>
+                        <span class="text-sm text-green-600 dark:text-green-400 progress-text"><i class="fas fa-check mr-1"></i>0% complete</span>
+                      </div>
+                      <!-- Progress Bar -->
+                      <div class="mt-2 w-full bg-gray-200 dark:bg-dark-600 rounded-full h-2">
+                        <div class="bg-brand-orange h-2 rounded-full progress-bar transition-all duration-500" style="width: 0%"></div>
+                      </div>
+                    </div>
+                    {% with first_lesson=enrollment.course.modules.first.lessons.first %}
+                      {% if first_lesson %}
+                        <a href="{% url 'academy_web:lesson_view' enrollment.course.slug first_lesson.slug %}" class="flex-shrink-0 bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-brand-blue transition">
+                          Continue
+                        </a>
+                      {% else %}
+                        <a href="{% url 'academy_web:course_detail' enrollment.course.slug %}" class="flex-shrink-0 bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-brand-blue transition">
+                          View Course
+                        </a>
+                      {% endif %}
+                    {% endwith %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="text-center py-12">
+                <div class="w-20 h-20 bg-gray-100 dark:bg-dark-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <i class="fas fa-book-open text-gray-400 dark:text-gray-500 text-3xl"></i>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">No courses yet</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">Start learning by enrolling in your first course</p>
+                <a href="{% url 'academy_web:course_list' %}" class="inline-flex items-center bg-brand-orange text-white px-5 py-2.5 rounded-lg font-medium hover:bg-brand-blue transition">
+                  <i class="fas fa-search mr-2"></i>Browse Courses
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sidebar -->
+      <div class="space-y-6">
+        <!-- Profile Card -->
+        <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700 p-6">
+          <div class="text-center">
+            <div class="w-20 h-20 bg-brand-orange rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <span class="text-white text-2xl font-bold">{{ request.user.name|default:request.user.email|slice:":1"|upper }}</span>
+            </div>
+            <h3 class="font-bold text-gray-900 dark:text-white text-lg">{{ request.user.name|default:"Student" }}</h3>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">{{ request.user.email }}</p>
+            <div class="mt-4 pt-4 border-t border-gray-100 dark:border-dark-700">
+              <div class="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <i class="fas fa-calendar-alt text-brand-orange"></i>
+                Member since {{ request.user.date_joined|date:"M Y" }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Payment Proofs -->
+        <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700 p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Payment Proofs</h3>
+            <span class="text-xs font-medium text-gray-500 dark:text-gray-400">Status</span>
+          </div>
+          {% if payment_proofs %}
+            <div class="space-y-3">
+              {% for proof in payment_proofs %}
+                <div class="flex items-center justify-between px-3 py-2 rounded-lg bg-gray-50 dark:bg-dark-700/60">
+                  <div class="text-sm text-gray-700 dark:text-gray-200 truncate">{{ proof.course.title }}</div>
+                  <span class="text-xs font-medium px-2 py-1 rounded-full {% if proof.status == 'PENDING' %}bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-200{% elif proof.status == 'APPROVED' %}bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-200{% else %}bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-200{% endif %}">
+                    {% if proof.status == 'PENDING' %}Under Review{% elif proof.status == 'APPROVED' %}Approved{% else %}Rejected{% endif %}
+                  </span>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <p class="text-sm text-gray-600 dark:text-gray-400">No payment proofs submitted yet.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block realtime_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Connect to notifications WebSocket
+    window.wsManager.connect('notifications', '/ws/notifications/', {
+        onMessage: (data) => {
+            handleNotification(data);
+        },
+        onOpen: () => {
+            console.log('Notifications connected');
+        }
+    });
+    
+    // Connect to progress WebSocket for each enrolled course
+    {% for enrollment in enrollments %}
+    window.wsManager.connect('progress_{{ enrollment.course.id }}', '/ws/progress/{{ enrollment.course.id }}/', {
+        onMessage: (data) => {
+            handleProgressUpdate({{ enrollment.course.id }}, data);
+        }
+    });
+    {% endfor %}
+    
+    function handleNotification(data) {
+        if (data.type === 'unread_count') {
+            // Update notification badge
+            console.log('Unread notifications:', data.count);
+        } else if (data.type === 'enrollment_success') {
+            window.wsManager.showNotification('success', data.message);
+            // Reload page to show new enrollment
+            setTimeout(() => location.reload(), 2000);
+        } else if (data.type === 'payment_approved') {
+            window.wsManager.showNotification('success', data.message);
+        } else if (data.type === 'certificate_issued') {
+            window.wsManager.showNotification('success', `🎉 ${data.message}`);
+            updateCertificateCount();
+        }
+    }
+    
+    function handleProgressUpdate(courseId, data) {
+        if (data.type === 'progress_update' && data.progress) {
+            const progress = data.progress;
+            const courseCard = document.querySelector(`[data-course-id="${courseId}"]`);
+            
+            if (courseCard) {
+                const progressBar = courseCard.querySelector('.progress-bar');
+                const progressText = courseCard.querySelector('.progress-text');
+                
+                if (progressBar) {
+                    progressBar.style.width = `${progress.progress_percent}%`;
+                }
+                
+                if (progressText) {
+                    progressText.innerHTML = `<i class="fas fa-check mr-1"></i>${Math.round(progress.progress_percent)}% complete`;
+                }
+            }
+        }
+    }
+    
+    function updateCertificateCount() {
+        const certCount = document.getElementById('certificates-count');
+        if (certCount) {
+            const current = parseInt(certCount.textContent) || 0;
+            certCount.textContent = current + 1;
+        }
+    }
+});
+</script>
+{% endblock %}

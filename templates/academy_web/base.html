@@ -1,0 +1,695 @@
+{% load i18n static %}
+{% get_current_language as CURRENT_LANGUAGE %}
+
+<!DOCTYPE html>
+<html lang="{{ CURRENT_LANGUAGE|default:'en' }}" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="{% block meta_description %}Veeru's Pro Academy - Master programming, web development, and tech skills with expert-led courses{% endblock %}">
+  <meta name="keywords" content="programming courses, web development, Python, JavaScript, React, online learning, coding bootcamp">
+  <meta name="author" content="Veeru's Pro Academy">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#FF6500">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="{% block og_title %}Veeru's Pro Academy{% endblock %}">
+  <meta property="og:description" content="Master programming and web development with expert-led courses">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  <meta property="og:image" content="{% block og_image %}https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=630&fit=crop{% endblock %}">
+  <meta property="og:site_name" content="Veeru's Pro Academy">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}Veeru's Pro Academy{% endblock %}">
+  <meta name="twitter:description" content="Master programming and web development with expert-led courses">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{% static 'branding/favicon.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'branding/favicon.png' %}">
+  <link rel="shortcut icon" href="{% static 'branding/favicon.png' %}">
+  
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+  
+  <title>{% block title %}Veeru's Pro Academy{% endblock %}</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              orange: '#FF6500',
+              'orange-hover': '#E55A00',
+              'orange-light': '#FF8533',
+              blue: '#1E3E62',
+              'blue-hover': '#162F4A',
+              'blue-light': '#2A5580',
+              dark: '#0B192C',
+              black: '#000000',
+            },
+            primary: {
+              50: '#FFF7F0',
+              100: '#FFEFE0',
+              200: '#FFDFC2',
+              300: '#FFCFA3',
+              400: '#FF9F52',
+              500: '#FF6500',
+              600: '#E55A00',
+              700: '#CC5000',
+              800: '#994000',
+              900: '#662A00',
+              950: '#331500',
+            },
+            dark: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              200: '#e2e8f0',
+              300: '#cbd5e1',
+              400: '#94a3b8',
+              500: '#64748b',
+              600: '#475569',
+              700: '#1E3E62',
+              800: '#0B192C',
+              900: '#070F1A',
+              950: '#000000',
+            }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out',
+            'slide-up': 'slideUp 0.5s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+        }
+      }
+    }
+  </script>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; position: relative; overflow-x: hidden; }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.25), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.2), transparent 35%),
+        radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.15), transparent 45%);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: -2;
+      mix-blend-mode: screen;
+      background-attachment: fixed;
+    }
+    html.dark body::before {
+      opacity: 0.45;
+      mix-blend-mode: overlay;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22120%22%20height%3D%22120%22%20viewBox%3D%220%200%20120%20120%22%3E%3Cpath%20d%3D%22M0%20120L120%200%22%20stroke%3D%22%23e2e8f0%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E");
+      opacity: 0.06;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+      z-index: -1;
+      background-attachment: fixed;
+    }
+    html.dark body::after {
+      opacity: 0.04;
+      mix-blend-mode: multiply;
+    }
+    .texture-layer {
+      position: relative;
+      overflow: hidden;
+    }
+    .texture-layer::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 45%),
+        repeating-linear-gradient(120deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18) 1px, transparent 1px, transparent 12px);
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: screen;
+    }
+    .texture-layer > * {
+      position: relative;
+      z-index: 1;
+    }
+    .textured-panel {
+      background-color: rgba(255, 255, 255, 0.9);
+      background-image:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 60%),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08) 1px, transparent 1px, transparent 6px);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: 0 25px 45px -25px rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(8px);
+    }
+    .dark .textured-panel {
+      background-color: rgba(15, 23, 42, 0.7);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 35px -20px rgba(0, 0, 0, 0.6);
+    }
+    .flow-section {
+      position: relative;
+      overflow: hidden;
+    }
+    .flow-section::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0px, transparent 60%);
+      opacity: 0.35;
+      z-index: 0;
+    }
+    .flow-section > * {
+      position: relative;
+      z-index: 1;
+    }
+    .flow-section h2, .flow-section h3 {
+      color: #fff;
+    }
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+    .flow-step {
+      padding: 1.75rem;
+      border-radius: 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .flow-step:hover, .flow-step:focus-within {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px -20px rgba(15, 23, 42, 0.8);
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+    .flow-step-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      margin-bottom: 1rem;
+      color: white;
+    }
+    .flow-step p {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    
+    /* Theme Colors - Flat Solid Fills */
+    .bg-brand-orange { background-color: #FF6500; }
+    .bg-brand-blue { background-color: #1E3E62; }
+    .bg-brand-dark { background-color: #0B192C; }
+    .bg-brand-black { background-color: #000000; }
+    
+    .text-brand-orange { color: #FF6500; }
+    .text-brand-blue { color: #1E3E62; }
+    .text-brand-dark { color: #0B192C; }
+    
+    .border-brand-orange { border-color: #FF6500; }
+    .border-brand-blue { border-color: #1E3E62; }
+    
+    /* Primary Button - Orange */
+    .btn-primary {
+      background-color: #FF6500;
+      color: white;
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover {
+      background-color: #E55A00;
+      box-shadow: 0 4px 12px rgba(255, 101, 0, 0.3);
+    }
+    .btn-primary:focus {
+      outline: 2px solid #FF6500;
+      outline-offset: 2px;
+    }
+    .btn-primary:active {
+      background-color: #CC5000;
+    }
+    .btn-primary:disabled {
+      background-color: #94a3b8;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    
+    /* Secondary Button - Blue */
+    .btn-secondary {
+      background-color: #1E3E62;
+      color: white;
+      transition: all 0.2s ease;
+    }
+    .btn-secondary:hover {
+      background-color: #162F4A;
+      box-shadow: 0 4px 12px rgba(30, 62, 98, 0.3);
+    }
+    .btn-secondary:focus {
+      outline: 2px solid #1E3E62;
+      outline-offset: 2px;
+    }
+    
+    /* Outline Button */
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid #1E3E62;
+      color: #1E3E62;
+      transition: all 0.2s ease;
+    }
+    .btn-outline:hover {
+      background-color: #1E3E62;
+      color: white;
+    }
+    .dark .btn-outline {
+      border-color: #FF6500;
+      color: #FF6500;
+    }
+    .dark .btn-outline:hover {
+      background-color: #FF6500;
+      color: white;
+    }
+    
+    /* Card Hover Effect */
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { 
+      transform: translateY(-4px); 
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+    }
+    .dark .card-hover:hover { 
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.4);
+    }
+    
+    /* Hero Section */
+    .hero-bg { background-color: #0B192C; }
+    .dark .hero-bg { background-color: #000000; }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    .dark ::-webkit-scrollbar-track { background: #0B192C; }
+    ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+    
+    /* Focus States */
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { 
+      outline: 2px solid #FF6500; 
+      outline-offset: 2px; 
+    }
+    
+    /* Line Clamp */
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    
+    /* Loading States */
+    .spinner { border: 3px solid #e5e7eb; border-top-color: #FF6500; border-radius: 50%; width: 24px; height: 24px; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    
+    .btn-loading { position: relative; color: transparent !important; pointer-events: none; }
+    .btn-loading::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; border: 2px solid white; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; }
+    
+    /* Page Transition */
+    .page-enter { animation: fadeIn 0.3s ease-out; }
+    
+    /* Form Input Focus */
+    input:focus, select:focus, textarea:focus {
+      border-color: #FF6500;
+      box-shadow: 0 0 0 3px rgba(255, 101, 0, 0.1);
+    }
+    
+    /* Link Styles */
+    .link-primary { color: #FF6500; transition: color 0.2s; }
+    .link-primary:hover { color: #E55A00; }
+    .dark .link-primary { color: #FF8533; }
+    .dark .link-primary:hover { color: #FF6500; }
+    
+    /* Navigation Active State */
+    .nav-link.active {
+      background-color: white;
+      color: #FF6500;
+      font-weight: 600;
+    }
+    .dark .nav-link.active {
+      background-color: #1E3E62;
+      color: #FF6500;
+    }
+    
+    /* Consistent Button Heights */
+    .btn-h-10 { height: 40px; display: inline-flex; align-items: center; justify-content: center; }
+  </style>
+  
+  <!-- Dark mode init -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('theme');
+      if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+  
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-gray-50 dark:bg-dark-950 min-h-screen flex flex-col text-gray-900 dark:text-gray-100 page-enter">
+  <!-- Skip to content -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 btn-primary px-4 py-2 rounded-lg z-[100]">Skip to main content</a>
+
+  <!-- Navigation -->
+  <nav class="bg-white dark:bg-dark-800 shadow-sm sticky top-0 z-50 border-b border-gray-200 dark:border-dark-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <a href="{% url 'academy_web:home' %}" class="flex items-center space-x-2 group" aria-label="Veeru's Pro Academy Home">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-md overflow-hidden bg-white">
+              <img src="{% static 'branding/logo.jpg' %}" alt="Veeru's Pro Academy" class="object-cover w-full h-full">
+            </div>
+            <span class="font-bold text-xl text-gray-900 dark:text-white hidden sm:block">Veeru's <span class="text-brand-orange">Pro Academy</span></span>
+          </a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center">
+          <div class="flex items-center bg-gray-100/50 dark:bg-dark-700/50 rounded-xl p-1">
+            <a href="{% url 'academy_web:home' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Home</a>
+            <a href="{% url 'academy_web:course_list' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Courses</a>
+            <a href="{% url 'academy_web:projects_list' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Projects</a>
+            <a href="{% url 'academy_web:blog' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Blog</a>
+            <a href="{% url 'academy_web:about' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">About</a>
+            <a href="{% url 'academy_web:contact' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Contact</a>
+          </div>
+          {% if request.user.is_authenticated %}
+          <div class="flex items-center ml-2 bg-gray-100/50 dark:bg-dark-700/50 rounded-xl p-1">
+            <a href="{% url 'academy_web:dashboard' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Dashboard</a>
+            {% if request.user.is_staff %}
+            <a href="/admin/" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Admin</a>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+        
+        <!-- Right Side Actions -->
+        <div class="hidden lg:flex items-center space-x-2">
+          <!-- Dark Mode Toggle -->
+          <button type="button" onclick="toggleDarkMode()" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-600 flex items-center justify-center transition-all" aria-label="Toggle dark mode">
+            <i class="fas fa-sun dark:hidden"></i>
+            <i class="fas fa-moon hidden dark:block"></i>
+          </button>
+          
+          <!-- Language Selector -->
+          <form action="{% url 'set_language' %}" method="post" class="relative">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+            <select name="language" onchange="this.form.submit();" class="appearance-none bg-gray-100 dark:bg-dark-700 border-0 rounded-xl px-3 py-2.5 pr-8 text-sm text-gray-700 dark:text-gray-300 cursor-pointer focus:ring-2 focus:ring-brand-orange transition-all h-10" aria-label="Select language">
+              {% get_available_languages as LANGS %}
+              {% for lang in LANGS %}
+                <option value="{{ lang.0 }}" {% if lang.0 == CURRENT_LANGUAGE %}selected{% endif %}>{{ lang.0|upper }}</option>
+              {% endfor %}
+            </select>
+            <i class="fas fa-globe absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs pointer-events-none"></i>
+          </form>
+          
+          {% if request.user.is_authenticated %}
+            <div class="flex items-center space-x-2 pl-2 ml-2 border-l border-gray-200 dark:border-dark-600">
+              <div class="flex items-center space-x-2 bg-gray-100 dark:bg-dark-700 rounded-xl px-3 py-1.5">
+                <div class="w-7 h-7 bg-brand-blue rounded-full flex items-center justify-center">
+                  <span class="text-white text-xs font-bold">{{ request.user.name|default:request.user.email|slice:":1"|upper }}</span>
+                </div>
+                <span class="text-sm text-gray-700 dark:text-gray-300 font-medium max-w-[100px] truncate">{{ request.user.name|default:request.user.email|truncatechars:12 }}</span>
+              </div>
+              <a href="{% url 'academy_web:logout' %}" onclick="return confirm('Are you sure you want to logout?')" class="h-10 px-4 rounded-xl bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-medium hover:bg-red-100 dark:hover:bg-red-900/50 transition-all text-sm flex items-center justify-center">
+                <i class="fas fa-sign-out-alt"></i>
+              </a>
+            </div>
+          {% else %}
+            <div class="flex items-center space-x-2 pl-2 ml-2 border-l border-gray-200 dark:border-dark-600">
+              <a href="{% url 'academy_web:login' %}" class="h-10 px-4 rounded-xl text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-gray-100 dark:hover:bg-dark-700 font-medium transition-all text-sm flex items-center justify-center">Login</a>
+              <a href="{% url 'academy_web:signup' %}" class="h-10 btn-primary px-5 rounded-xl font-medium text-sm flex items-center justify-center shadow-md">Sign Up</a>
+            </div>
+          {% endif %}
+        </div>
+        
+        <!-- Mobile/Tablet buttons -->
+        <div class="lg:hidden flex items-center space-x-2">
+          <button type="button" onclick="toggleDarkMode()" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-300 flex items-center justify-center" aria-label="Toggle dark mode">
+            <i class="fas fa-sun dark:hidden"></i>
+            <i class="fas fa-moon hidden dark:block"></i>
+          </button>
+          <button type="button" onclick="toggleMobileMenu()" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-300 flex items-center justify-center" aria-label="Toggle menu">
+            <i class="fas fa-bars text-lg" id="menu-icon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white dark:bg-dark-800 border-t border-gray-200 dark:border-dark-700">
+      <div class="px-4 py-4 space-y-1">
+        <a href="{% url 'academy_web:home' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-700 font-medium transition-all">
+          <i class="fas fa-home mr-3 w-5 text-center text-brand-orange"></i>Home
+        </a>
+        <a href="{% url 'academy_web:course_list' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-700 font-medium transition-all">
+          <i class="fas fa-book mr-3 w-5 text-center text-brand-orange"></i>Courses
+        </a>
+        <a href="{% url 'academy_web:projects_list' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-700 font-medium transition-all">
+          <i class="fas fa-project-diagram mr-3 w-5 text-center text-brand-orange"></i>BTech Projects
+        </a>
+        <a href="{% url 'academy_web:blog' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-700 font-medium transition-all">
+          <i class="fas fa-blog mr-3 w-5 text-center text-brand-orange"></i>Blog
+        </a>
+        <a href="{% url 'academy_web:about' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-700 font-medium transition-all">
+          <i class="fas fa-info-circle mr-3 w-5 text-center text-brand-orange"></i>About
+        </a>
+        <a href="{% url 'academy_web:contact' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-700 font-medium transition-all">
+          <i class="fas fa-envelope mr-3 w-5 text-center text-brand-orange"></i>Contact
+        </a>
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'academy_web:dashboard' %}" class="flex items-center px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-700 font-medium transition-all">
+            <i class="fas fa-tachometer-alt mr-3 w-5 text-center text-brand-orange"></i>Dashboard
+          </a>
+          {% if request.user.is_staff %}
+            <a href="/admin/" class="flex items-center px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-700 font-medium transition-all">
+              <i class="fas fa-cog mr-3 w-5 text-center text-brand-orange"></i>Admin Panel
+            </a>
+          {% endif %}
+          <div class="border-t border-gray-200 dark:border-dark-700 pt-4 mt-4">
+            <div class="flex items-center px-4 py-2 mb-3">
+              <div class="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center mr-3">
+                <span class="text-white font-bold">{{ request.user.name|default:request.user.email|slice:":1"|upper }}</span>
+              </div>
+              <div>
+                <div class="text-sm font-medium text-gray-900 dark:text-white">{{ request.user.name|default:"User" }}</div>
+                <div class="text-xs text-gray-500 dark:text-gray-400">{{ request.user.email }}</div>
+              </div>
+            </div>
+            <a href="{% url 'academy_web:logout' %}" onclick="return confirm('Are you sure you want to logout?')" class="flex items-center justify-center bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 px-4 py-3 rounded-xl font-medium hover:bg-red-100 dark:hover:bg-red-900/50 transition-all">
+              <i class="fas fa-sign-out-alt mr-2"></i>Logout
+            </a>
+          </div>
+        {% else %}
+          <div class="border-t border-gray-200 dark:border-dark-700 pt-4 mt-4 space-y-2">
+            <a href="{% url 'academy_web:login' %}" class="flex items-center justify-center border-2 border-brand-blue text-brand-blue dark:border-brand-orange dark:text-brand-orange px-4 py-3 rounded-xl font-medium hover:bg-brand-blue hover:text-white dark:hover:bg-brand-orange dark:hover:text-white transition-all">
+              <i class="fas fa-sign-in-alt mr-2"></i>Login
+            </a>
+            <a href="{% url 'academy_web:signup' %}" class="flex items-center justify-center btn-primary px-4 py-3 rounded-xl font-medium">
+              <i class="fas fa-user-plus mr-2"></i>Sign Up Free
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Flash Messages -->
+  {% if messages %}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 space-y-2" role="alert">
+      {% for message in messages %}
+        <div class="{% if message.tags == 'error' %}bg-red-50 dark:bg-red-900/30 border-red-500 text-red-700 dark:text-red-400{% elif message.tags == 'success' %}bg-green-50 dark:bg-green-900/30 border-green-500 text-green-700 dark:text-green-400{% elif message.tags == 'warning' %}bg-yellow-50 dark:bg-yellow-900/30 border-yellow-500 text-yellow-700 dark:text-yellow-400{% else %}bg-blue-50 dark:bg-blue-900/30 border-blue-500 text-blue-700 dark:text-blue-400{% endif %} border-l-4 rounded-lg p-4 flex items-center justify-between shadow-sm">
+          <div class="flex items-center">
+            <i class="{% if message.tags == 'error' %}fas fa-exclamation-circle{% elif message.tags == 'success' %}fas fa-check-circle{% elif message.tags == 'warning' %}fas fa-exclamation-triangle{% else %}fas fa-info-circle{% endif %} mr-3 text-lg"></i>
+            <span class="font-medium">{{ message }}</span>
+          </div>
+          <button type="button" onclick="this.parentElement.remove()" class="ml-4 opacity-70 hover:opacity-100 transition-opacity" aria-label="Dismiss">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  
+  <!-- Main Content -->
+  <main id="main-content" class="flex-grow">
+    {% block content %}{% endblock %}
+  </main>
+  
+  <!-- Footer -->
+  <footer class="bg-brand-dark text-white mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <!-- Brand -->
+        <div class="lg:col-span-1">
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-10 h-10 bg-brand-orange rounded-xl flex items-center justify-center">
+              <i class="fas fa-graduation-cap text-white text-xl"></i>
+            </div>
+            <span class="font-bold text-xl">Veeru's Pro Academy</span>
+          </div>
+          <p class="text-gray-400 mb-6 leading-relaxed">Empowering students with industry-ready skills through expert-led courses in programming and web development.</p>
+          <div class="flex space-x-3">
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="w-10 h-10 bg-brand-blue rounded-xl flex items-center justify-center hover:bg-brand-orange transition-colors" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="w-10 h-10 bg-brand-blue rounded-xl flex items-center justify-center hover:bg-brand-orange transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" class="w-10 h-10 bg-brand-blue rounded-xl flex items-center justify-center hover:bg-brand-orange transition-colors" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com" target="_blank" rel="noopener" class="w-10 h-10 bg-brand-blue rounded-xl flex items-center justify-center hover:bg-brand-orange transition-colors" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        
+        <!-- Quick Links -->
+        <div>
+          <h4 class="font-semibold text-lg mb-4">Quick Links</h4>
+          <ul class="space-y-3 text-gray-400">
+            <li><a href="{% url 'academy_web:course_list' %}" class="hover:text-brand-orange transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-orange"></i>All Courses</a></li>
+            <li><a href="{% url 'academy_web:projects_list' %}" class="hover:text-brand-orange transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-orange"></i>BTech Projects</a></li>
+            <li><a href="{% url 'academy_web:blog' %}" class="hover:text-brand-orange transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-orange"></i>Blog</a></li>
+            <li><a href="{% url 'academy_web:faq' %}" class="hover:text-brand-orange transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-orange"></i>FAQ</a></li>
+            <li><a href="{% url 'academy_web:careers' %}" class="hover:text-brand-orange transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-orange"></i>Careers</a></li>
+          </ul>
+        </div>
+        
+        <!-- Legal -->
+        <div>
+          <h4 class="font-semibold text-lg mb-4">Legal</h4>
+          <ul class="space-y-3 text-gray-400">
+            <li><a href="{% url 'academy_web:about' %}" class="hover:text-brand-orange transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-orange"></i>About Us</a></li>
+            <li><a href="{% url 'academy_web:contact' %}" class="hover:text-brand-orange transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-orange"></i>Contact Us</a></li>
+            <li><a href="{% url 'academy_web:privacy' %}" class="hover:text-brand-orange transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-orange"></i>Privacy Policy</a></li>
+            <li><a href="{% url 'academy_web:terms' %}" class="hover:text-brand-orange transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-orange"></i>Terms of Service</a></li>
+            <li><a href="{% url 'academy_web:refund_policy' %}" class="hover:text-brand-orange transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-orange"></i>Refund Policy</a></li>
+          </ul>
+        </div>
+        
+        <!-- Contact -->
+        <div>
+          <h4 class="font-semibold text-lg mb-4">Contact Us</h4>
+          <ul class="space-y-3 text-gray-400">
+            <li class="flex items-start"><i class="fas fa-envelope mr-3 text-brand-orange mt-1"></i><a href="mailto:support@veeruproacademy.com" class="hover:text-white transition-colors">support@veeruproacademy.com</a></li>
+            <li class="flex items-start"><i class="fas fa-globe mr-3 text-brand-orange mt-1"></i><a href="https://veeruproacademy.com" class="hover:text-white transition-colors">veeruproacademy.com</a></li>
+            <li class="flex items-start"><i class="fas fa-map-marker-alt mr-3 text-brand-orange mt-1"></i><span>India</span></li>
+          </ul>
+          
+          <!-- Newsletter -->
+          <div class="mt-6">
+            <h5 class="font-medium mb-2 text-white">Stay Updated</h5>
+            <form class="flex" onsubmit="event.preventDefault(); this.querySelector('button').textContent = 'Subscribed!'; this.querySelector('input').disabled = true;">
+              <input type="email" placeholder="Your email" required class="flex-1 bg-brand-blue border-0 rounded-l-lg px-4 py-2.5 text-sm text-white placeholder-gray-400 focus:ring-2 focus:ring-brand-orange">
+              <button type="submit" class="btn-primary px-4 py-2.5 rounded-r-lg font-medium"><i class="fas fa-paper-plane"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-brand-blue mt-10 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
+        <p>&copy; {% now "Y" %} Veeru's Pro Academy. All rights reserved.</p>
+        <p class="mt-2 md:mt-0">Made with <i class="fas fa-heart text-brand-orange mx-1"></i> in India</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Back to Top -->
+  <button type="button" id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 right-6 w-12 h-12 btn-primary rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all z-40 hover:scale-110" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+  
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const icon = document.getElementById('menu-icon');
+      menu.classList.toggle('hidden');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    }
+    
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    function highlightActiveNav() {
+      const normalizedPath = (window.location.pathname.replace(/\/$/, '') || '/');
+      document.querySelectorAll('.nav-link').forEach(function(link) {
+        try {
+          const linkUrl = new URL(link.href, window.location.origin);
+          const linkPath = (linkUrl.pathname.replace(/\/$/, '') || '/');
+          if (linkPath === normalizedPath) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        } catch (error) {
+          // Ignore invalid URLs
+        }
+      });
+    }
+    document.addEventListener('DOMContentLoaded', highlightActiveNav);
+    highlightActiveNav();
+    
+    window.addEventListener('scroll', function() {
+      const btn = document.getElementById('back-to-top');
+      if (window.scrollY > 300) {
+        btn.classList.remove('opacity-0', 'invisible');
+        btn.classList.add('opacity-100', 'visible');
+      } else {
+        btn.classList.add('opacity-0', 'invisible');
+        btn.classList.remove('opacity-100', 'visible');
+      }
+    });
+    
+    document.querySelectorAll('[role="alert"] > div').forEach(function(alert) {
+      setTimeout(function() {
+        alert.style.opacity = '0';
+        setTimeout(function() { alert.remove(); }, 300);
+      }, 5000);
+    });
+  </script>
+  
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

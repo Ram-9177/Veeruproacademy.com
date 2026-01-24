@@ -2,66 +2,34 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Build Next.js project",
+			"label": "Django: Run dev server",
 			"type": "shell",
-			"command": "npm run build",
-			"problemMatcher": [
-				"$tsc"
-			],
+			"command": ".venv/bin/python manage.py runserver 0.0.0.0:8000",
 			"group": "build"
 		},
 		{
-			"label": "Start Next.js dev server",
+			"label": "Django: Check",
 			"type": "shell",
-			"command": "npm run dev",
+			"command": ".venv/bin/python manage.py check",
 			"group": "build"
 		},
 		{
-			"label": "Restart Next.js dev server",
+			"label": "Django: Migrate",
 			"type": "shell",
-			"command": "npm run dev",
+			"command": ".venv/bin/python manage.py migrate",
 			"group": "build"
 		},
 		{
-			"label": "Start Next.js dev server",
+			"label": "Django: Seed demo content",
 			"type": "shell",
-			"command": "npm run dev",
+			"command": ".venv/bin/python manage.py seed_demo",
 			"group": "build"
 		},
 		{
-			"label": "Start Next.js dev server",
+			"label": "Django: Collect static",
 			"type": "shell",
-			"command": "npm run dev",
+			"command": ".venv/bin/python manage.py collectstatic --noinput",
 			"group": "build"
-		},
-		{
-			"label": "Build Next.js project",
-			"type": "shell",
-			"command": "npm run build",
-			"group": "build"
-		},
-		{
-			"label": "Build Next.js project",
-			"type": "shell",
-			"command": "npm run build",
-			"group": "build"
-		},
-		{
-			"label": "Build Next.js project",
-			"type": "shell",
-			"command": "npm run build",
-			"group": "build"
-		},
-		{
-			"label": "Build Next.js project",
-			"type": "shell",
-			"command": "npm run build",
-			"group": "build"
-		},
-		{
-			"label": "Start Next.js dev server",
-			"type": "shell",
-			"command": "npm run dev"
 		}
 	]
 }
