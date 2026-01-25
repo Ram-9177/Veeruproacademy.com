@@ -1,3 +1,32 @@
+# Render service configuration for Veeru's Pro Academy
+# This file declares a web service (Daphne), a worker (Celery), and a beat service.
+# Do NOT place secrets here; use Render dashboard env/secret settings.
+
+services:
+  - type: web
+    name: veeru-web
+    env: docker
+    branch: integrate-main
+    plan: free
+    startCommand: "bash -lc \"python manage.py migrate --noinput && python manage.py collectstatic --noinput && daphne -b 0.0.0.0 -p $PORT academy.asgi:application\""
+
+  - type: worker
+    name: veeru-worker
+    env: docker
+    branch: integrate-main
+    plan: free
+    startCommand: "bash -lc \"celery -A academy worker --loglevel=info\""
+
+  - type: worker
+    name: veeru-beat
+    env: docker
+    branch: integrate-main
+    plan: free
+    startCommand: "bash -lc \"celery -A academy beat --loglevel=info\""
+
+# Note: Render will not store secrets in this file. Set all environment variables
+# (SECRET_KEY, REDIS_URL, DATABASE_URL, DJANGO_SETTINGS_MODULE, ALLOWED_HOSTS, etc.)
+# in the Render dashboard after importing this repo.
 # Render.com Blueprint Specification
 # Deploy to Render using this file
 # https://render.com/docs/blueprint-spec
