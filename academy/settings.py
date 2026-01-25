@@ -371,6 +371,16 @@ CHANNEL_LAYERS = {
     },
 }
 
+# Development fallback: use in-memory channel layer when Redis isn't available
+# or when explicitly requested via DJANGO_USE_INMEMORY_CHANNELS. This makes it
+# possible to run and test WebSocket consumers locally without a Redis server.
+if DEBUG and env.bool('DJANGO_USE_INMEMORY_CHANNELS', default=True):
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        }
+    }
+
 # Celery Configuration
 CELERY_BROKER_URL = env('CELERY_BROKER_URL', default=REDIS_URL)
 CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', default=REDIS_URL)
