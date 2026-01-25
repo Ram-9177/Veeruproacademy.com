@@ -1,0 +1,14 @@
+[Unit]
+Description=Celery Worker for Veeru's Pro Academy
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/srv/veeru
+ExecStart=/srv/veeru/.venv/bin/celery -A academy worker --loglevel=INFO
+Restart=always
+EnvironmentFile=/srv/veeru/.env
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=Veeru's Pro Academy Daphne ASGI
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/srv/veeru
+ExecStart=/srv/veeru/.venv/bin/daphne -b 0.0.0.0 -p 8000 academy.asgi:application
+Restart=always
+EnvironmentFile=/srv/veeru/.env
+
+[Install]
+WantedBy=multi-user.target
