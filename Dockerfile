@@ -17,8 +17,11 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . /app
 
+# Collect static assets during build (best effort)
 RUN python manage.py collectstatic --noinput || true
 
 EXPOSE 8000
 
-CMD ["daphne", "-b", "0.0.0.0", "-p", "8000", "academy.asgi:application"]
+# Use entrypoint to run migrations, collectstatic, then start Daphne
+RUN chmod +x /app/entrypoint.sh
+CMD ["/app/entrypoint.sh"]
