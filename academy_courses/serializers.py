@@ -40,6 +40,8 @@ class ModuleSerializer(serializers.ModelSerializer):
 
 
 class LessonSerializer(serializers.ModelSerializer):
+    course_id = serializers.SerializerMethodField()
+    
     class Meta:
         model = Lesson
         fields = [
@@ -59,3 +61,6 @@ class LessonSerializer(serializers.ModelSerializer):
             'scheduled_at',
             'metadata',
         ]
+    
+    def get_course_id(self, obj):
+        return obj.module.course_id if obj.module else None

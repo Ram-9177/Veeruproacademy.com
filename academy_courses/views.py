@@ -55,11 +55,11 @@ class LessonViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.G
 	permission_classes = [IsAuthenticatedOrReadOnly]
 	
 	def get_queryset(self):
-		queryset = Lesson.objects.select_related('course', 'module').all()
+		queryset = Lesson.objects.select_related('module', 'module__course').all()
 		# Non-staff users can only see lessons from published courses
 		if not self.request.user.is_staff:
 			queryset = queryset.filter(
 				status=ContentStatus.PUBLISHED,
-				course__status=ContentStatus.PUBLISHED
+				module__course__status=ContentStatus.PUBLISHED
 			)
 		return queryset

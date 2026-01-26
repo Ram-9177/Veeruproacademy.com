@@ -349,37 +349,63 @@ LOGGING = {
 # Redis Configuration
 REDIS_URL = env('REDIS_URL', default='redis://localhost:6379/0')
 
-# Caching configuration with Redis
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': REDIS_URL,
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            'SOCKET_CONNECT_TIMEOUT': 5,
-            'SOCKET_TIMEOUT': 5,
-            'COMPRESSOR': 'django_redis.compressors.zlib.ZlibCompressor',
-            'CONNECTION_POOL_KWARGS': {
-                'max_connections': 50,
-                'retry_on_timeout': True,
+# Caching configuration with Redis fallback to local memory cache
+try:
+    import redis
+    redis_client = redis.from_url(REDIS_URL, socket_connect_timeout=2)
+    redis_client.ping()
+    redis_available = True
+except Exception:
+    redis_available = False
+
+if redis_available:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': REDIS_URL,
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+                'SOCKET_CONNECT_TIMEOUT': 5,
+                'SOCKET_TIMEOUT': 5,
+                'COMPRESSOR': 'django_redis.compressors.zlib.ZlibCompressor',
+                'CONNECTION_POOL_KWARGS': {
+                    'max_connections': 50,
+                    'retry_on_timeout': True,
+                },
             },
-        },
-        'KEY_PREFIX': 'academy',
-        'TIMEOUT': 300,  # 5 minutes default
+            'KEY_PREFIX': 'academy',
+            'TIMEOUT': 300,  # 5 minutes default
+        }
     }
-}
+else:
+    # Fallback to local memory cache when Redis is not available
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'academy-cache',
+            'TIMEOUT': 300,
+        }
+    }
 
 # Channels Configuration (WebSocket)
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [REDIS_URL],
-            'capacity': 1500,
-            'expiry': 10,
-        },
-    },
-}
+if redis_available:
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {
+                'hosts': [REDIS_URL],
+                'capacity': 1500,
+                'expiry': 10,
+            },
+        }
+    }
+else:
+    # Fallback to in-memory channel layer when Redis is not available
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        }
+    }
 
 # Development fallback: use in-memory channel layer when Redis isn't available
 # or when explicitly requested via DJANGO_USE_INMEMORY_CHANNELS. This makes it
