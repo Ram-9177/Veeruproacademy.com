@@ -8,7 +8,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-
+    services:
+      redis:
+        image: redis:latest
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
     steps:
       - name: Clone repository without actions
         run: |
