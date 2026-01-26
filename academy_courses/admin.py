@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Course, CourseCategory, Lesson, Module
+from .models import Course, CourseCategory, Lesson, Module, ContentStatus
 
 
 class LessonInline(admin.TabularInline):
@@ -21,36 +21,51 @@ class ModuleInline(admin.TabularInline):
 
 @admin.register(CourseCategory)
 class CourseCategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'order', 'course_count']
-    search_fields = ['name', 'slug']
+    list_display = ['name', 'slug', 'order', 'course_count', 'created_at']
+    search_fields = ['name', 'slug', 'description']
     ordering = ['order', 'name']
     prepopulated_fields = {'slug': ('name',)}
+    list_per_page = 25
+    list_editable = ['order']
+    readonly_fields = ['created_at', 'updated_at']
+    
+    fieldsets = (
+        ('Category Info', {
+            'fields': ('name', 'slug', 'description', 'order')
+        }),
+        ('Metadata', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
     
     def course_count(self, obj):
-        return obj.courses.count()
+        count = obj.courses.count()
+        return format_html('<span style="background: #e3f2fd; padding: 2px 6px; border-radius: 3px;">{}</span>', count)
     course_count.short_description = 'Courses'
 
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ['title', 'status_badge', 'price_display', 'level', 'module_count', 'lesson_count', 'order']
-    list_filter = ['status', 'level', 'category']
+    list_display = ['title', 'status_badge', 'category', 'price_display', 'level', 'module_count', 'lesson_count', 'order', 'created_at']
+    list_filter = ['status', 'level', 'category', 'created_at', 'published_at']
     search_fields = ['title', 'slug', 'description']
     ordering = ['order', 'title']
     prepopulated_fields = {'slug': ('title',)}
     list_editable = ['order']
     list_per_page = 20
     inlines = [ModuleInline]
+    date_hierarchy = 'created_at'
     
     fieldsets = (
         ('Basic Information', {
-            'fields': ('title', 'slug', 'description', 'category')
+            'fields': ('title', 'slug', 'description', 'category', 'instructor')
         }),
         ('Course Details', {
             'fields': ('level', 'duration', 'price', 'thumbnail')
         }),
         ('Status & Ordering', {
-            'fields': ('status', 'order', 'instructor'),
+            'fields': ('status', 'order'),
             'classes': ('collapse',)
         }),
     )

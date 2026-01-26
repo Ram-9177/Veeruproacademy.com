@@ -885,6 +885,18 @@
         }
       });
     })();
+
+    // Auto-refresh content every 30 seconds if no WebSocket (fallback polling)
+    (function() {
+      setInterval(function() {
+        if (typeof loadCoursesDropdown === 'function') {
+          loadCoursesDropdown();
+        }
+        if (typeof loadCoursesBar === 'function') {
+          loadCoursesBar();
+        }
+      }, 30000);
+    })();
   </script>
   
   {% block extra_js %}{% endblock %}

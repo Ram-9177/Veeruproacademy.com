@@ -6,23 +6,29 @@ from .models import Project, ProjectStatus
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ("title", "status_badge", "price_display", "slug", "updated_at", "created_at")
-    list_filter = ("status",)
+    list_display = ("title", "status_badge", "price_display", "created_at", "updated_at", "total_projects")
+    list_filter = ("status", "created_at")
     search_fields = ("title", "slug", "description")
     prepopulated_fields = {'slug': ('title',)}
-    list_per_page = 20
+    list_per_page = 25
+    list_editable = []
     date_hierarchy = 'created_at'
     ordering = ['-created_at']
+    readonly_fields = ['created_at', 'updated_at']
     
     fieldsets = (
         ('Basic Information', {
             'fields': ('title', 'slug', 'description')
         }),
         ('Project Details', {
-            'fields': ('thumbnail', 'price', 'metadata')
+            'fields': ('thumbnail', 'price')
         }),
         ('Status', {
             'fields': ('status',),
+        }),
+        ('Metadata', {
+            'fields': ('metadata', 'created_at', 'updated_at'),
+            'classes': ('collapse',)
         }),
     )
     
@@ -42,7 +48,12 @@ class ProjectAdmin(admin.ModelAdmin):
     
     def price_display(self, obj):
         if obj.price and obj.price > 0:
-            return format_html('<strong>₹{}</strong>', int(obj.price))
+            return format_html('<strong style="color: #2563eb;">₹{}</strong>', int(obj.price))
         return format_html('<span style="color: #10b981; font-weight: bold;">FREE</span>')
     price_display.short_description = 'Price'
     price_display.admin_order_field = 'price'
+    
+    def total_projects(self, obj):
+        return Project.objects.filter(status=ProjectStatus.PUBLISHED).count()
+    total_projects.short_description = 'Published'
+

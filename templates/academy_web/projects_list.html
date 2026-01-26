@@ -15,7 +15,55 @@
     </div>
   </div>
 </section>
-
+<script>
+  async function loadProjects() {
+    try {
+      const response = await fetch('/api/projects/');
+      const data = await response.json();
+      const container = document.getElementById('projectsContainer');
+      
+      const projects = Array.isArray(data) ? data : (data.results || []);
+      
+      if (projects.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full text-center py-16">
+            <svg class="w-20 h-20 text-gray-300 dark:text-gray-600 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">No Projects Yet</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">Be the first to showcase your project!</p>
+          </div>
+        `;
+        return;
+      }
+      
+      container.innerHTML = projects.map(project => `
+        <div class="bg-gray-50 dark:bg-dark-700 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition group">
+          <div class="aspect-video bg-gray-200 dark:bg-dark-600 relative overflow-hidden">
+            ${project.thumbnail ? `<img src="${project.thumbnail}" alt="${project.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">` : '<div class="w-full h-full flex items-center justify-center"><svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></div>'}
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">${project.title}</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">${project.description || 'No description'}</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-medium text-brand-orange">${project.price > 0 ? '₹' + Math.floor(project.price) : 'FREE'}</span>
+              <a href="/projects/${project.slug}/" class="text-brand-orange hover:text-brand-blue font-medium text-sm transition">
+                View Project →
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    } catch (error) {
+      console.error('Error loading projects:', error);
+      document.getElementById('projectsContainer').innerHTML = '<div class="col-span-full text-center text-red-500">Error loading projects</div>';
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', loadProjects);
+  // Auto-refresh projects every 30 seconds
+  setInterval(loadProjects, 30000);
+</script>
 <!-- Filters -->
 <section class="py-8 bg-gray-50 dark:bg-dark-900 border-b border-gray-200 dark:border-dark-700">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,57 +82,9 @@
 <!-- Projects Grid -->
 <section class="py-16 bg-white dark:bg-dark-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    {% if projects %}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {% for project in projects %}
-      <div class="bg-gray-50 dark:bg-dark-700 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition group">
-        <div class="aspect-video bg-gray-200 dark:bg-dark-600 relative overflow-hidden">
-          {% if project.thumbnail %}
-          <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-          {% else %}
-          <div class="w-full h-full flex items-center justify-center">
-            <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-            </svg>
-          </div>
-          {% endif %}
-          <div class="absolute top-3 right-3">
-            <span class="px-3 py-1 bg-brand-orange text-white text-xs font-medium rounded-full">{{ project.category }}</span>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ project.title }}</h3>
-          <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">{{ project.description }}</p>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <div class="w-8 h-8 bg-brand-orange/20 rounded-full flex items-center justify-center">
-                <span class="text-brand-orange font-semibold text-sm">{{ project.student.first_name|slice:":1" }}</span>
-              </div>
-              <span class="text-sm text-gray-600 dark:text-gray-400">{{ project.student.get_full_name }}</span>
-            </div>
-            <a href="{% url 'academy_web:project_detail' project.slug %}" class="text-brand-orange hover:text-brand-blue font-medium text-sm transition">
-              View Project →
-            </a>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
+    <div id="projectsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Loaded dynamically -->
     </div>
-    {% else %}
-    <div class="text-center py-16">
-      <svg class="w-20 h-20 text-gray-300 dark:text-gray-600 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-      </svg>
-      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">No Projects Yet</h3>
-      <p class="text-gray-600 dark:text-gray-400 mb-8">Be the first to showcase your project!</p>
-      <a href="{% url 'academy_web:course_list' %}" class="inline-flex items-center px-6 py-3 bg-brand-orange text-white font-semibold rounded-lg hover:bg-brand-blue transition shadow-lg">
-        Start Learning
-        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-        </svg>
-      </a>
-    </div>
-    {% endif %}
   </div>
 </section>
 

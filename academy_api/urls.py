@@ -4,6 +4,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from academy_courses.views import CourseCategoryViewSet, CourseViewSet, LessonViewSet, ModuleViewSet
 from academy_learning.views import EnrollmentViewSet, CourseProgressViewSet, LessonProgressViewSet
+from academy_projects.views import ProjectViewSet
 
 from .views import health
 
@@ -12,6 +13,7 @@ router.register('course-categories', CourseCategoryViewSet, basename='course-cat
 router.register('courses', CourseViewSet, basename='course')
 router.register('modules', ModuleViewSet, basename='module')
 router.register('lessons', LessonViewSet, basename='lesson')
+router.register('projects', ProjectViewSet, basename='project')
 router.register('enrollments', EnrollmentViewSet, basename='enrollment')
 router.register('course-progress', CourseProgressViewSet, basename='course-progress')
 router.register('lesson-progress', LessonProgressViewSet, basename='lesson-progress')
