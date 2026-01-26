@@ -42,6 +42,14 @@ python manage.py runserver 0.0.0.0:8000
 - App: http://127.0.0.1:8000/
 - Admin: http://127.0.0.1:8000/admin/
 
+### 5) Run tests
+
+```bash
+python manage.py test
+```
+
+**Note:** Tests run without requiring Redis or external services. The test suite uses in-memory alternatives for channels, cache, and Celery.
+
 ## Repo structure
 
 - `academy/`: Django project (settings/urls/wsgi/asgi)
