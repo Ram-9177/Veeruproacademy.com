@@ -1,2 +1,2 @@
-web: gunicorn academy.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 2 --threads 4 --timeout 60
+web: daphne -b 0.0.0.0 -p ${PORT:-8000} academy.asgi:application
 release: python manage.py migrate --noinput && python manage.py collectstatic --noinput
