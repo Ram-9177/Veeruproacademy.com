@@ -20,7 +20,10 @@ __pycache__/
 *.py[cod]
 *.pyo
 .venv/
+test_env/
 db.sqlite3
+htmlcov/
+.coverage
 
 # Django collected static / media
 staticfiles/

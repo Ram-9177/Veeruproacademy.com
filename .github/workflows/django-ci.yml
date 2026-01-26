@@ -9,12 +9,32 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Clone repository without actions
         run: |
           git clone --depth 1 "$GITHUB_SERVER_URL/${GITHUB_REPOSITORY}.git" repo
           cd repo
           ls
+
+      - name: Cache Python dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            repo/.venv
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-venv-
 
       - name: Set up Python and dependencies
         run: |
@@ -33,6 +53,10 @@ jobs:
           DJANGO_DEBUG: 'False'
           DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
           DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
+          REDIS_URL: redis://localhost:6379/0
+          DJANGO_USE_INMEMORY_CHANNELS: 'True'
+          CELERY_BROKER_URL: redis://localhost:6379/0
+          CELERY_TASK_ALWAYS_EAGER: 'True'
         run: |
           cd repo
           . .venv/bin/activate
@@ -45,6 +69,10 @@ jobs:
           DJANGO_DEBUG: 'False'
           DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
           DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
+          REDIS_URL: redis://localhost:6379/0
+          DJANGO_USE_INMEMORY_CHANNELS: 'True'
+          CELERY_BROKER_URL: redis://localhost:6379/0
+          CELERY_TASK_ALWAYS_EAGER: 'True'
         run: |
           cd repo
           . .venv/bin/activate
@@ -57,19 +85,45 @@ jobs:
           DJANGO_DEBUG: 'False'
           DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
           DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
+          REDIS_URL: redis://localhost:6379/0
+          DJANGO_USE_INMEMORY_CHANNELS: 'True'
+          CELERY_BROKER_URL: redis://localhost:6379/0
+          CELERY_TASK_ALWAYS_EAGER: 'True'
         run: |
           cd repo
           . .venv/bin/activate
           python manage.py collectstatic --noinput
 
-      - name: Run tests
+      - name: Run tests with coverage
         env:
           DJANGO_SETTINGS_MODULE: academy.settings
           DJANGO_SECRET_KEY: ci-secret-key
           DJANGO_DEBUG: 'False'
           DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
           DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
+          REDIS_URL: redis://localhost:6379/0
+          DJANGO_USE_INMEMORY_CHANNELS: 'True'
+          CELERY_BROKER_URL: redis://localhost:6379/0
+          CELERY_TASK_ALWAYS_EAGER: 'True'
         run: |
           cd repo
           . .venv/bin/activate
-          python manage.py test
+          pip install coverage
+          coverage run --source='.' manage.py test
+          coverage report
+          coverage html
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: coverage-report
+          path: repo/htmlcov/
+
+      - name: Run linting checks
+        run: |
+          cd repo
+          . .venv/bin/activate
+          pip install flake8
+          flake8 --max-line-length=120 --exclude=migrations,venv,.venv,__pycache__ .
+        continue-on-error: true
