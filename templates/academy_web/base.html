@@ -369,6 +369,10 @@
     
     /* Consistent Button Heights */
     .btn-h-10 { height: 40px; display: inline-flex; align-items: center; justify-content: center; }
+    
+    /* Sticky Courses Bar - Hide scrollbar */
+    #coursesBarList::-webkit-scrollbar { display: none; }
+    #coursesBarList { -ms-overflow-style: none; }
   </style>
   
   <!-- Dark mode init -->
@@ -551,6 +555,19 @@
     </div>
   </nav>
   
+  <!-- Sticky Courses Bar -->
+  <div id="coursesBar" class="bg-gradient-to-r from-brand-orange/10 to-brand-blue/10 dark:from-brand-orange/5 dark:to-brand-blue/5 border-b border-gray-200 dark:border-dark-700 sticky top-16 z-40 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div class="flex items-center space-x-2">
+        <span class="text-sm font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">Featured:</span>
+        <div id="coursesBarList" class="flex items-center space-x-2 overflow-x-auto pb-1" style="scrollbar-width: none; -ms-overflow-style: none;">
+          <!-- Courses will be loaded here by JavaScript -->
+          <div class="text-xs text-gray-500 dark:text-gray-400">Loading courses...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <!-- Flash Messages -->
   {% if messages %}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 space-y-2" role="alert">
@@ -702,8 +719,35 @@
       }
     }
     
+    // Load courses in sticky bar
+    async function loadCoursesBar() {
+      try {
+        const response = await fetch('/api/courses/');
+        const data = await response.json();
+        
+        const coursesBarList = document.getElementById('coursesBarList');
+        
+        if (data.results && data.results.length > 0) {
+          coursesBarList.innerHTML = data.results.map(course => `
+            <a href="/courses/${course.slug}/" class="inline-flex items-center px-4 py-1.5 rounded-full bg-white dark:bg-dark-700 border border-gray-200 dark:border-dark-600 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-brand-orange hover:text-white dark:hover:bg-brand-orange transition-all whitespace-nowrap shadow-sm">
+              ${course.title}
+            </a>
+          `).join('');
+        } else {
+          coursesBarList.innerHTML = '<div class="text-xs text-gray-500 dark:text-gray-400">No courses available</div>';
+        }
+      } catch (error) {
+        const coursesBarList = document.getElementById('coursesBarList');
+        coursesBarList.innerHTML = '<div class="text-xs text-red-500">Error loading courses</div>';
+        console.error('Error loading courses bar:', error);
+      }
+    }
+    
     // Load courses on page load
-    document.addEventListener('DOMContentLoaded', loadCoursesDropdown);
+    document.addEventListener('DOMContentLoaded', function() {
+      loadCoursesBar();
+      loadCoursesDropdown();
+    });
 
     function highlightActiveNav() {
       const normalizedPath = (window.location.pathname.replace(/\/$/, '') || '/');
