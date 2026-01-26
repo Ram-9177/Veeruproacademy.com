@@ -69,6 +69,9 @@ jobs:
           DJANGO_DEBUG: 'False'
           DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
           DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
+          DJANGO_USE_INMEMORY_CHANNELS: 'True'
+          DJANGO_USE_LOCMEM_CACHE: 'True'
+          CELERY_TASK_ALWAYS_EAGER: 'True'
         run: |
           cd repo
           . .venv/bin/activate
