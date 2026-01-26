@@ -55,6 +55,9 @@ _vercel_url = env('VERCEL_URL', default='').strip()
 if _vercel_url and _vercel_url not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(_vercel_url)
 
+# Site URL for emails and external links
+SITE_URL = env('SITE_URL', default='http://localhost:8000')
+
 
 # Application definition
 
@@ -384,10 +387,21 @@ CHANNEL_LAYERS = {
 # Development fallback: use in-memory channel layer when Redis isn't available
 # or when explicitly requested via DJANGO_USE_INMEMORY_CHANNELS. This makes it
 # possible to run and test WebSocket consumers locally without a Redis server.
-if DEBUG and env.bool('DJANGO_USE_INMEMORY_CHANNELS', default=True):
+# In DEBUG mode, default to in-memory unless explicitly disabled.
+# In production/CI mode, only use in-memory if explicitly enabled.
+use_inmemory = env.bool('DJANGO_USE_INMEMORY_CHANNELS', default=DEBUG)
+if use_inmemory:
     CHANNEL_LAYERS = {
         'default': {
             'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        }
+    }
+    # Also use local memory cache for CI/testing when Redis isn't available
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'unique-snowflake',
+            'TIMEOUT': 300,  # 5 minutes default
         }
     }
 
@@ -403,6 +417,11 @@ CELERY_TASK_TIME_LIMIT = 30 * 60  # 30 minutes
 CELERY_TASK_SOFT_TIME_LIMIT = 25 * 60  # 25 minutes
 CELERY_WORKER_PREFETCH_MULTIPLIER = 4
 CELERY_WORKER_MAX_TASKS_PER_CHILD = 1000
+
+# When using in-memory backends (testing/CI), run Celery tasks synchronously
+if use_inmemory:
+    CELERY_TASK_ALWAYS_EAGER = True
+    CELERY_TASK_EAGER_PROPAGATES = True
 
 # Session configuration for better security with Redis
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
