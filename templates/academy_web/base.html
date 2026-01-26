@@ -392,7 +392,7 @@
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 btn-primary px-4 py-2 rounded-lg z-[100]">Skip to main content</a>
 
   <!-- Navigation -->
-  <nav class="bg-white dark:bg-dark-800 shadow-sm sticky top-0 z-50 border-b border-gray-200 dark:border-dark-700">
+  <nav class="bg-white dark:bg-dark-900 shadow-md sticky top-0 z-50 border-b border-gray-200 dark:border-dark-700">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <!-- Logo -->
@@ -407,7 +407,7 @@
         
         <!-- Desktop Navigation -->
         <div class="hidden lg:flex items-center">
-          <div class="flex items-center bg-gray-100/50 dark:bg-dark-700/50 rounded-xl p-1">
+          <div class="flex items-center bg-gray-100 dark:bg-dark-700 rounded-xl p-1">
             <a href="{% url 'academy_web:home' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Home</a>
             <!-- Courses Dropdown -->
             <div class="relative group">
@@ -434,7 +434,7 @@
             <a href="{% url 'academy_web:contact' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Contact</a>
           </div>
           {% if request.user.is_authenticated %}
-          <div class="flex items-center ml-2 bg-gray-100/50 dark:bg-dark-700/50 rounded-xl p-1">
+          <div class="flex items-center ml-2 bg-gray-100 dark:bg-dark-700 rounded-xl p-1">
             <a href="{% url 'academy_web:dashboard' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Dashboard</a>
             {% if request.user.is_staff %}
             <a href="/admin/" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Admin</a>
