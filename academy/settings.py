@@ -291,6 +291,9 @@ EMAIL_USE_SSL = env.bool('DJANGO_EMAIL_USE_SSL', default=False)
 DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL', default='noreply@veeruproacademy.com')
 SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
+# Site URL for emails and absolute URLs
+SITE_URL = env('SITE_URL', default='http://localhost:8000')
+
 # Domain + security
 _raw_csrf_trusted = env('DJANGO_CSRF_TRUSTED_ORIGINS', default=None)
 if _raw_csrf_trusted is None:
@@ -350,24 +353,36 @@ LOGGING = {
 REDIS_URL = env('REDIS_URL', default='redis://localhost:6379/0')
 
 # Caching configuration with Redis
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': REDIS_URL,
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            'SOCKET_CONNECT_TIMEOUT': 5,
-            'SOCKET_TIMEOUT': 5,
-            'COMPRESSOR': 'django_redis.compressors.zlib.ZlibCompressor',
-            'CONNECTION_POOL_KWARGS': {
-                'max_connections': 50,
-                'retry_on_timeout': True,
+# In test mode (when DJANGO_USE_INMEMORY_CHANNELS is True), use LocMemCache instead
+USE_REDIS_CACHE = not env.bool('DJANGO_USE_INMEMORY_CHANNELS', default=DEBUG)
+
+if USE_REDIS_CACHE:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': REDIS_URL,
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+                'SOCKET_CONNECT_TIMEOUT': 5,
+                'SOCKET_TIMEOUT': 5,
+                'COMPRESSOR': 'django_redis.compressors.zlib.ZlibCompressor',
+                'CONNECTION_POOL_KWARGS': {
+                    'max_connections': 50,
+                    'retry_on_timeout': True,
+                },
             },
-        },
-        'KEY_PREFIX': 'academy',
-        'TIMEOUT': 300,  # 5 minutes default
+            'KEY_PREFIX': 'academy',
+            'TIMEOUT': 300,  # 5 minutes default
+        }
     }
-}
+else:
+    # Use local memory cache for tests
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'test-cache',
+        }
+    }
 
 # Channels Configuration (WebSocket)
 CHANNEL_LAYERS = {
@@ -384,7 +399,7 @@ CHANNEL_LAYERS = {
 # Development fallback: use in-memory channel layer when Redis isn't available
 # or when explicitly requested via DJANGO_USE_INMEMORY_CHANNELS. This makes it
 # possible to run and test WebSocket consumers locally without a Redis server.
-if DEBUG and env.bool('DJANGO_USE_INMEMORY_CHANNELS', default=True):
+if env.bool('DJANGO_USE_INMEMORY_CHANNELS', default=DEBUG):
     CHANNEL_LAYERS = {
         'default': {
             'BACKEND': 'channels.layers.InMemoryChannelLayer',
@@ -403,6 +418,13 @@ CELERY_TASK_TIME_LIMIT = 30 * 60  # 30 minutes
 CELERY_TASK_SOFT_TIME_LIMIT = 25 * 60  # 25 minutes
 CELERY_WORKER_PREFETCH_MULTIPLIER = 4
 CELERY_WORKER_MAX_TASKS_PER_CHILD = 1000
+
+# In test mode, run Celery tasks synchronously without Redis
+if env.bool('CELERY_TASK_ALWAYS_EAGER', default=False):
+    CELERY_TASK_ALWAYS_EAGER = True
+    CELERY_TASK_EAGER_PROPAGATES = True
+    CELERY_BROKER_URL = 'memory://'
+    CELERY_RESULT_BACKEND = 'cache+memory://'
 
 # Session configuration for better security with Redis
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
