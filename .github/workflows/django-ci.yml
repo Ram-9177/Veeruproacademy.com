@@ -94,22 +94,6 @@ jobs:
           . .venv/bin/activate
           python manage.py collectstatic --noinput
 
-      - name: Run tests
-        env:
-          DJANGO_SETTINGS_MODULE: academy.settings
-          DJANGO_SECRET_KEY: ci-secret-key
-          DJANGO_DEBUG: 'False'
-          DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
-          DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
-          REDIS_URL: redis://localhost:6379/0
-          DJANGO_USE_INMEMORY_CHANNELS: 'True'
-          CELERY_BROKER_URL: redis://localhost:6379/0
-          CELERY_TASK_ALWAYS_EAGER: 'True'
-        run: |
-          cd repo
-          . .venv/bin/activate
-          python manage.py test
-
       - name: Run tests with coverage
         env:
           DJANGO_SETTINGS_MODULE: academy.settings
@@ -119,6 +103,7 @@ jobs:
           DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
           REDIS_URL: redis://localhost:6379/0
           DJANGO_USE_INMEMORY_CHANNELS: 'True'
+          CELERY_BROKER_URL: redis://localhost:6379/0
           CELERY_TASK_ALWAYS_EAGER: 'True'
         run: |
           cd repo

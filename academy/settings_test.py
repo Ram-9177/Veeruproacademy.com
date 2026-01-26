@@ -28,7 +28,8 @@ CELERY_TASK_EAGER_PROPAGATES = True
 CELERY_BROKER_URL = 'memory://'
 CELERY_RESULT_BACKEND = 'cache+memory://'
 
-# Faster password hashing for tests
+# Faster password hashing for tests - uses MD5 without salt specifically for test speed
+# DO NOT use in production
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.MD5PasswordHasher',
 ]
