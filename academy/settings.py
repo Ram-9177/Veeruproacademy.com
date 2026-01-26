@@ -239,6 +239,16 @@ if DJANGO_USE_S3_MEDIA:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Channels / WebSocket real-time layer
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [env('REDIS_URL', default='redis://localhost:6379')],
+        },
+    },
+}
+
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',

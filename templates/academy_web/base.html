@@ -701,9 +701,10 @@
         const response = await fetch('/api/courses/');
         const data = await response.json();
         const coursesList = document.getElementById('coursesList');
+        const courses = Array.isArray(data) ? data : (data.results || []);
         
-        if (data.results && data.results.length > 0) {
-          coursesList.innerHTML = data.results.map(course => `
+        if (courses.length > 0) {
+          coursesList.innerHTML = courses.map(course => `
             <a href="/courses/${course.slug}/" class="block px-4 py-2.5 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-600 hover:text-brand-orange transition-all">
               <div class="font-medium truncate">${course.title}</div>
               <div class="text-xs text-gray-500 dark:text-gray-400 truncate">${course.category || 'Course'}</div>
@@ -726,9 +727,10 @@
         const data = await response.json();
         
         const coursesBarList = document.getElementById('coursesBarList');
+        const courses = Array.isArray(data) ? data : (data.results || []);
         
-        if (data.results && data.results.length > 0) {
-          coursesBarList.innerHTML = data.results.map(course => `
+        if (courses.length > 0) {
+          coursesBarList.innerHTML = courses.map(course => `
             <a href="/courses/${course.slug}/" class="inline-flex items-center px-4 py-1.5 rounded-full bg-white dark:bg-dark-700 border border-gray-200 dark:border-dark-600 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-brand-orange hover:text-white dark:hover:bg-brand-orange transition-all whitespace-nowrap shadow-sm">
               ${course.title}
             </a>
@@ -785,6 +787,104 @@
         setTimeout(function() { alert.remove(); }, 300);
       }, 5000);
     });
+
+    // Real-time course updates via WebSocket (optional Redis-backed Channels)
+    (function() {
+      const wsScheme = window.location.protocol === 'https:' ? 'wss' : 'ws';
+      const wsUrl = `${wsScheme}://${window.location.host}/ws/courses/`;
+
+      let courseSocket = null;
+      let reconnectAttempts = 0;
+      const maxReconnectAttempts = 5;
+      const reconnectDelayMs = 3000;
+
+      function connectCourseWebSocket() {
+        try {
+          courseSocket = new WebSocket(wsUrl);
+
+          courseSocket.onopen = function() {
+            reconnectAttempts = 0;
+          };
+
+          courseSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            const { type, course } = data;
+
+            switch (type) {
+              case 'course_created':
+              case 'course_updated':
+                refreshCourses();
+                showCourseNotification(course.title || course.slug, type === 'course_created' ? 'New course available' : 'Course updated', 'info');
+                break;
+              case 'course_deleted':
+                refreshCourses();
+                showCourseNotification(course.slug, 'Course removed', 'warning');
+                break;
+              default:
+                break;
+            }
+          };
+
+          courseSocket.onerror = function() {
+            // Errors are handled by onclose reconnect
+          };
+
+          courseSocket.onclose = function() {
+            if (reconnectAttempts < maxReconnectAttempts) {
+              reconnectAttempts += 1;
+              const delay = reconnectDelayMs * Math.pow(2, reconnectAttempts - 1);
+              setTimeout(connectCourseWebSocket, delay);
+            }
+          };
+        } catch (err) {
+          console.error('WebSocket connection failed', err);
+        }
+      }
+
+      function refreshCourses() {
+        if (typeof loadCoursesDropdown === 'function') {
+          loadCoursesDropdown();
+        }
+        if (typeof loadCoursesBar === 'function') {
+          loadCoursesBar();
+        }
+      }
+
+      function showCourseNotification(title, message, type) {
+        const container = document.createElement('div');
+        container.className = 'fixed top-4 right-4 z-50 px-4 py-3 rounded-lg shadow-lg text-white text-sm animate-fade-in';
+
+        let bg = 'bg-blue-500';
+        if (type === 'warning') bg = 'bg-yellow-500';
+        if (type === 'error') bg = 'bg-red-600';
+
+        container.classList.add(bg);
+        container.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="font-semibold">${message}</span>
+            <span class="opacity-90">${title}</span>
+          </div>
+        `;
+
+        document.body.appendChild(container);
+        setTimeout(() => {
+          container.style.opacity = '0';
+          setTimeout(() => container.remove(), 400);
+        }, 4000);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', connectCourseWebSocket);
+      } else {
+        connectCourseWebSocket();
+      }
+
+      window.addEventListener('beforeunload', function() {
+        if (courseSocket && courseSocket.readyState === WebSocket.OPEN) {
+          courseSocket.close();
+        }
+      });
+    })();
   </script>
   
   {% block extra_js %}{% endblock %}
