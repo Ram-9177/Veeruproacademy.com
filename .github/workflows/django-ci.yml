@@ -1,0 +1,75 @@
+name: Django CI (no external actions)
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Clone repository without actions
+        run: |
+          git clone --depth 1 "$GITHUB_SERVER_URL/${GITHUB_REPOSITORY}.git" repo
+          cd repo
+          ls
+
+      - name: Set up Python and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-venv python3-pip
+          cd repo
+          python3 -m venv .venv
+          . .venv/bin/activate
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Django system check
+        env:
+          DJANGO_SETTINGS_MODULE: academy.settings
+          DJANGO_SECRET_KEY: ci-secret-key
+          DJANGO_DEBUG: 'False'
+          DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+          DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
+        run: |
+          cd repo
+          . .venv/bin/activate
+          python manage.py check
+
+      - name: Run migrations (SQLite)
+        env:
+          DJANGO_SETTINGS_MODULE: academy.settings
+          DJANGO_SECRET_KEY: ci-secret-key
+          DJANGO_DEBUG: 'False'
+          DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+          DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
+        run: |
+          cd repo
+          . .venv/bin/activate
+          python manage.py migrate --noinput
+
+      - name: Collect static (before tests)
+        env:
+          DJANGO_SETTINGS_MODULE: academy.settings
+          DJANGO_SECRET_KEY: ci-secret-key
+          DJANGO_DEBUG: 'False'
+          DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+          DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
+        run: |
+          cd repo
+          . .venv/bin/activate
+          python manage.py collectstatic --noinput
+
+      - name: Run tests
+        env:
+          DJANGO_SETTINGS_MODULE: academy.settings
+          DJANGO_SECRET_KEY: ci-secret-key
+          DJANGO_DEBUG: 'False'
+          DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+          DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
+        run: |
+          cd repo
+          . .venv/bin/activate
+          python manage.py test
