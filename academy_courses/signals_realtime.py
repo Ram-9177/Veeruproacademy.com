@@ -49,7 +49,7 @@ def broadcast_course_created_or_updated(sender, instance, created, **kwargs):
                 }
             }
         )
-    except Exception as e:
+    except (ConnectionError, OSError) as e:
         # Log the error but don't fail the request/test
         # This allows the application to work without Redis in test environments
         logger.warning(f"Failed to broadcast course update: {e}")
@@ -81,6 +81,6 @@ def broadcast_course_deleted(sender, instance, **kwargs):
                 }
             }
         )
-    except Exception as e:
+    except (ConnectionError, OSError) as e:
         # Log the error but don't fail the request/test
         logger.warning(f"Failed to broadcast course deletion: {e}")
