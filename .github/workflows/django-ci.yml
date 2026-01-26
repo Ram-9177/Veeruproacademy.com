@@ -52,6 +52,15 @@ jobs:
           DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
         run: python manage.py migrate --noinput
 
+      - name: Collect static (before tests)
+        env:
+          DJANGO_SETTINGS_MODULE: academy.settings
+          DJANGO_SECRET_KEY: ci-secret-key
+          DJANGO_DEBUG: 'False'
+          DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+          DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
+        run: python manage.py collectstatic --noinput
+
       - name: Run tests
         env:
           DJANGO_SETTINGS_MODULE: academy.settings
@@ -61,7 +70,7 @@ jobs:
           DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
         run: python manage.py test
 
-      - name: Collect static
+      - name: Verify staticfiles collected
         env:
           DJANGO_SETTINGS_MODULE: academy.settings
           DJANGO_SECRET_KEY: ci-secret-key
