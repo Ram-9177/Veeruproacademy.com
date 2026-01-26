@@ -1,20 +1,26 @@
 #!/usr/bin/env sh
 set -e
 
+echo "Starting entrypoint.sh..."
+
 # Apply database migrations
+echo "Running migrations..."
 python manage.py migrate --noinput
 
 # Collect static files (idempotent)
+echo "Collecting static files..."
 python manage.py collectstatic --noinput
 
-# Create superuser if vars are provided
+# Create superuser from environment variables
 if [ -n "$DJANGO_SUPERUSER_USERNAME" ] && [ -n "$DJANGO_SUPERUSER_EMAIL" ] && [ -n "$DJANGO_SUPERUSER_PASSWORD" ]; then
-  python manage.py shell <<EOF
+  echo "Creating superuser from env vars..."
+  python manage.py shell << 'PYEOF'
 from django.contrib.auth import get_user_model
+import os
 User = get_user_model()
-username = "$DJANGO_SUPERUSER_USERNAME"
-email = "$DJANGO_SUPERUSER_EMAIL"
-password = "$DJANGO_SUPERUSER_PASSWORD"
+username = os.getenv('DJANGO_SUPERUSER_USERNAME')
+email = os.getenv('DJANGO_SUPERUSER_EMAIL')
+password = os.getenv('DJANGO_SUPERUSER_PASSWORD')
 
 if not User.objects.filter(username=username).exists():
     User.objects.create_superuser(username=username, email=email, password=password)
@@ -27,11 +33,14 @@ else:
     user.email = email
     user.save()
     print(f"Superuser '{username}' password updated")
-EOF
+PYEOF
+else
+  echo "DJANGO_SUPERUSER_* env vars not set, skipping primary admin creation"
 fi
 
-# Also create the backup admin user
-python manage.py shell <<EOF
+# Create backup admin user
+echo "Creating backup admin user..."
+python manage.py shell << 'PYEOF'
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -45,7 +54,7 @@ else:
     user.is_staff = True
     user.save()
     print("Backup admin user 'Adminveeru' password updated")
-EOF
+PYEOF
 
-# Start Daphne ASGI server
+echo "Starting Daphne ASGI server..."
 exec daphne -b 0.0.0.0 -p 8000 academy.asgi:application
