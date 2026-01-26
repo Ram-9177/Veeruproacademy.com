@@ -79,21 +79,19 @@ def logout_view(request: HttpRequest) -> HttpResponse:
 
 
 def course_list(request: HttpRequest) -> HttpResponse:
-    courses = (
-        Course.objects
-        .filter(status=ContentStatus.PUBLISHED)
-        .select_related('category', 'instructor')
-        .order_by("order", "title")
-    )
+    qs = Course.objects.select_related('category', 'instructor').order_by("order", "title")
+    # Staff sees all drafts; users see only published
+    if not request.user.is_staff:
+        qs = qs.filter(status=ContentStatus.PUBLISHED)
+    courses = qs
     return render(request, "academy_web/course_list.html", {"courses": courses})
 
 
 def course_detail(request: HttpRequest, slug: str) -> HttpResponse:
-    course = get_object_or_404(
-        Course.objects.select_related('category', 'instructor'),
-        slug=slug,
-        status=ContentStatus.PUBLISHED
-    )
+    qs = Course.objects.select_related('category', 'instructor')
+    if not request.user.is_staff:
+        qs = qs.filter(status=ContentStatus.PUBLISHED)
+    course = get_object_or_404(qs, slug=slug)
     modules = course.modules.order_by("order", "title").prefetch_related("lessons")
 
     has_entitlement = False
