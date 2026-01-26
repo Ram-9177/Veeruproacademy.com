@@ -7,21 +7,11 @@ by using faster alternatives and more forgiving configurations.
 
 from .settings import *
 
-# Force cache to handle connection failures gracefully
+# Use local memory cache instead of Redis for tests
 CACHES = {
     'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': REDIS_URL,
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            'SOCKET_CONNECT_TIMEOUT': 2,
-            'SOCKET_TIMEOUT': 2,
-            'IGNORE_EXCEPTIONS': True,  # Don't crash tests on Redis issues
-            'CONNECTION_POOL_KWARGS': {
-                'max_connections': 10,
-                'retry_on_timeout': True,
-            },
-        },
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'test-cache',
     }
 }
 
@@ -35,6 +25,8 @@ CHANNEL_LAYERS = {
 # Make Celery run tasks synchronously in tests
 CELERY_TASK_ALWAYS_EAGER = True
 CELERY_TASK_EAGER_PROPAGATES = True
+CELERY_BROKER_URL = 'memory://'
+CELERY_RESULT_BACKEND = 'cache+memory://'
 
 # Faster password hashing for tests
 PASSWORD_HASHERS = [
