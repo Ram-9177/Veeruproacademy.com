@@ -405,7 +405,25 @@
         <div class="hidden lg:flex items-center">
           <div class="flex items-center bg-gray-100/50 dark:bg-dark-700/50 rounded-xl p-1">
             <a href="{% url 'academy_web:home' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Home</a>
-            <a href="{% url 'academy_web:course_list' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Courses</a>
+            <!-- Courses Dropdown -->
+            <div class="relative group">
+              <button class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap flex items-center" onclick="toggleCoursesDropdown(event)">
+                Courses
+                <i class="fas fa-chevron-down text-xs ml-1.5 group-hover:rotate-180 transition-transform"></i>
+              </button>
+              <!-- Dropdown Menu -->
+              <div id="coursesDropdown" class="absolute top-full left-0 mt-1 w-64 bg-white dark:bg-dark-700 rounded-xl shadow-lg border border-gray-200 dark:border-dark-600 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 max-h-96 overflow-y-auto z-50">
+                <div class="p-2">
+                  <a href="{% url 'academy_web:course_list' %}" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-600 hover:text-brand-orange transition-all">
+                    View All Courses
+                  </a>
+                  <div class="border-t border-gray-200 dark:border-dark-600 my-2"></div>
+                  <div id="coursesList" class="space-y-1">
+                    <div class="px-4 py-2 text-xs text-gray-500 dark:text-gray-400">Loading courses...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <a href="{% url 'academy_web:projects_list' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Projects</a>
             <a href="{% url 'academy_web:blog' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Blog</a>
             <a href="{% url 'academy_web:about' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">About</a>
@@ -651,6 +669,41 @@
         localStorage.setItem('theme', 'dark');
       }
     }
+    
+    // Course dropdown functionality
+    function toggleCoursesDropdown(e) {
+      e.preventDefault();
+      const dropdown = document.getElementById('coursesDropdown');
+      dropdown.classList.toggle('opacity-0');
+      dropdown.classList.toggle('invisible');
+    }
+    
+    // Load courses into dropdown
+    async function loadCoursesDropdown() {
+      try {
+        const response = await fetch('/api/courses/');
+        const data = await response.json();
+        const coursesList = document.getElementById('coursesList');
+        
+        if (data.results && data.results.length > 0) {
+          coursesList.innerHTML = data.results.map(course => `
+            <a href="/courses/${course.slug}/" class="block px-4 py-2.5 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-600 hover:text-brand-orange transition-all">
+              <div class="font-medium truncate">${course.title}</div>
+              <div class="text-xs text-gray-500 dark:text-gray-400 truncate">${course.category || 'Course'}</div>
+            </a>
+          `).join('');
+        } else {
+          coursesList.innerHTML = '<div class="px-4 py-2 text-xs text-gray-500 dark:text-gray-400">No courses available</div>';
+        }
+      } catch (error) {
+        const coursesList = document.getElementById('coursesList');
+        coursesList.innerHTML = '<div class="px-4 py-2 text-xs text-red-500">Error loading courses</div>';
+        console.error('Error loading courses:', error);
+      }
+    }
+    
+    // Load courses on page load
+    document.addEventListener('DOMContentLoaded', loadCoursesDropdown);
 
     function highlightActiveNav() {
       const normalizedPath = (window.location.pathname.replace(/\/$/, '') || '/');
