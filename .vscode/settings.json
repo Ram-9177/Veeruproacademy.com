@@ -1,5 +1,7 @@
 {
   "files.associations": {
     "**/templates/**/*.html": "django-html"
-  }
+  },
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "python-envs.pythonProjects": []
 }

@@ -5,17 +5,26 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="bg-brand-orange text-white py-16">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center">
-      <h1 class="text-4xl lg:text-5xl font-bold mb-4">Explore Our Courses</h1>
-      <p class="text-xl text-white/80 max-w-2xl mx-auto mb-8">Choose from our collection of expert-led courses designed to take your skills to the next level</p>
+<section class="relative overflow-hidden bg-gradient-to-br from-brand-blue via-brand-blue/90 to-brand-dark text-white py-16">
+  <div class="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_15%_20%,rgba(255,116,68,0.35),transparent_35%),radial-gradient(circle_at_85%_10%,rgba(255,255,255,0.15),transparent_30%),radial-gradient(circle_at_30%_80%,rgba(87,106,143,0.25),transparent_40%)]"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="text-center max-w-4xl mx-auto">
+      <p class="text-xs uppercase tracking-[0.35em] text-brand-orange mb-3">Course catalog</p>
+      <h1 class="text-4xl lg:text-5xl font-bold mb-4">Curated tracks to keep you shipping</h1>
+      <p class="text-xl text-white/80 max-w-3xl mx-auto mb-8">Search, filter, and jump straight into detail pages. Each redirect keeps your intent—no lost context when you come back to learn.</p>
       
       <!-- Search Bar -->
-      <div class="max-w-xl mx-auto">
+      <div class="max-w-2xl mx-auto">
         <div class="relative">
-          <input type="text" id="courseSearch" placeholder="Search courses..." class="w-full px-6 py-4 rounded-xl border-2 border-white/20 bg-white/10 text-white placeholder-white/60 focus:outline-none focus:border-white/40 backdrop-blur-sm pr-12" onkeyup="filterCourses()">
+          <input type="text" id="courseSearch" placeholder="Search courses or topics" class="w-full px-6 py-4 rounded-2xl border border-white/15 bg-white/10 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-brand-orange/60 focus:border-transparent backdrop-blur-sm pr-12" onkeyup="filterCourses()">
           <i class="fas fa-search absolute right-5 top-1/2 -translate-y-1/2 text-white/60"></i>
+        </div>
+        <div class="flex flex-wrap justify-center gap-2 mt-4 text-sm text-white/80">
+          <span class="px-3 py-1 rounded-full bg-white/10 border border-white/10">Python</span>
+          <span class="px-3 py-1 rounded-full bg-white/10 border border-white/10">JavaScript</span>
+          <span class="px-3 py-1 rounded-full bg-white/10 border border-white/10">React</span>
+          <span class="px-3 py-1 rounded-full bg-white/10 border border-white/10">DSA</span>
+          <span class="px-3 py-1 rounded-full bg-white/10 border border-white/10">Career prep</span>
         </div>
       </div>
     </div>
@@ -29,26 +38,27 @@
       <!-- Filter Buttons -->
       <div class="flex flex-wrap items-center gap-2">
         <span class="text-gray-500 dark:text-gray-400 text-sm mr-2">Filter:</span>
-        <button onclick="filterByLevel('')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-brand-orange/10 text-brand-orange transition" data-level="">
+        <button onclick="filterByLevel('')" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-brand-orange/10 text-brand-orange transition" data-level="">
           All
         </button>
-        <button onclick="filterByLevel('Beginner')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-brand-orange/10 transition" data-level="Beginner">
+        <button onclick="filterByLevel('Beginner')" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-brand-orange/10 transition" data-level="Beginner">
           <i class="fas fa-seedling mr-1"></i>Beginner
         </button>
-        <button onclick="filterByLevel('Intermediate')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-brand-orange/10 transition" data-level="Intermediate">
+        <button onclick="filterByLevel('Intermediate')" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-brand-orange/10 transition" data-level="Intermediate">
           <i class="fas fa-chart-line mr-1"></i>Intermediate
         </button>
-        <button onclick="filterByLevel('Advanced')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-brand-orange/10 transition" data-level="Advanced">
+        <button onclick="filterByLevel('Advanced')" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-brand-orange/10 transition" data-level="Advanced">
           <i class="fas fa-rocket mr-1"></i>Advanced
         </button>
-        <button onclick="filterByPrice('free')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-green-100 dark:hover:bg-green-900/30 transition" data-price="free">
+        <button onclick="filterByPrice('free')" class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-green-100 dark:hover:bg-green-900/30 transition" data-price="free">
           <i class="fas fa-gift mr-1"></i>Free
         </button>
       </div>
       
       <!-- Course Count -->
-      <div class="text-gray-600 dark:text-gray-400 text-sm">
-        <span id="courseCount">{{ courses|length }}</span> courses available
+      <div class="flex items-center gap-3 text-gray-600 dark:text-gray-400 text-sm">
+        <span id="courseCount" class="text-lg font-bold text-brand-orange">{{ courses|length }}</span>
+        <span>courses available</span>
       </div>
     </div>
   </div>
@@ -60,13 +70,13 @@
     {% if courses %}
       <div id="coursesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {% for course in courses %}
-          <div class="course-card bg-white dark:bg-dark-800 rounded-2xl overflow-hidden shadow-sm card-hover border border-gray-100 dark:border-dark-700" 
+          <div class="course-card bg-white dark:bg-dark-800 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition border border-gray-100 dark:border-dark-700" 
                data-title="{{ course.title|lower }}" 
                data-level="{{ course.level|default:'Beginner' }}" 
                data-price="{{ course.price|default:0 }}"
                data-description="{{ course.description|lower|default:'' }}">
             <!-- Course Thumbnail -->
-            <div class="relative h-48 bg-brand-orange">
+            <div class="relative h-52 bg-gradient-to-br from-brand-blue to-brand-orange">
               {% if course.thumbnail %}
                 <img src="{{ course.thumbnail }}" alt="{{ course.title }}" class="w-full h-full object-cover" loading="lazy">
               {% else %}
@@ -88,7 +98,7 @@
               
               <!-- Level Badge -->
               {% if course.level %}
-                <span class="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
+                <span class="absolute top-4 right-4 bg-white/90 text-brand-orange px-3 py-1 rounded-full text-xs font-semibold shadow">
                   {{ course.level }}
                 </span>
               {% endif %}
@@ -125,9 +135,15 @@
               {% endif %}
               
               <!-- Action Button -->
-              <a href="{% url 'academy_web:course_detail' course.slug %}" class="block w-full text-center bg-brand-orange text-white py-3 rounded-xl font-semibold hover:bg-brand-blue transition shadow-lg">
-                View Course <i class="fas fa-arrow-right ml-2"></i>
-              </a>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                  <span class="px-3 py-1 rounded-full bg-gray-100 dark:bg-dark-700">{{ course.level|default:'Beginner' }}</span>
+                  <span class="px-3 py-1 rounded-full bg-gray-100 dark:bg-dark-700">{{ course.modules.count }} modules</span>
+                </div>
+                <a href="{% url 'academy_web:course_detail' course.slug %}" class="inline-flex items-center gap-2 bg-brand-orange text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition shadow-lg text-sm">
+                  View course <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
             </div>
           </div>
         {% endfor %}
@@ -140,7 +156,7 @@
         </div>
         <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">No Courses Found</h3>
         <p class="text-gray-600 dark:text-gray-400 mb-6">Try adjusting your search or filter criteria</p>
-        <button onclick="clearFilters()" class="inline-flex items-center bg-brand-orange text-white px-6 py-3 rounded-xl font-semibold hover:bg-brand-blue transition shadow-lg">
+        <button onclick="clearFilters()" class="inline-flex items-center bg-brand-orange text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition shadow-lg">
           <i class="fas fa-redo mr-2"></i>Clear Filters
         </button>
       </div>
@@ -151,7 +167,7 @@
         </div>
         <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">No Courses Available Yet</h3>
         <p class="text-gray-600 dark:text-gray-400 mb-6">We're working on adding amazing courses. Check back soon!</p>
-        <a href="{% url 'academy_web:home' %}" class="inline-flex items-center bg-brand-orange text-white px-6 py-3 rounded-xl font-semibold hover:bg-brand-blue transition shadow-lg">
+        <a href="{% url 'academy_web:home' %}" class="inline-flex items-center bg-brand-orange text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition shadow-lg">
           <i class="fas fa-home mr-2"></i>Back to Home
         </a>
       </div>
