@@ -21,8 +21,11 @@ jobs:
     steps:
       - name: Clone repository without actions
         run: |
+          git clone --depth 1 --branch "$GITHUB_HEAD_REF" "$GITHUB_SERVER_URL/${GITHUB_REPOSITORY}.git" repo || \
           git clone --depth 1 "$GITHUB_SERVER_URL/${GITHUB_REPOSITORY}.git" repo
           cd repo
+          git fetch origin "$GITHUB_SHA" --depth 1 || true
+          git checkout "$GITHUB_SHA" || true
           ls
 
       - name: Set up Python and dependencies
@@ -78,6 +81,9 @@ jobs:
           DJANGO_DEBUG: 'False'
           DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
           DJANGO_CSRF_TRUSTED_ORIGINS: https://example.com
+          DJANGO_USE_INMEMORY_CHANNELS: 'True'
+          DJANGO_USE_LOCMEM_CACHE: 'True'
+          CELERY_TASK_ALWAYS_EAGER: 'True'
         run: |
           cd repo
           . .venv/bin/activate
