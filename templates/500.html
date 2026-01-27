@@ -4,37 +4,41 @@
 {% block title %}Server Error - Veeru's Pro Academy{% endblock %}
 
 {% block content %}
-<section class="min-h-[calc(100vh-4rem)] bg-gray-50 dark:bg-brand-dark py-20 flex items-center">
-  <div class="max-w-lg mx-auto px-4 text-center">
-    <!-- Error Code -->
-    <div class="text-9xl font-bold text-brand-orange mb-6">500</div>
-    
-    <!-- Icon -->
-    <div class="w-24 h-24 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-8">
-      <i class="fas fa-exclamation-triangle text-red-500 text-4xl"></i>
-    </div>
-    
-    <!-- Message -->
-    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Something Went Wrong</h1>
-    <p class="text-gray-600 dark:text-gray-400 text-lg mb-8">
-      We're experiencing technical difficulties. Our team has been notified and is working on a fix. Please try again later.
-    </p>
-    
-    <!-- Actions -->
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="{% url 'academy_web:home' %}" class="btn-primary inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold">
-        <i class="fas fa-home mr-2"></i>Back to Home
-      </a>
-      <button onclick="window.location.reload()" class="btn-outline inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold">
-        <i class="fas fa-redo mr-2"></i>Try Again
-      </button>
-    </div>
-    
-    <!-- Support -->
-    <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-      <p class="text-gray-500 dark:text-gray-400 text-sm">
-        Need help? Contact us at <a href="mailto:support@veeruproacademy.com" class="text-brand-orange hover:underline">support@veeruproacademy.com</a>
-      </p>
+<section class="min-h-[calc(100vh-4rem)] py-20 flex items-center bg-[radial-gradient(circle_at_20%_20%,rgba(13,110,253,0.18),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(244,63,94,0.16),transparent_45%),#0F172A]">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="rounded-2xl border border-white/10 bg-white/10 dark:bg-white/5 backdrop-blur-xl shadow-2xl p-10 text-center space-y-8">
+      <!-- Error Code -->
+      <div class="text-8xl sm:text-9xl font-bold text-white tracking-tight drop-shadow-[0_10px_30px_rgba(13,110,253,0.45)]">500</div>
+
+      <!-- Icon -->
+      <div class="w-24 h-24 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto shadow-lg">
+        <span class="text-white/80 text-4xl">!</span>
+      </div>
+
+      <!-- Message -->
+      <div class="space-y-3">
+        <h1 class="text-3xl sm:text-4xl font-semibold text-white">Something Went Wrong</h1>
+        <p class="text-lg text-white/80">
+          We hit a snag. Please try again, and if it persists we’re on it.
+        </p>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="{% url 'academy_web:home' %}" class="btn-primary inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold">
+          <i class="fas fa-home mr-2"></i>Back to Home
+        </a>
+        <button onclick="window.location.reload()" class="btn-secondary inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-white">
+          <i class="fas fa-rotate-right mr-2"></i>Try Again
+        </button>
+      </div>
+
+      <!-- Support -->
+      <div class="pt-6 border-t border-white/10">
+        <p class="text-sm text-white/70">
+          Need help? Contact us at <a href="mailto:support@veeruproacademy.com" class="text-primary-200 hover:text-white underline">support@veeruproacademy.com</a>
+        </p>
+      </div>
     </div>
   </div>
 </section>

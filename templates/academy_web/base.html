@@ -49,41 +49,39 @@
         extend: {
           colors: {
             brand: {
-              orange: '#FF6500',
-              'orange-hover': '#E55A00',
-              'orange-light': '#FF8533',
-              blue: '#1E3E62',
-              'blue-hover': '#162F4A',
-              'blue-light': '#2A5580',
-              dark: '#0B192C',
-              black: '#000000',
+              primary: '#0D6EFD',
+              'primary-strong': '#0B5ED7',
+              'primary-deep': '#084298',
+              accent: '#F97316',
+              success: '#22C55E',
+              danger: '#F43F5E',
+              ink: '#0F172A',
+              surface: '#0B1220',
             },
             primary: {
-              50: '#FFF7F0',
-              100: '#FFEFE0',
-              200: '#FFDFC2',
-              300: '#FFCFA3',
-              400: '#FF9F52',
-              500: '#FF6500',
-              600: '#E55A00',
-              700: '#CC5000',
-              800: '#994000',
-              900: '#662A00',
-              950: '#331500',
+              50: '#E8F0FF',
+              100: '#D3E2FF',
+              200: '#A8C6FF',
+              300: '#7CA9FF',
+              400: '#4F8DFF',
+              500: '#0D6EFD',
+              600: '#0B5ED7',
+              700: '#0A53BF',
+              800: '#0947A6',
+              900: '#084298',
             },
-            dark: {
-              50: '#f8fafc',
-              100: '#f1f5f9',
-              200: '#e2e8f0',
-              300: '#cbd5e1',
-              400: '#94a3b8',
-              500: '#64748b',
+            neutral: {
+              50: '#F8FAFC',
+              100: '#F1F5F9',
+              200: '#E2E8F0',
+              300: '#CBD5E1',
+              400: '#94A3B8',
+              500: '#64748B',
               600: '#475569',
-              700: '#1E3E62',
-              800: '#0B192C',
-              900: '#070F1A',
-              950: '#000000',
-            }
+              700: '#334155',
+              800: '#1E293B',
+              900: '#0F172A',
+            },
           },
           animation: {
             'fade-in': 'fadeIn 0.5s ease-out',
@@ -108,10 +106,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   
   <style>
-    body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; position: relative; overflow-x: hidden; }
+    body { font-family: 'Space Grotesk', 'Inter', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; position: relative; overflow-x: hidden; }
     body::before {
       content: "";
       position: fixed;
@@ -198,6 +196,27 @@
     }
     .flow-section h2, .flow-section h3 {
       color: #fff;
+    }
+    .btn-primary {
+      background: #0D6EFD;
+      color: #fff;
+      border: 1px solid #0B5ED7;
+      box-shadow: 0 18px 40px -18px rgba(13, 110, 253, 0.65);
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover {
+      background: #0B5ED7;
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #0D6EFD;
+      border: 1px solid rgba(13, 110, 253, 0.4);
+      transition: all 0.2s ease;
+    }
+    .btn-secondary:hover {
+      border-color: #0D6EFD;
+      background: rgba(13, 110, 253, 0.08);
     }
     .flow-steps {
       display: grid;
