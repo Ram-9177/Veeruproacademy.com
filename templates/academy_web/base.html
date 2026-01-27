@@ -10,7 +10,7 @@
   <meta name="keywords" content="programming courses, web development, Python, JavaScript, React, online learning, coding bootcamp">
   <meta name="author" content="Veeru's Pro Academy">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#2D4059">
+  <meta name="theme-color" content="#181A20">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
@@ -52,49 +52,79 @@
         extend: {
           colors: {
             brand: {
-              primary: '#1A2238', // much deeper blue
-              'primary-strong': '#0F172A',
-              'primary-deep': '#090E1A',
-              accent: '#FF6A3D', // bold orange-red
-              orange: '#FF6A3D',
-              cream: '#FFD460',
-              subtle: '#1A2238',
-              blue: '#1A2238',
-              dark: '#090E1A',
-              success: '#22C55E',
-              danger: '#F43F5E',
-              ink: '#1A2238',
-              surface: '#232946', // heavy dark surface
+              primary: '#5A9CB5',
+              accent: '#FACE68',
+              orange: '#FAAC68',
+              red: '#FA6868',
+              blue: '#5A9CB5',
+              yellow: '#FACE68',
+              dark: '#181A20',
+              card: '#23272F',
+            },
+            dark: {
+              900: '#181A20',
+              800: '#23272F',
+              700: '#2D4059',
+            },
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body, html {
+      background: #181A20 !important;
+      color: #FACE68 !important;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, #5A9CB5 0%, #FACE68 100%);
+      color: #181A20;
+      border: none;
+      box-shadow: 0 2px 12px #5A9CB533;
+      transition: box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #FACE68 0%, #FA6868 100%);
+      color: #181A20;
+      box-shadow: 0 4px 24px #FA686833;
+    }
+    .section-dark {
+      background: #181A20 !important;
+      color: #FACE68 !important;
+    }
+    .card {
+      background: #23272F !important;
+      color: #FACE68 !important;
+      border: 2px solid #5A9CB5;
+      box-shadow: 0 2px 12px #5A9CB533;
+    }
+    .card-accent {
+      border-color: #FACE68 !important;
+    }
+    .text-brand-accent { color: #FACE68 !important; }
+    .text-brand-blue { color: #5A9CB5 !important; }
+    .text-brand-orange { color: #FAAC68 !important; }
+    .text-brand-red { color: #FA6868 !important; }
+    .bg-brand-dark { background: #181A20 !important; }
+    .bg-brand-card { background: #23272F !important; }
+    .bg-brand-accent { background: #FACE68 !important; }
+    .bg-brand-blue { background: #5A9CB5 !important; }
+    .bg-brand-orange { background: #FAAC68 !important; }
+    .bg-brand-red { background: #FA6868 !important; }
+    .shadow-brand { box-shadow: 0 2px 12px #5A9CB533; }
+    .shadow-accent { box-shadow: 0 2px 12px #FACE6833; }
+    .shadow-orange { box-shadow: 0 2px 12px #FAAC6833; }
+    .shadow-red { box-shadow: 0 2px 12px #FA686833; }
+  </style>
+              sand: '#FAAC68',
+              coral: '#FA6868',
+              dark: '#232946',
             },
             primary: {
-              50: '#F3F4F6',
-              100: '#E5E7EB',
-              200: '#D1D5DB',
-              300: '#9CA3AF',
-              400: '#6B7280',
-              500: '#374151',
-              600: '#1F2937',
-              700: '#111827',
-              800: '#090E1A',
-              900: '#05070D',
-            },
-            neutral: {
-              50: '#F8FAFC',
-              100: '#F1F5F9',
-              200: '#E2E8F0',
-              300: '#CBD5E1',
-              400: '#94A3B8',
-              500: '#64748B',
-              600: '#475569',
-              700: '#334155',
-              800: '#1E293B',
-              900: '#0F172A',
-            },
-            highlight: {
-              100: '#FFF6E0',
-              200: '#FFD460',
-              300: '#FF6A3D',
-              400: '#232946',
+              500: '#5A9CB5',
+              600: '#FACE68',
+              700: '#FAAC68',
+              800: '#FA6868',
             },
           },
           animation: {
@@ -220,17 +250,18 @@
       z-index: 1;
     }
     .flow-section h2, .flow-section h3 {
-      color: #fff;
+      color: #FACE68;
     }
     .btn-primary {
-      background: #FF7444;
-      color: #fff;
-      border: 1px solid #FF6238;
-      box-shadow: 0 18px 40px -18px rgba(255, 116, 68, 0.65);
+      background: #5A9CB5;
+      color: #232946;
+      border: 1px solid #FACE68;
+      box-shadow: 0 18px 40px -18px rgba(90, 156, 181, 0.65);
       transition: all 0.2s ease;
     }
     .btn-primary:hover {
-      background: #FF6238;
+      background: #FAAC68;
+      color: #232946;
       transform: translateY(-1px);
     }
     .btn-secondary {

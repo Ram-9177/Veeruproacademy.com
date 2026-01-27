@@ -11,20 +11,20 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 auto-rows-auto">
             
             <!-- Box 1: Main Headline (Spans 8 columns on large screens) -->
-            <div class="lg:col-span-8 glass rounded-3xl p-12 lg:p-16 relative overflow-hidden group glow-border min-h-[400px] flex items-center">
+            <div class="lg:col-span-8 card rounded-3xl p-12 lg:p-16 relative overflow-hidden group glow-border min-h-[400px] flex items-center">
                 <!-- Glow Effects -->
                 <div class="absolute top-0 left-0 w-96 h-96 bg-neon-purple/20 rounded-full blur-[100px] animate-glow-pulse"></div>
                 <div class="absolute bottom-0 right-0 w-96 h-96 bg-neon-lime/10 rounded-full blur-[100px] animate-glow-pulse" style="animation-delay: 1s;"></div>
                 
                 <div class="relative z-10">
                     <!-- Badge -->
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-neon-purple/30 mb-8" id="heroBadge">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full card-accent border border-brand-accent mb-8" id="heroBadge">
                         <div class="w-2 h-2 rounded-full bg-neon-lime animate-pulse"></div>
                         <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Live Learning Platform</span>
                     </div>
                     
                     <!-- Main Headline -->
-                    <h1 class="font-clash font-bold text-6xl lg:text-8xl xl:text-9xl leading-none mb-6" id="heroHeadline">
+                    <h1 class="font-clash font-bold text-6xl lg:text-8xl xl:text-9xl leading-none mb-6 text-brand-accent" id="heroHeadline">
                         <div class="overflow-hidden">
                             <span class="inline-block headline-word" style="opacity: 0; transform: translateY(100px);">SHIP</span>
                         </div>
@@ -40,13 +40,13 @@
                     </h1>
                     
                     <!-- Subheadline -->
-                    <p class="text-xl lg:text-2xl text-gray-400 max-w-2xl mb-10 font-light" id="heroSubtext" style="opacity: 0;">
+                    <p class="text-xl lg:text-2xl text-brand-blue max-w-2xl mb-10 font-light" id="heroSubtext" style="opacity: 0;">
                         Master production-grade skills through real-world projects. Join <span class="text-neon-lime font-semibold">50,000+</span> developers building their future.
                     </p>
                     
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4" id="heroCTA" style="opacity: 0;">
-                        <a href="{% url 'academy_web:courses' %}" class="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-neon-purple to-neon-lime font-semibold text-black overflow-hidden shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:shadow-[0_0_50px_rgba(168,85,247,0.7)] transition-all duration-300">
+                        <a href="{% url 'academy_web:courses' %}" class="btn-primary group relative px-8 py-4 rounded-xl font-semibold overflow-hidden shadow-brand hover:shadow-accent transition-all duration-300">
                             <span class="relative z-10 flex items-center justify-center gap-2">
                                 <i class="fas fa-rocket"></i>
                                 Explore Courses
@@ -54,7 +54,7 @@
                             </span>
                             <div class="absolute inset-0 bg-gradient-to-r from-neon-lime to-neon-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </a>
-                        <a href="{% url 'academy_web:about' %}" class="px-8 py-4 rounded-xl glass border border-white/20 font-semibold hover:border-neon-lime/50 hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2">
+                        <a href="{% url 'academy_web:about' %}" class="px-8 py-4 rounded-xl card-accent border font-semibold hover:border-brand-accent hover:bg-brand-accent/10 transition-all duration-300 flex items-center justify-center gap-2">
                             <i class="fas fa-play"></i>
                             Watch Demo
                         </a>

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="max-w-xl mx-auto py-12">
   <h1 class="text-2xl font-bold mb-4">We value your feedback</h1>
-  <form method="post" class="bg-white dark:bg-dark-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-dark-700">
+  <form method="post" class="card p-6 rounded-xl shadow-brand border card-accent text-brand-accent">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn-primary px-6 py-2 rounded-xl font-semibold mt-2">Submit Feedback</button>

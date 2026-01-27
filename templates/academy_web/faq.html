@@ -20,19 +20,19 @@
 </section>
 
 <!-- FAQ Categories -->
-<section class="py-8 bg-white dark:bg-dark-800 border-b border-gray-100 dark:border-dark-700">
+<section class="py-8 bg-brand-dark border-b border-brand-blue">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-wrap justify-center gap-3">
-      <button onclick="filterFAQ('all')" class="faq-filter px-4 py-2 rounded-lg text-sm font-medium bg-brand-orange text-white transition" data-category="all">
+      <button onclick="filterFAQ('all')" class="faq-filter px-4 py-2 rounded-lg text-sm font-medium bg-brand-accent text-brand-dark transition" data-category="all">
         All Questions
       </button>
-      <button onclick="filterFAQ('courses')" class="faq-filter px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-brand-orange/10 transition" data-category="courses">
+      <button onclick="filterFAQ('courses')" class="faq-filter px-4 py-2 rounded-lg text-sm font-medium bg-brand-card text-brand-accent hover:bg-brand-accent/10 transition" data-category="courses">
         <i class="fas fa-book mr-1"></i>Courses
       </button>
-      <button onclick="filterFAQ('payments')" class="faq-filter px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-brand-orange/10 transition" data-category="payments">
+      <button onclick="filterFAQ('payments')" class="faq-filter px-4 py-2 rounded-lg text-sm font-medium bg-brand-card text-brand-accent hover:bg-brand-accent/10 transition" data-category="payments">
         <i class="fas fa-credit-card mr-1"></i>Payments
       </button>
-      <button onclick="filterFAQ('technical')" class="faq-filter px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-400 hover:bg-brand-orange/10 transition" data-category="technical">
+      <button onclick="filterFAQ('technical')" class="faq-filter px-4 py-2 rounded-lg text-sm font-medium bg-brand-card text-brand-accent hover:bg-brand-accent/10 transition" data-category="technical">
         <i class="fas fa-cog mr-1"></i>Technical
       </button>
     </div>
@@ -40,17 +40,17 @@
 </section>
 
 <!-- FAQ Items -->
-<section class="py-16 bg-gray-50 dark:bg-dark-900">
+<section class="py-16 bg-brand-card">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="space-y-4" id="faqContainer">
       <!-- Courses FAQs -->
-      <div class="faq-item bg-white dark:bg-dark-800 rounded-xl border border-gray-100 dark:border-dark-700 overflow-hidden" data-category="courses">
+      <div class="faq-item card rounded-xl border card-accent overflow-hidden" data-category="courses">
         <button onclick="toggleFAQ(this)" class="w-full flex items-center justify-between p-6 text-left">
-          <span class="font-semibold text-gray-900 dark:text-white pr-4">What courses do you offer?</span>
+          <span class="font-semibold text-brand-accent pr-4">What courses do you offer?</span>
           <i class="fas fa-chevron-down text-brand-orange transition-transform"></i>
         </button>
         <div class="faq-answer hidden px-6 pb-6">
-          <p class="text-gray-600 dark:text-gray-400">We offer comprehensive courses in Python programming, web development, and other programming topics. All courses are designed to take you from beginner to job-ready with practical, hands-on projects.</p>
+          <p class="text-brand-blue">We offer comprehensive courses in Python programming, web development, and other programming topics. All courses are designed to take you from beginner to job-ready with practical, hands-on projects.</p>
         </div>
       </div>
 
