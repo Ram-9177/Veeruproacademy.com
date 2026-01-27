@@ -5,30 +5,50 @@
 
 {% block content %}
 <!-- Premium Logo Introduction Section -->
-<section class="relative overflow-hidden bg-gradient-to-b from-white via-blue-50 to-white dark:from-dark-900 dark:via-dark-800 dark:to-dark-900 py-12">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col items-center justify-center text-center space-y-6">
-      <!-- Logo Display -->
-      <div class="animate-bounce-slow">
-        <img src="{% static 'branding/logo.jpg' %}" alt="Veeru's Pro Academy Logo" class="h-40 w-auto mx-auto drop-shadow-2xl rounded-2xl">
+<section class="relative overflow-hidden py-20 sm:py-28">
+  <!-- Enhanced Background with Gradients & Texture -->
+  <div class="absolute inset-0">
+    <div class="absolute inset-0 bg-gradient-to-br from-white via-brand-cream/20 to-brand-subtle/10"></div>
+    <div class="absolute top-0 left-0 w-96 h-96 bg-brand-orange/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-primary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+    <div class="absolute top-1/2 left-1/2 w-96 h-96 bg-brand-subtle/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col items-center justify-center text-center space-y-8">
+      <!-- Logo Display with Enhanced Frame -->
+      <div class="relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-brand-orange/20 to-brand-primary/20 rounded-3xl blur-2xl scale-125 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative animate-bounce-slow">
+          <div class="absolute inset-0 bg-gradient-to-br from-brand-orange/30 via-brand-primary/20 to-brand-subtle/20 rounded-3xl"></div>
+          <img src="{% static 'branding/logo.jpg' %}" alt="Veeru's Pro Academy Logo" class="relative h-48 w-auto mx-auto drop-shadow-2xl rounded-3xl border-4 border-white shadow-2xl">
+        </div>
       </div>
-      <!-- Brand Story -->
-      <div class="space-y-3 max-w-3xl">
-        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
-          Welcome to <span class="text-brand-primary">Veeru's Pro</span> <span class="text-brand-orange">Academy</span>
+      
+      <!-- Brand Story with Enhanced Typography -->
+      <div class="space-y-6 max-w-3xl">
+        <div class="inline-block">
+          <span class="inline-block px-4 py-1 bg-brand-orange/20 border border-brand-orange/40 rounded-full text-sm font-semibold text-brand-orange tracking-wider">✓ MARK OF EXCELLENCE</span>
+        </div>
+        
+        <h2 class="text-4xl lg:text-5xl font-black text-gray-900">
+          Welcome to <span class="bg-gradient-to-r from-brand-primary via-brand-orange to-brand-primary bg-clip-text text-transparent">Veeru's Pro Academy</span>
         </h2>
-        <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-          Your checkmark for professional excellence in programming. We empower students to master industry-ready skills through expert-led courses, real-world projects, and personalized mentorship.
+        
+        <p class="text-lg lg:text-xl text-gray-700 leading-relaxed font-medium">
+          Your <span class="font-bold text-brand-orange">checkmark for professional excellence</span> in programming. We empower students to master industry-ready skills through expert-led courses, real-world projects, and personalized mentorship.
         </p>
-        <div class="flex justify-center gap-4 pt-4">
-          <div class="px-6 py-3 rounded-full bg-brand-orange/10 border border-brand-orange/30">
-            <span class="text-brand-orange font-semibold">✓ Expert-Led</span>
+        
+        <!-- Value Props with Enhanced Design -->
+        <div class="flex flex-wrap justify-center gap-3 pt-4">
+          <div class="group px-6 py-3 rounded-full bg-gradient-to-r from-brand-orange/15 to-brand-orange/5 border-2 border-brand-orange/40 hover:border-brand-orange transition-all duration-300 cursor-default">
+            <span class="text-brand-orange font-bold text-sm tracking-wide">✓ EXPERT-LED</span>
           </div>
-          <div class="px-6 py-3 rounded-full bg-brand-primary/10 border border-brand-primary/30">
-            <span class="text-brand-primary font-semibold">✓ Job-Ready</span>
+          <div class="group px-6 py-3 rounded-full bg-gradient-to-r from-brand-primary/15 to-brand-primary/5 border-2 border-brand-primary/40 hover:border-brand-primary transition-all duration-300 cursor-default">
+            <span class="text-brand-primary font-bold text-sm tracking-wide">✓ JOB-READY</span>
           </div>
-          <div class="px-6 py-3 rounded-full bg-brand-subtle/10 border border-brand-subtle/30">
-            <span class="text-brand-primary font-semibold">✓ Lifetime Access</span>
+          <div class="group px-6 py-3 rounded-full bg-gradient-to-r from-brand-subtle/15 to-brand-subtle/5 border-2 border-brand-subtle/40 hover:border-brand-subtle transition-all duration-300 cursor-default">
+            <span class="text-brand-primary font-bold text-sm tracking-wide">✓ LIFETIME ACCESS</span>
           </div>
         </div>
       </div>
@@ -36,106 +56,176 @@
   </div>
 </section>
 
-<!-- Hero Section -->
-<section class="relative overflow-hidden bg-gradient-to-br from-brand-blue/95 via-brand-blue to-brand-dark text-white py-16 lg:py-24">
-  <div class="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,rgba(255,116,68,0.25),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(87,106,143,0.25),transparent_30%),radial-gradient(circle_at_50%_80%,rgba(255,255,255,0.08),transparent_40%)]"></div>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<!-- Hero Section - Enhanced -->
+<section class="relative overflow-hidden text-white py-24 lg:py-32">
+  <!-- Premium Gradient Background -->
+  <div class="absolute inset-0">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-primary via-brand-primary to-brand-dark"></div>
+    <!-- Animated Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-brand-primary/20"></div>
+    <!-- Radial Gradient Accents -->
+    <div class="absolute top-20 left-10 w-96 h-96 bg-brand-orange/15 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-brand-subtle/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 right-1/4 w-72 h-72 bg-brand-orange/10 rounded-full blur-3xl animate-pulse"></div>
+    <!-- Texture Pattern -->
+    <svg class="absolute inset-0 w-full h-full opacity-[0.03]" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="texture" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <circle cx="10" cy="10" r="1" fill="white"/>
+        </pattern>
+      </defs>
+      <rect width="100" height="100" fill="url(#texture)"/>
+    </svg>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
       <!-- Hero Content -->
-      <div class="text-center lg:text-left space-y-6">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur">
-          <span class="text-xs font-semibold uppercase tracking-[0.25em] text-brand-orange">Career Sprint</span>
-          <span class="text-white/80 text-sm">Job-ready projects, fast feedback</span>
+      <div class="text-center lg:text-left space-y-8">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white/15 border-2 border-white/30 backdrop-blur-xl hover:bg-white/20 transition-all duration-300 w-fit mx-auto lg:mx-0">
+          <span class="inline-block w-2 h-2 bg-brand-orange rounded-full animate-pulse"></span>
+          <span class="text-xs font-bold uppercase tracking-[0.2em] text-brand-orange">Career Sprint Program</span>
+          <span class="text-white/80 text-xs font-medium">→ Job-ready in 12 weeks</span>
         </div>
-        <h1 class="text-4xl lg:text-6xl font-bold leading-tight">
-          Build portfolio-worthy skills
-          <span class="block text-brand-orange">ship faster, get hired</span>
-        </h1>
-        <p class="text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-          Bite-sized lessons, mentor-backed checkpoints, and clear redirects that keep you moving—no dead ends, just momentum from signup to job offer.
+
+        <!-- Main Heading with Gradient -->
+        <div class="space-y-4">
+          <h1 class="text-5xl lg:text-7xl font-black leading-tight">
+            <span class="block">Build portfolio-worthy</span>
+            <span class="block">
+              <span class="relative">
+                <span class="absolute inset-0 bg-gradient-to-r from-brand-orange via-brand-orange to-brand-cream blur-lg opacity-40 -skew-y-1"></span>
+                <span class="relative text-brand-orange">skills & ship fast</span>
+              </span>
+            </span>
+          </h1>
+        </div>
+
+        <!-- Subheading -->
+        <p class="text-xl lg:text-2xl text-white/90 leading-relaxed font-medium max-w-2xl mx-auto lg:mx-0">
+          Bite-sized lessons, mentor-backed checkpoints, and crystal-clear redirects that keep you moving—no dead ends, just momentum from signup to job offer.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-          <a href="{% url 'academy_web:course_list' %}" class="btn-primary px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all">
-            <i class="fas fa-rocket mr-2"></i>Browse courses
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+          <a href="{% url 'academy_web:course_list' %}" class="group relative overflow-hidden px-8 py-5 rounded-xl font-bold text-lg text-white bg-gradient-to-r from-brand-orange to-brand-orange shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 transition-all duration-300">
+            <span class="absolute inset-0 bg-gradient-to-r from-brand-cream to-brand-orange opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+            <span class="relative flex items-center justify-center gap-2">
+              <i class="fas fa-rocket"></i>Browse Courses
+            </span>
           </a>
-          <a href="{% url 'academy_web:about' %}" class="btn-outline px-8 py-4 rounded-xl font-semibold text-lg">
-            <i class="fas fa-play mr-2"></i>See how it flows
+          <a href="{% url 'academy_web:about' %}" class="group px-8 py-5 rounded-xl font-bold text-lg text-white border-3 border-white/40 hover:border-white hover:bg-white/10 backdrop-blur transition-all duration-300">
+            <span class="flex items-center justify-center gap-2">
+              <i class="fas fa-play"></i>See the Flow
+            </span>
           </a>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
-          <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur">
-            <div class="text-2xl font-bold">5k+</div>
-            <p class="text-white/70 text-sm">Learners shipped projects</p>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-8">
+          <div class="group p-4 rounded-xl bg-white/10 border border-white/20 backdrop-blur hover:bg-white/15 hover:border-brand-orange/50 transition-all duration-300 cursor-default">
+            <div class="text-3xl font-black text-brand-cream">5k+</div>
+            <p class="text-white/70 text-xs font-semibold mt-2 leading-tight">Learners Shipped</p>
           </div>
-          <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur">
-            <div class="text-2xl font-bold">50+</div>
-            <p class="text-white/70 text-sm">Mentor-reviewed modules</p>
+          <div class="group p-4 rounded-xl bg-white/10 border border-white/20 backdrop-blur hover:bg-white/15 hover:border-brand-orange/50 transition-all duration-300 cursor-default">
+            <div class="text-3xl font-black text-brand-cream">50+</div>
+            <p class="text-white/70 text-xs font-semibold mt-2 leading-tight">Expert Modules</p>
           </div>
-          <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur">
-            <div class="text-2xl font-bold">95%</div>
-            <p class="text-white/70 text-sm">Placement-track success</p>
+          <div class="group p-4 rounded-xl bg-white/10 border border-white/20 backdrop-blur hover:bg-white/15 hover:border-brand-orange/50 transition-all duration-300 cursor-default">
+            <div class="text-3xl font-black text-brand-cream">95%</div>
+            <p class="text-white/70 text-xs font-semibold mt-2 leading-tight">Success Rate</p>
           </div>
-          <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur">
-            <div class="text-2xl font-bold">24/7</div>
-            <p class="text-white/70 text-sm">Live community support</p>
+          <div class="group p-4 rounded-xl bg-white/10 border border-white/20 backdrop-blur hover:bg-white/15 hover:border-brand-orange/50 transition-all duration-300 cursor-default">
+            <div class="text-3xl font-black text-brand-cream">24/7</div>
+            <p class="text-white/70 text-xs font-semibold mt-2 leading-tight">Live Support</p>
           </div>
         </div>
       </div>
 
-      <!-- Hero Image -->
-      <div class="relative">
-        <div class="bg-gradient-to-br from-brand-orange to-brand-blue rounded-3xl p-8 shadow-2xl border border-white/10">
-          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-            <div class="space-y-4">
-              <div class="flex items-center gap-3">
-                <div class="w-3 h-3 bg-red-400 rounded-full"></div>
-                <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+      <!-- Hero Image - Enhanced Code Display -->
+      <div class="relative hidden lg:block">
+        <!-- Glowing Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-brand-orange/20 via-brand-primary/10 to-brand-subtle/20 rounded-3xl blur-2xl"></div>
+        
+        <!-- Code Card -->
+        <div class="relative bg-gradient-to-br from-black/40 to-black/20 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/10 overflow-hidden group hover:border-brand-orange/30 transition-all duration-300">
+          <!-- Animated Border -->
+          <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-brand-orange/0 via-brand-orange/20 to-brand-orange/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          
+          <div class="relative space-y-4">
+            <!-- Terminal Header -->
+            <div class="flex items-center gap-3 pb-4 border-b border-white/10">
+              <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+              <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+              <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+              <span class="text-white/50 text-xs font-mono ml-auto">~/academy</span>
+            </div>
+
+            <!-- Code -->
+            <div class="font-mono text-sm leading-8 text-white/90">
+              <div class="text-brand-orange">def</div>
+              <div class="ml-4">
+                <span class="text-brand-cream">launch_career</span>
+                <span class="text-white">(path=</span>
+                <span class="text-green-400">"fullstack"</span>
+                <span class="text-white">):</span>
               </div>
-              <div class="font-mono text-sm text-white/90 leading-relaxed">
-                <div class="text-brand-subtle">def</div>
-                <div class="ml-4 text-yellow-300">launch_career(path="fullstack"):</div>
-                <div class="ml-8 text-white">stack = ["Python", "React", "DSA"]</div>
-                <div class="ml-8 text-white">projects = ship(stack)</div>
-                <div class="ml-8 text-brand-cream">return hireable(projects)</div>
+              <div class="ml-8 text-white">stack = [<span class="text-blue-300">"Python"</span>, <span class="text-blue-300">"React"</span>, <span class="text-blue-300">"DSA"</span>]</div>
+              <div class="ml-8 text-white">projects = <span class="text-brand-orange">ship</span>(stack)</div>
+              <div class="ml-8">
+                <span class="text-brand-orange">return</span>
+                <span class="text-brand-cream"> hireable</span>
+                <span class="text-white">(projects)</span>
               </div>
             </div>
           </div>
         </div>
+
         <!-- Floating Elements -->
-        <div class="absolute -top-6 -right-4 w-24 h-24 bg-brand-orange/25 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-6 -left-6 w-20 h-20 bg-brand-blue/25 rounded-full blur-2xl"></div>
+        <div class="absolute -top-6 -right-4 w-24 h-24 bg-brand-orange/25 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-brand-primary/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 0.5s;"></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Quick Track Section -->
-<section class="py-12 bg-white dark:bg-dark-800">
+<section class="py-16 lg:py-20 bg-white dark:bg-dark-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="rounded-3xl border border-gray-100 dark:border-dark-700 p-8 lg:p-10 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-dark-800 dark:via-dark-800 dark:to-dark-900">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-        <div class="space-y-3 max-w-2xl">
-          <p class="text-xs uppercase tracking-[0.35em] text-brand-orange">Momentum-first learning</p>
-          <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Zero wandering, just guided redirects</h2>
-          <p class="text-gray-600 dark:text-gray-400">Search, select, enroll, and return to the exact lesson or dashboard you need. Every CTA routes you forward; every success message brings you back to progress.</p>
+    <div class="rounded-3xl border-3 border-brand-primary/20 p-8 lg:p-12 bg-gradient-to-br from-brand-primary/5 via-brand-cream/10 to-brand-subtle/5 dark:from-dark-800 dark:via-dark-800 dark:to-dark-900 relative overflow-hidden">
+      <!-- Background Elements -->
+      <div class="absolute top-0 right-0 w-96 h-96 bg-brand-orange/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-brand-primary/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+      
+      <div class="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12">
+        <div class="space-y-4 max-w-2xl">
+          <div class="inline-block">
+            <span class="px-4 py-1 bg-brand-orange/20 border border-brand-orange/40 rounded-full text-xs font-bold uppercase tracking-wider text-brand-orange">⚡ MOMENTUM-FIRST LEARNING</span>
+          </div>
+          <h2 class="text-4xl lg:text-5xl font-black text-gray-900 dark:text-white">
+            Zero wandering,<br/>just <span class="text-brand-orange">guided redirects</span>
+          </h2>
+          <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
+            Search, select, enroll, and return to the exact lesson or dashboard you need. Every CTA routes you forward; every success message brings you back to progress.
+          </p>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full lg:w-auto">
-          <div class="p-4 rounded-2xl bg-white dark:bg-dark-900 border border-gray-100 dark:border-dark-700 shadow-sm">
-            <span class="block text-2xl font-bold text-gray-900 dark:text-white">40m</span>
-            <span class="text-sm text-gray-600 dark:text-gray-400">Avg. lesson time</span>
+          <div class="group p-6 rounded-2xl bg-gradient-to-br from-white to-gray-50 dark:from-dark-700 dark:to-dark-900 border-2 border-gray-100 dark:border-dark-600 shadow-lg hover:shadow-xl hover:border-brand-orange/50 transition-all duration-300">
+            <span class="block text-3xl font-black bg-gradient-to-r from-brand-primary to-brand-orange bg-clip-text text-transparent">40m</span>
+            <span class="text-sm font-semibold text-gray-600 dark:text-gray-400 mt-2">Avg. Lesson</span>
           </div>
-          <div class="p-4 rounded-2xl bg-white dark:bg-dark-900 border border-gray-100 dark:border-dark-700 shadow-sm">
-            <span class="block text-2xl font-bold text-gray-900 dark:text-white">3x</span>
-            <span class="text-sm text-gray-600 dark:text-gray-400">Faster completions</span>
+          <div class="group p-6 rounded-2xl bg-gradient-to-br from-white to-gray-50 dark:from-dark-700 dark:to-dark-900 border-2 border-gray-100 dark:border-dark-600 shadow-lg hover:shadow-xl hover:border-brand-orange/50 transition-all duration-300">
+            <span class="block text-3xl font-black bg-gradient-to-r from-brand-primary to-brand-orange bg-clip-text text-transparent">3x</span>
+            <span class="text-sm font-semibold text-gray-600 dark:text-gray-400 mt-2">Faster</span>
           </div>
-          <div class="p-4 rounded-2xl bg-white dark:bg-dark-900 border border-gray-100 dark:border-dark-700 shadow-sm">
-            <span class="block text-2xl font-bold text-gray-900 dark:text-white">12</span>
-            <span class="text-sm text-gray-600 dark:text-gray-400">Weekly live labs</span>
+          <div class="group p-6 rounded-2xl bg-gradient-to-br from-white to-gray-50 dark:from-dark-700 dark:to-dark-900 border-2 border-gray-100 dark:border-dark-600 shadow-lg hover:shadow-xl hover:border-brand-orange/50 transition-all duration-300">
+            <span class="block text-3xl font-black bg-gradient-to-r from-brand-primary to-brand-orange bg-clip-text text-transparent">12</span>
+            <span class="text-sm font-semibold text-gray-600 dark:text-gray-400 mt-2">Weekly Labs</span>
           </div>
-          <div class="p-4 rounded-2xl bg-white dark:bg-dark-900 border border-gray-100 dark:border-dark-700 shadow-sm">
-            <span class="block text-2xl font-bold text-gray-900 dark:text-white">98%</span>
-            <span class="text-sm text-gray-600 dark:text-gray-400">Happy redirects</span>
+          <div class="group p-6 rounded-2xl bg-gradient-to-br from-white to-gray-50 dark:from-dark-700 dark:to-dark-900 border-2 border-gray-100 dark:border-dark-600 shadow-lg hover:shadow-xl hover:border-brand-orange/50 transition-all duration-300">
+            <span class="block text-3xl font-black bg-gradient-to-r from-brand-primary to-brand-orange bg-clip-text text-transparent">98%</span>
+            <span class="text-sm font-semibold text-gray-600 dark:text-gray-400 mt-2">Success</span>
           </div>
         </div>
       </div>
