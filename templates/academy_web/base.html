@@ -52,31 +52,31 @@
         extend: {
           colors: {
             brand: {
-              primary: '#2D4059',
-              'primary-strong': '#25364B',
-              'primary-deep': '#1E2C3E',
-              accent: '#EA5455',
-              orange: '#F07B3F',
+              primary: '#1A2238', // much deeper blue
+              'primary-strong': '#0F172A',
+              'primary-deep': '#090E1A',
+              accent: '#FF6A3D', // bold orange-red
+              orange: '#FF6A3D',
               cream: '#FFD460',
-              subtle: '#2D4059',
-              blue: '#2D4059',
-              dark: '#1E2C3E',
+              subtle: '#1A2238',
+              blue: '#1A2238',
+              dark: '#090E1A',
               success: '#22C55E',
               danger: '#F43F5E',
-              ink: '#2D4059',
-              surface: '#1B283D',
+              ink: '#1A2238',
+              surface: '#232946', // heavy dark surface
             },
             primary: {
-              50: '#F4F6FB',
-              100: '#E7EBF6',
-              200: '#D0D6EC',
-              300: '#B7BFD9',
-              400: '#8E9BB8',
-              500: '#576A8F',
-              600: '#4A5D81',
-              700: '#3C4C6B',
-              800: '#2F3D58',
-              900: '#243145',
+              50: '#F3F4F6',
+              100: '#E5E7EB',
+              200: '#D1D5DB',
+              300: '#9CA3AF',
+              400: '#6B7280',
+              500: '#374151',
+              600: '#1F2937',
+              700: '#111827',
+              800: '#090E1A',
+              900: '#05070D',
             },
             neutral: {
               50: '#F8FAFC',
@@ -89,6 +89,12 @@
               700: '#334155',
               800: '#1E293B',
               900: '#0F172A',
+            },
+            highlight: {
+              100: '#FFF6E0',
+              200: '#FFD460',
+              300: '#FF6A3D',
+              400: '#232946',
             },
           },
           animation: {
@@ -128,32 +134,38 @@
       position: fixed;
       inset: 0;
       background-image:
-        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.25), transparent 55%),
-        radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.2), transparent 35%),
-        radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.15), transparent 45%);
-      opacity: 0.6;
+        linear-gradient(120deg, rgba(255, 106, 61, 0.08) 0%, rgba(26, 34, 56, 0.95) 100%),
+        radial-gradient(circle at 10% 20%, rgba(255, 212, 96, 0.12), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(255, 106, 61, 0.10), transparent 35%),
+        radial-gradient(circle at 50% 100%, rgba(35, 41, 70, 0.15), transparent 45%);
+      opacity: 0.9;
       pointer-events: none;
       z-index: -2;
       mix-blend-mode: screen;
       background-attachment: fixed;
     }
     html.dark body::before {
-      opacity: 0.45;
+      opacity: 0.95;
       mix-blend-mode: overlay;
+      background-image:
+        linear-gradient(120deg, rgba(35, 41, 70, 0.98) 0%, rgba(255, 106, 61, 0.12) 100%),
+        radial-gradient(circle at 10% 20%, rgba(255, 106, 61, 0.10), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(255, 212, 96, 0.10), transparent 35%),
+        radial-gradient(circle at 50% 100%, rgba(26, 34, 56, 0.15), transparent 45%);
     }
     body::after {
       content: "";
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22120%22%20height%3D%22120%22%20viewBox%3D%220%200%20120%20120%22%3E%3Cpath%20d%3D%22M0%20120L120%200%22%20stroke%3D%22%23e2e8f0%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E");
-      opacity: 0.06;
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2Fsvg%22%20width%3D%22120%22%20height%3D%22120%22%20viewBox%3D%220%200%20120%20120%22%3E%3Cpath%20d%3D%22M0%20120L120%200%22%20stroke%3D%22%23FF6A3D%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E");
+      opacity: 0.12;
       mix-blend-mode: soft-light;
       pointer-events: none;
       z-index: -1;
       background-attachment: fixed;
     }
     html.dark body::after {
-      opacity: 0.04;
+      opacity: 0.09;
       mix-blend-mode: multiply;
     }
     .texture-layer {
