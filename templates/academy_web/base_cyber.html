@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Veeru's Pro Academy - Ship Code. Get Hired.{% endblock %}</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-zinc': '#050505',
+                        'neon-purple': '#A855F7',
+                        'neon-lime': '#BEF264',
+                        'cyber-blue': '#22D3EE',
+                    },
+                    fontFamily: {
+                        'clash': ['"Clash Display"', 'sans-serif'],
+                        'space': ['"Space Grotesk"', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
+                        'slide-left': 'slide-left 30s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'glow-pulse': {
+                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                            '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+                        },
+                        'slide-left': {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Spline 3D Viewer -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.54/build/spline-viewer.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            cursor: none !important;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', monospace;
+            background: #050505;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #A855F7, #BEF264);
+            border-radius: 10px;
+        }
+        
+        /* Noise Texture */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.04;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.8), transparent);
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: screen;
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+        }
+        
+        .custom-cursor::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 50%;
+            animation: pulse-ring 1.5s ease-out infinite;
+        }
+        
+        @keyframes pulse-ring {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+        
+        /* Glass Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #A855F7, #BEF264);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Glowing Border */
+        .glow-border {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(135deg, #A855F7, #BEF264);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .glow-border:hover::before {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-deep-zinc text-white font-space antialiased">
+    
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+    
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+    
+    <!-- Floating Island Navbar -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl">
+        <div class="glass rounded-2xl px-8 py-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="{% url 'academy_web:home' %}" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-neon-purple to-neon-lime flex items-center justify-center font-clash font-bold text-lg shadow-[0_0_20px_rgba(168,85,247,0.4)] group-hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] transition-all duration-300">
+                        V
+                    </div>
+                    <span class="font-clash font-bold text-xl hidden md:block">VEERU<span class="text-neon-lime">PRO</span></span>
+                </a>
+                
+                <!-- Nav Links -->
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="{% url 'academy_web:courses' %}" class="text-sm font-medium text-gray-400 hover:text-neon-lime transition-colors duration-300 relative group">
+                        Courses
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-neon-lime group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="{% url 'academy_web:about' %}" class="text-sm font-medium text-gray-400 hover:text-neon-lime transition-colors duration-300 relative group">
+                        About
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-neon-lime group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#" class="text-sm font-medium text-gray-400 hover:text-neon-lime transition-colors duration-300 relative group">
+                        Projects
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-neon-lime group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#" class="text-sm font-medium text-gray-400 hover:text-neon-lime transition-colors duration-300 relative group">
+                        Community
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-neon-lime group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                </div>
+                
+                <!-- CTA Button -->
+                <a href="{% url 'academy_web:signup' %}" class="relative group overflow-hidden px-6 py-2.5 rounded-lg bg-gradient-to-r from-neon-purple to-neon-lime font-semibold text-sm text-black shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] transition-all duration-300">
+                    <span class="relative z-10">Start Free</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-neon-lime to-neon-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="pt-32">
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="relative mt-32 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <!-- Brand -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-neon-purple to-neon-lime flex items-center justify-center font-clash font-bold text-lg">
+                            V
+                        </div>
+                        <span class="font-clash font-bold text-xl">VEERU<span class="text-neon-lime">PRO</span></span>
+                    </div>
+                    <p class="text-sm text-gray-500">Ship code. Get hired. Built for the next generation of developers.</p>
+                </div>
+                
+                <!-- Links -->
+                <div>
+                    <h4 class="font-clash font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-neon-lime transition-colors">Courses</a></li>
+                        <li><a href="#" class="hover:text-neon-lime transition-colors">Projects</a></li>
+                        <li><a href="#" class="hover:text-neon-lime transition-colors">Mentorship</a></li>
+                        <li><a href="#" class="hover:text-neon-lime transition-colors">Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-clash font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-neon-lime transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-neon-lime transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-neon-lime transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-neon-lime transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-clash font-semibold mb-4">Social</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-lg glass flex items-center justify-center hover:bg-neon-purple/20 transition-all duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg glass flex items-center justify-center hover:bg-neon-purple/20 transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg glass flex items-center justify-center hover:bg-neon-purple/20 transition-all duration-300">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-600">© 2026 VeeruPro Academy. All rights reserved.</p>
+                <div class="flex gap-6 text-sm text-gray-600">
+                    <a href="#" class="hover:text-neon-lime transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-neon-lime transition-colors">Terms</a>
+                    <a href="#" class="hover:text-neon-lime transition-colors">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Custom Cursor Script -->
+    <script>
+        const cursor = document.getElementById('customCursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, {
+                x: e.clientX,
+                y: e.clientY,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
