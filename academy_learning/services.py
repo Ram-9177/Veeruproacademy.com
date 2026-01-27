@@ -1,6 +1,7 @@
 """
 Business logic services for learning features.
 """
+import logging
 from dataclasses import dataclass
 from typing import Optional
 from django.db import transaction
@@ -10,6 +11,9 @@ from django.core.cache import cache
 from academy_courses.models import Course
 from academy_learning.models import Enrollment, EnrollmentStatus, CourseProgress
 from academy_users.models import User
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -23,67 +27,86 @@ def enroll_user_in_course(user: User, course: Course) -> EnrollmentResult:
     """
     Enroll a user in a course with proper validation and caching.
     """
+    # Calculate lesson count once for progress initialization or refresh.
+    def _compute_total_lessons() -> int:
+        return course.modules.aggregate(total=models.Count("lessons"))['total'] or 0
+
     # Check if already enrolled
     existing = Enrollment.objects.filter(user=user, course=course).first()
     if existing:
         if existing.status == EnrollmentStatus.ACTIVE:
+            # Already active; avoid duplicate create and integrity errors.
+            # Ensure progress exists even if enrollment was created elsewhere.
+            CourseProgress.objects.get_or_create(
+                user=user,
+                course=course,
+                defaults={
+                    "total_lessons": _compute_total_lessons(),
+                    "completed_lessons": 0,
+                    "progress_percent": 0,
+                },
+            )
             return EnrollmentResult(
                 success=False,
                 message="You are already enrolled in this course",
-                enrollment=existing
+                enrollment=existing,
             )
-        elif existing.status == EnrollmentStatus.CANCELLED:
+        if existing.status == EnrollmentStatus.CANCELLED:
             # Reactivate cancelled enrollment
-            existing.status = EnrollmentStatus.ACTIVE
-            existing.started_at = timezone.now()
-            existing.save()
-            
-            # Clear cache
-            cache.delete(f'user_enrollments_{user.id}')
-            
-            # Trigger background tasks
-            from academy_learning.tasks import send_enrollment_email
-            send_enrollment_email.delay(user.id, course.id)
-            
+            with transaction.atomic():
+                existing.status = EnrollmentStatus.ACTIVE
+                existing.started_at = timezone.now()
+                existing.save(update_fields=["status", "started_at"])
+
+                # Ensure progress exists
+                CourseProgress.objects.get_or_create(
+                    user=user,
+                    course=course,
+                    defaults={
+                        "total_lessons": _compute_total_lessons(),
+                        "completed_lessons": 0,
+                        "progress_percent": 0,
+                    },
+                )
+
+            cache.delete(f"user_enrollments_{user.id}")
+
+            _safe_send_enrollment_email(user.id, course.id)
+
             return EnrollmentResult(
                 success=True,
                 message="Enrollment reactivated successfully",
-                enrollment=existing
+                enrollment=existing,
             )
-    
+
     # Create new enrollment
     with transaction.atomic():
-        enrollment = Enrollment.objects.create(
+        enrollment, _ = Enrollment.objects.get_or_create(
             user=user,
             course=course,
-            status=EnrollmentStatus.ACTIVE,
+            defaults={"status": EnrollmentStatus.ACTIVE},
         )
-        
-        # Initialize course progress
-        total_lessons = course.modules.aggregate(
-            total=models.Count('lessons')
-        )['total'] or 0
-        
-        CourseProgress.objects.create(
+
+        # Initialize or reconcile course progress
+        CourseProgress.objects.get_or_create(
             user=user,
             course=course,
-            total_lessons=total_lessons,
-            completed_lessons=0,
-            progress_percent=0,
+            defaults={
+                "total_lessons": _compute_total_lessons(),
+                "completed_lessons": 0,
+                "progress_percent": 0,
+            },
         )
-    
-    # Clear cache
-    cache.delete(f'user_enrollments_{user.id}')
-    cache.delete(f'course_enrollments_{course.id}')
-    
-    # Trigger background tasks
-    from academy_learning.tasks import send_enrollment_email
-    send_enrollment_email.delay(user.id, course.id)
-    
+
+    cache.delete(f"user_enrollments_{user.id}")
+    cache.delete(f"course_enrollments_{course.id}")
+
+    _safe_send_enrollment_email(user.id, course.id)
+
     return EnrollmentResult(
         success=True,
         message="Enrolled successfully",
-        enrollment=enrollment
+        enrollment=enrollment,
     )
 
 
@@ -129,3 +152,12 @@ def invalidate_progress_cache(user_id: int, course_id: int):
     cache.delete(f'course_progress_{user_id}_{course_id}')
     cache.delete(f'user_enrollments_{user_id}')
     cache.delete(f'course_enrollments_{course_id}')
+
+
+def _safe_send_enrollment_email(user_id: int, course_id: int) -> None:
+    """Queue enrollment email without breaking the request if Celery/Redis is down."""
+    try:
+        from academy_learning.tasks import send_enrollment_email
+        send_enrollment_email.apply_async(args=[user_id, course_id], ignore_result=True)
+    except Exception as exc:  # pragma: no cover - defensive guard for runtime outages
+        logger.warning("Enrollment email could not be queued", exc_info=exc)
