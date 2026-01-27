@@ -66,9 +66,37 @@
               800: '#23272F',
               700: '#2D4059',
             },
+            sand: '#FAAC68',
+            coral: '#FA6868',
+            dark: '#232946',
+            primary: {
+              500: '#5A9CB5',
+              600: '#FACE68',
+              700: '#FAAC68',
+              800: '#FA6868',
+            },
           },
-        },
-      },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'bounce-slow': 'bounceSlow 3s infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            bounceSlow: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-16px)' },
+            },
+          },
+        }
+      }
     }
   </script>
   <style>
