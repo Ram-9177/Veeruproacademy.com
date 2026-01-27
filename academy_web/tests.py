@@ -144,7 +144,7 @@ class SmokeFlowTests(TestCase):
 
         detail = self._get("academy_web:course_detail", slug=self.paid_course.slug)
         # Check for payment-related elements
-        self.assertContains(detail, "Enroll Now")
+        self.assertContains(detail, "Enroll now")
         self.assertContains(detail, "payment proof")
 
         # Enroll should be blocked for paid courses until entitlement exists
@@ -171,7 +171,7 @@ class SmokeFlowTests(TestCase):
         self.assertContains(dash_pending, "Under Review")
 
         detail_pending = self._get("academy_web:course_detail", slug=self.paid_course.slug)
-        self.assertContains(detail_pending, "Under Review")
+        self.assertContains(detail_pending, "Payment under review")
 
         # Admin approves
         approve_course_payment_proof(submission=submission, admin_user=self.admin)
