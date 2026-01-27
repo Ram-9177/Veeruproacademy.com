@@ -1,5 +1,5 @@
 {% extends 'academy_web/base.html' %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}Sign Up - Veeru's Pro Academy{% endblock %}
 
@@ -11,43 +11,51 @@
         <!-- Left Side - Benefits -->
         <div class="bg-gradient-to-br from-brand-blue to-brand-dark p-8 lg:p-12 text-white hidden lg:block relative overflow-hidden">
           <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,rgba(255,116,68,0.4),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.35),transparent_30%)]"></div>
-          <div class="h-full flex flex-col justify-center relative space-y-8">
-            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/10 border border-white/15 w-max">
-              <i class="fas fa-bolt"></i>
-              <span class="text-sm font-semibold">Redirects you to action</span>
+          <div class="h-full flex flex-col justify-between relative">
+            <!-- Logo at top -->
+            <div class="text-center mb-8">
+              <img src="{% static 'branding/logo.jpg' %}" alt="Veeru's Pro Academy" class="h-24 w-auto mx-auto rounded-lg shadow-lg">
+              <p class="text-white/70 text-sm mt-4">Get your checkmark for excellence</p>
             </div>
-            <div>
-              <h2 class="text-3xl font-bold mb-3">Start your learning journey</h2>
-              <p class="text-white/80">Create an account and we will route you straight to your dashboard or the course you wanted. Flow-safe and fast.</p>
-            </div>
-            <div class="space-y-4">
-              <div class="flex items-start space-x-4">
-                <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <i class="fas fa-book-open text-white"></i>
-                </div>
-                <div>
-                  <h3 class="font-semibold">Quality courses</h3>
-                  <p class="text-white/70 text-sm">Expert-built, project-backed lessons.</p>
-                </div>
+            
+            <!-- Benefits -->
+            <div class="space-y-8">
+              <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/10 border border-white/15 w-max">
+                <i class="fas fa-bolt"></i>
+                <span class="text-sm font-semibold">Redirects you to action</span>
               </div>
-              <div class="flex items-start space-x-4">
-                <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <i class="fas fa-rupee-sign text-white"></i>
-                </div>
-                <div>
-                  <h3 class="font-semibold">Affordable pricing</h3>
-                  <p class="text-white/70 text-sm">Pocket-friendly, transparent plans.</p>
-                </div>
+              <div>
+                <h2 class="text-3xl font-bold mb-3">Start your learning journey</h2>
+                <p class="text-white/80">Create an account and we will route you straight to your dashboard or the course you wanted. Flow-safe and fast.</p>
               </div>
-              <div class="flex items-start space-x-4">
-                <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <i class="fas fa-infinity text-white"></i>
+              <div class="space-y-4">
+                <div class="flex items-start space-x-4">
+                  <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-book-open text-white"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold">Quality courses</h3>
+                    <p class="text-white/70 text-sm">Expert-built, project-backed lessons.</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 class="font-semibold">Lifetime access</h3>
-                  <p class="text-white/70 text-sm">Stay enrolled forever.</p>
+                <div class="flex items-start space-x-4">
+                  <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-rupee-sign text-white"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold">Affordable pricing</h3>
+                    <p class="text-white/70 text-sm">Pocket-friendly, transparent plans.</p>
+                  </div>
                 </div>
-              </div>
+                <div class="flex items-start space-x-4">
+                  <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-infinity text-white"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold">Lifetime access</h3>
+                    <p class="text-white/70 text-sm">Stay enrolled forever.</p>
+                  </div>
+                </div>
               <div class="flex items-start space-x-4">
                 <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
                   <i class="fas fa-headset text-white"></i>

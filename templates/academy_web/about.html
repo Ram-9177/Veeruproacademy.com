@@ -1,9 +1,24 @@
 {% extends 'academy_web/base.html' %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}About Us - Veeru's Pro Academy{% endblock %}
 
 {% block content %}
+<!-- Brand Logo & Story -->
+<section class="bg-gradient-to-r from-brand-primary/5 via-transparent to-brand-orange/5 py-16">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="mb-8">
+      <img src="{% static 'branding/logo.jpg' %}" alt="Veeru's Pro Academy Logo" class="h-48 w-auto mx-auto rounded-2xl shadow-xl">
+    </div>
+    <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+      Our <span class="text-brand-primary">Identity</span>: The Checkmark for <span class="text-brand-orange">Excellence</span>
+    </h1>
+    <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
+      The Veeru's Pro Academy logo symbolizes a checkmark for achievement—a mark of verified expertise and professional growth. Every student who completes our courses earns this badge of excellence.
+    </p>
+  </div>
+</section>
+
 <!-- Hero -->
 <section class="bg-brand-orange text-white py-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,7 +27,7 @@
         <span class="inline-block bg-white/10 text-white px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
           <i class="fas fa-info-circle mr-2"></i>Our Story
         </span>
-        <h1 class="text-4xl lg:text-5xl font-bold mb-6">About Veeru's Pro Academy</h1>
+        <h2 class="text-4xl lg:text-5xl font-bold mb-6">About Veeru's Pro Academy</h2>
         <p class="text-xl text-white/80 leading-relaxed mb-6">
           Empowering the next generation of developers with industry-ready skills, practical knowledge, and a supportive learning community since 2023.
         </p>
@@ -65,7 +80,7 @@
         <div class="w-16 h-16 bg-brand-orange rounded-2xl flex items-center justify-center mb-6 shadow-lg">
           <i class="fas fa-rocket text-white text-2xl"></i>
         </div>
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Our Mission</h2>
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Our Mission</h3>
         <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
           To democratize tech education by providing high-quality, affordable, and accessible programming courses that prepare students for real-world careers in the ever-evolving tech industry.
         </p>
@@ -90,7 +105,7 @@
         <div class="w-16 h-16 bg-brand-orange rounded-2xl flex items-center justify-center mb-6 shadow-lg">
           <i class="fas fa-eye text-white text-2xl"></i>
         </div>
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Our Vision</h2>
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Our Vision</h3>
         <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
           To become India's most trusted platform for tech education, creating a community of skilled developers who drive innovation and positive change in the world.
         </p>
