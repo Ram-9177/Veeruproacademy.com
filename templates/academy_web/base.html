@@ -441,7 +441,7 @@
   
   {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-gray-50 dark:bg-dark-950 min-h-screen flex flex-col text-gray-900 dark:text-gray-100 page-enter">
+<body class="bg-brand-primary text-gray-900 dark:bg-brand-dark dark:text-gray-100 min-h-screen flex flex-col page-enter">
   <!-- Skip to content -->
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 btn-primary px-4 py-2 rounded-lg z-[100]">Skip to main content</a>
 
@@ -452,12 +452,11 @@
         <!-- Logo -->
         <div class="flex items-center">
           <a href="{% url 'academy_web:home' %}" class="flex items-center space-x-2 group" aria-label="Veeru's Pro Academy Home">
-            <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-md overflow-hidden bg-white">
-              <div class="w-full h-full flex items-center justify-center">
-                <span class="text-2xl font-black text-brand-primary">VEERUPRO ACADEMY</span>
-              </div>
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center shadow-md overflow-hidden bg-white dark:bg-dark-700 border border-gray-200 dark:border-gray-700">
+              <img src="{% static 'branding/logo-dark-bg.png' %}" alt="Veeru's Pro Academy Logo" class="w-full h-full object-contain dark:block hidden"/>
+              <img src="{% static 'branding/logo-white-bg.png' %}" alt="Veeru's Pro Academy Logo" class="w-full h-full object-contain dark:hidden"/>
             </div>
-            <span class="font-bold text-xl text-gray-900 dark:text-white hidden sm:block">Veeru's <span class="text-brand-orange">Pro Academy</span></span>
+            <span class="font-bold text-xl text-gray-900 dark:text-white hidden sm:block tracking-tight">Veeru's <span class="text-brand-orange">Pro Academy</span></span>
           </a>
         </div>
         
@@ -494,41 +493,41 @@
             <a href="{% url 'academy_web:dashboard' %}" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Dashboard</a>
             {% if request.user.is_staff %}
             <a href="/admin/" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-orange hover:bg-white dark:hover:bg-dark-600 transition-all whitespace-nowrap">Admin</a>
-            {% endif %}
-          </div>
-          {% endif %}
-        </div>
-        
-        <!-- Right Side Actions -->
-        <div class="hidden lg:flex items-center space-x-2">
-          <!-- Dark Mode Toggle -->
-          <button type="button" onclick="toggleDarkMode()" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-dark-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-600 flex items-center justify-center transition-all" aria-label="Toggle dark mode">
-            <i class="fas fa-sun dark:hidden"></i>
-            <i class="fas fa-moon hidden dark:block"></i>
-          </button>
-          
-          <!-- Language Selector -->
-          <form action="{% url 'set_language' %}" method="post" class="relative">
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{{ request.get_full_path }}">
-            <select name="language" onchange="this.form.submit();" class="appearance-none bg-gray-100 dark:bg-dark-700 border-0 rounded-xl px-3 py-2.5 pr-8 text-sm text-gray-700 dark:text-gray-300 cursor-pointer focus:ring-2 focus:ring-brand-orange transition-all h-10" aria-label="Select language">
-              {% get_available_languages as LANGS %}
-              {% for lang in LANGS %}
-                <option value="{{ lang.0 }}" {% if lang.0 == CURRENT_LANGUAGE %}selected{% endif %}>{{ lang.0|upper }}</option>
-              {% endfor %}
-            </select>
-            <i class="fas fa-globe absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs pointer-events-none"></i>
-          </form>
-          
-          {% if request.user.is_authenticated %}
-            <div class="flex items-center space-x-2 pl-2 ml-2 border-l border-gray-200 dark:border-dark-600">
-              <div class="flex items-center space-x-2 bg-gray-100 dark:bg-dark-700 rounded-xl px-3 py-1.5">
-                <div class="w-7 h-7 bg-brand-blue rounded-full flex items-center justify-center">
-                  <span class="text-white text-xs font-bold">{{ request.user.name|default:request.user.email|slice:":1"|upper }}</span>
-                </div>
-                <span class="text-sm text-gray-700 dark:text-gray-300 font-medium max-w-[100px] truncate">{{ request.user.name|default:request.user.email|truncatechars:12 }}</span>
-              </div>
-              <a href="{% url 'academy_web:logout' %}" onclick="return confirm('Are you sure you want to logout?')" class="h-10 px-4 rounded-xl bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-medium hover:bg-red-100 dark:hover:bg-red-900/50 transition-all text-sm flex items-center justify-center">
+            <style>
+              body { font-family: 'Space Grotesk', 'Inter', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; position: relative; overflow-x: hidden; }
+              body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background-image:
+                  radial-gradient(circle at 10% 20%, rgba(45, 64, 89, 0.25), transparent 55%),
+                  radial-gradient(circle at 80% 0%, rgba(234, 84, 85, 0.12), transparent 35%),
+                  radial-gradient(circle at 50% 100%, rgba(240, 123, 63, 0.10), transparent 45%);
+                opacity: 0.7;
+                pointer-events: none;
+                z-index: -2;
+                mix-blend-mode: screen;
+                background-attachment: fixed;
+              }
+              html.dark body::before {
+                opacity: 0.55;
+                mix-blend-mode: overlay;
+              }
+              body::after {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22120%22%20height%3D%22120%22%20viewBox%3D%220%200%20120%20120%22%3E%3Cpath%20d%3D%22M0%20120L120%200%22%20stroke%3D%22%232d4059%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E");
+                opacity: 0.09;
+                mix-blend-mode: soft-light;
+                pointer-events: none;
+                z-index: -1;
+                background-attachment: fixed;
+              }
+              html.dark body::after {
+                opacity: 0.07;
+                mix-blend-mode: multiply;
+              }
                 <i class="fas fa-sign-out-alt"></i>
               </a>
             </div>
