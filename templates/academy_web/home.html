@@ -4,30 +4,6 @@
 {% block title %}Veeru's Pro Academy - Learn Programming & Web Development{% endblock %}
 
 {% block content %}
-<!-- Brand Intro Section (Clean and aligned) -->
-<section class="relative overflow-hidden py-16 sm:py-24">
-  <div class="absolute inset-0 bg-gradient-to-br from-white via-brand-cream/40 to-brand-subtle/20"></div>
-  <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col items-center text-center gap-6">
-      <!-- Logo: unchanged file, simple elevation -->
-      <div class="bg-white rounded-2xl p-4 shadow-xl border border-gray-100">
-        <img src="{% static 'branding/logo.jpg' %}" alt="Veeru's Pro Academy Logo" class="h-40 w-auto rounded-xl shadow-md">
-      </div>
-      
-      <h2 class="text-4xl lg:text-5xl font-black text-brand-primary">Welcome to Veeru's Pro Academy</h2>
-      <p class="text-lg lg:text-xl text-gray-700 max-w-3xl">
-        Your <span class="font-bold text-brand-orange">checkmark for professional excellence</span> in programming. We keep it clean, fast, and aligned to ship results.
-      </p>
-      
-      <!-- Value props: simple, no 3D -->
-      <div class="flex flex-wrap justify-center gap-3">
-        <span class="px-5 py-3 rounded-full bg-brand-orange/10 border border-brand-orange/30 text-brand-orange font-bold text-sm">✓ EXPERT-LED</span>
-        <span class="px-5 py-3 rounded-full bg-brand-primary/10 border border-brand-primary/30 text-brand-primary font-bold text-sm">✓ JOB-READY</span>
-        <span class="px-5 py-3 rounded-full bg-brand-subtle/10 border border-brand-subtle/30 text-brand-primary font-bold text-sm">✓ LIFETIME ACCESS</span>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- 3D Hero Section -->
 <section class="relative overflow-hidden text-white py-24 lg:py-32" style="perspective: 2000px;">
@@ -82,12 +58,12 @@
 
         <!-- CTA Buttons (clean) -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
-          <a href="{% url 'academy_web:course_list' %}" class="px-8 py-5 rounded-xl font-bold text-lg text-white bg-brand-orange hover:bg-orange-500 shadow-md transition-all">
+          <a href="{% url 'academy_web:course_list' %}" class="px-8 py-5 rounded-xl font-bold text-lg text-black bg-brand-cream hover:bg-white shadow-md transition-all">
             <span class="flex items-center justify-center gap-2">
               <i class="fas fa-rocket"></i>Browse Courses
             </span>
           </a>
-          <a href="{% url 'academy_web:about' %}" class="px-8 py-5 rounded-xl font-bold text-lg text-brand-primary border-2 border-brand-primary/40 hover:border-brand-primary hover:bg-brand-primary/10 transition-all">
+          <a href="{% url 'academy_web:about' %}" class="px-8 py-5 rounded-xl font-bold text-lg text-white border-2 border-white/10 hover:border-white/30 hover:bg-white/5 backdrop-blur-xl transition-all">
             <span class="flex items-center justify-center gap-2">
               <i class="fas fa-play"></i>See the Flow
             </span>
@@ -380,6 +356,24 @@
           <a href="{% url 'academy_web:dashboard' %}" class="btn-secondary btn-h-10 px-4 rounded-full text-sm shadow-sm">Go to dashboard</a>
         </div>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- Brand Intro Section (moved below) -->
+<section class="relative overflow-hidden py-16 sm:py-24 bg-brand-primary">
+  <div class="absolute inset-0 bg-gradient-to-br from-brand-primary via-brand-primary-strong to-brand-primary-deep opacity-90"></div>
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col items-center text-center gap-6">
+      <h2 class="text-4xl lg:text-5xl font-black text-white animate-fade-in">Welcome to VEERUPRO ACADEMY</h2>
+      <p class="text-lg lg:text-xl text-white/80 max-w-3xl">
+        Your <span class="font-bold text-brand-orange">checkmark for professional excellence</span> in programming. We keep it clean, fast, and aligned to ship results.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <span class="px-5 py-3 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white font-bold text-sm">✓ EXPERT-LED</span>
+        <span class="px-5 py-3 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white font-bold text-sm">✓ JOB-READY</span>
+        <span class="px-5 py-3 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white font-bold text-sm">✓ LIFETIME ACCESS</span>
+      </div>
     </div>
   </div>
 </section>

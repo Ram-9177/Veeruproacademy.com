@@ -2,7 +2,7 @@
 {% get_current_language as CURRENT_LANGUAGE %}
 
 <!DOCTYPE html>
-<html lang="{{ CURRENT_LANGUAGE|default:'en' }}" class="scroll-smooth">
+<html lang="{{ CURRENT_LANGUAGE|default:'en' }}" class="scroll-smooth dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,7 +10,7 @@
   <meta name="keywords" content="programming courses, web development, Python, JavaScript, React, online learning, coding bootcamp">
   <meta name="author" content="Veeru's Pro Academy">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#FF7444">
+  <meta name="theme-color" content="#2D4059">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
@@ -42,6 +42,9 @@
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- GSAP for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -49,16 +52,19 @@
         extend: {
           colors: {
             brand: {
-              primary: '#576A8F',
-              'primary-strong': '#4A5D81',
-              'primary-deep': '#3C4C6B',
-              accent: '#FF7444',
-              subtle: '#B7BDF7',
-              cream: '#FFF8DE',
+              primary: '#2D4059',
+              'primary-strong': '#25364B',
+              'primary-deep': '#1E2C3E',
+              accent: '#EA5455',
+              orange: '#F07B3F',
+              cream: '#FFD460',
+              subtle: '#2D4059',
+              blue: '#2D4059',
+              dark: '#1E2C3E',
               success: '#22C55E',
               danger: '#F43F5E',
-              ink: '#0F172A',
-              surface: '#0B1220',
+              ink: '#2D4059',
+              surface: '#1B283D',
             },
             primary: {
               50: '#F4F6FB',
@@ -259,45 +265,45 @@
     }
     
     /* Theme Colors - Flat Solid Fills (aligned to Tailwind config) */
-    .bg-brand-primary { background-color: #576A8F; }
-    .bg-brand-accent { background-color: #FF7444; }
-    .bg-brand-orange { background-color: #FF7444; }
-    .bg-brand-blue { background-color: #576A8F; }
-    .bg-brand-dark { background-color: #0B1220; }
-    .bg-brand-cream { background-color: #FFF8DE; }
-    .bg-brand-subtle { background-color: #B7BDF7; }
+    .bg-brand-primary { background-color: #2D4059; }
+    .bg-brand-accent { background-color: #EA5455; }
+    .bg-brand-orange { background-color: #F07B3F; }
+    .bg-brand-blue { background-color: #2D4059; }
+    .bg-brand-dark { background-color: #1E2C3E; }
+    .bg-brand-cream { background-color: #FFD460; }
+    .bg-brand-subtle { background-color: #2D4059; }
     .bg-brand-black { background-color: #000000; }
     
-    .text-brand-primary { color: #576A8F; }
-    .text-brand-accent { color: #FF7444; }
-    .text-brand-orange { color: #FF7444; }
-    .text-brand-blue { color: #576A8F; }
-    .text-brand-dark { color: #0B1220; }
-    .text-brand-cream { color: #FFF8DE; }
-    .text-brand-subtle { color: #B7BDF7; }
+    .text-brand-primary { color: #2D4059; }
+    .text-brand-accent { color: #EA5455; }
+    .text-brand-orange { color: #F07B3F; }
+    .text-brand-blue { color: #2D4059; }
+    .text-brand-dark { color: #1E2C3E; }
+    .text-brand-cream { color: #FFD460; }
+    .text-brand-subtle { color: #2D4059; }
     
-    .border-brand-primary { border-color: #576A8F; }
-    .border-brand-accent { border-color: #FF7444; }
-    .border-brand-orange { border-color: #FF7444; }
-    .border-brand-blue { border-color: #576A8F; }
+    .border-brand-primary { border-color: #2D4059; }
+    .border-brand-accent { border-color: #EA5455; }
+    .border-brand-orange { border-color: #F07B3F; }
+    .border-brand-blue { border-color: #2D4059; }
     
     /* Primary Button - Accent */
     .btn-primary {
-      background-color: #FF7444;
+      background-color: #EA5455;
       color: white;
       transition: all 0.2s ease;
     }
     .btn-primary:hover {
-      background-color: #FF6238;
-      box-shadow: 0 4px 12px rgba(255, 116, 68, 0.3);
+      background-color: #D33F45;
+      box-shadow: 0 4px 12px rgba(234, 84, 85, 0.3);
       transform: translateY(-2px);
     }
     .btn-primary:focus {
-      outline: 2px solid #FF7444;
+      outline: 2px solid #EA5455;
       outline-offset: 2px;
     }
     .btn-primary:active {
-      background-color: #E55C20;
+      background-color: #C43B3C;
       transform: translateY(0);
     }
     .btn-primary:disabled {
@@ -308,17 +314,17 @@
     
     /* Secondary Button - Primary */
     .btn-secondary {
-      background-color: #576A8F;
+      background-color: #2D4059;
       color: white;
       transition: all 0.2s ease;
     }
     .btn-secondary:hover {
-      background-color: #4A5D81;
-      box-shadow: 0 4px 12px rgba(87, 106, 143, 0.3);
+      background-color: #25364B;
+      box-shadow: 0 4px 12px rgba(45, 64, 89, 0.3);
       transform: translateY(-2px);
     }
     .btn-secondary:focus {
-      outline: 2px solid #576A8F;
+      outline: 2px solid #2D4059;
       outline-offset: 2px;
     }
     .btn-secondary:active {
@@ -328,27 +334,27 @@
     /* Outline Button */
     .btn-outline {
       background-color: transparent;
-      border: 2px solid #576A8F;
-      color: #576A8F;
+      border: 2px solid #2D4059;
+      color: #2D4059;
       transition: all 0.2s ease;
     }
     .btn-outline:hover {
-      background-color: rgba(87, 106, 143, 0.1);
-      border-color: #4A5D81;
-      color: #4A5D81;
+      background-color: rgba(45, 64, 89, 0.1);
+      border-color: #25364B;
+      color: #25364B;
     }
     .btn-outline:focus {
-      outline: 2px solid #576A8F;
+      outline: 2px solid #2D4059;
       outline-offset: 2px;
     }
     .dark .btn-outline {
-      border-color: #FF7444;
-      color: #FF7444;
+      border-color: #EA5455;
+      color: #EA5455;
     }
     .dark .btn-outline:hover {
-      background-color: rgba(255, 116, 68, 0.1);
-      border-color: #FF6238;
-      color: #FF6238;
+      background-color: rgba(234, 84, 85, 0.1);
+      border-color: #D33F45;
+      color: #D33F45;
     }
     
     /* Card Hover Effect */
@@ -447,7 +453,9 @@
         <div class="flex items-center">
           <a href="{% url 'academy_web:home' %}" class="flex items-center space-x-2 group" aria-label="Veeru's Pro Academy Home">
             <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-md overflow-hidden bg-white">
-              <img src="{% static 'branding/logo.jpg' %}" alt="Veeru's Pro Academy" class="object-cover w-full h-full">
+              <div class="w-full h-full flex items-center justify-center">
+                <span class="text-2xl font-black text-brand-primary">VEERUPRO ACADEMY</span>
+              </div>
             </div>
             <span class="font-bold text-xl text-gray-900 dark:text-white hidden sm:block">Veeru's <span class="text-brand-orange">Pro Academy</span></span>
           </a>
@@ -649,7 +657,7 @@
             <p class="text-gray-400 text-sm">Your Checkmark for Professional Excellence</p>
           </div>
           <div class="flex justify-center">
-            <img src="{% static 'branding/logo.jpg' %}" alt="Veeru's Pro Academy Logo" class="h-32 w-auto rounded-lg shadow-lg">
+            <span class="text-xl font-black text-brand-primary">VEERUPRO ACADEMY</span>
           </div>
           <div class="text-center md:text-right">
             <p class="text-gray-400 text-sm mb-2">Trusted by 5000+ learners</p>
