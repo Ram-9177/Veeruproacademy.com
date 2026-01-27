@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from unittest.mock import patch
 from django.urls import reverse
 
 from academy_audit.models import AuditLog
@@ -11,8 +12,13 @@ from academy_payments.models import Entitlement, PaymentProofSubmission, Product
 from academy_payments.services import approve_course_payment_proof
 
 
+
 class SmokeFlowTests(TestCase):
     def setUp(self) -> None:
+        # Patch Celery tasks to prevent Redis errors during tests
+        patcher = patch('academy_learning.services._safe_send_enrollment_email', lambda *a, **kw: None)
+        self.addCleanup(patcher.stop)
+        patcher.start()
         self.User = get_user_model()
         self.password = "StrongPass123!"
 
@@ -56,6 +62,27 @@ class SmokeFlowTests(TestCase):
             title="Paid Lesson 1",
             status=ContentStatus.PUBLISHED,
         )
+
+    def _get(self, name: str, **kwargs):
+        return self.client.get(reverse(name, kwargs=kwargs), secure=True)
+
+    def _post(self, name: str, data: dict, **kwargs):
+        return self.client.post(reverse(name, kwargs=kwargs), data=data, secure=True)
+
+    def test_payment_proof_submission_feedback(self):
+        self.client.login(email=self.student.email, password=self.password)
+        resp = self._post(
+            "academy_web:course_payment_proof",
+            slug=self.paid_course.slug,
+            data={
+                "proof_url": "https://example.com/proof2.png",
+                "notes": "Paid via UPI",
+            },
+        )
+        self.assertEqual(resp.status_code, 302)
+        # After submission, user should see a feedback message on dashboard
+        dash = self._get("academy_web:dashboard")
+        self.assertContains(dash, "Under Review")
 
     def _get(self, name: str, **kwargs):
         return self.client.get(reverse(name, kwargs=kwargs), secure=True)

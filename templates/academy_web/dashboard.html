@@ -4,18 +4,18 @@
 {% block title %}Dashboard - Veeru's Pro Academy{% endblock %}
 
 {% block content %}
-<section class="bg-brand-dark min-h-screen py-8">
+<section class="cyberpunk-bg min-h-screen py-8">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
       <div>
-        <h1 class="text-3xl font-bold text-brand-accent mb-2">
-          Welcome back, <span class="text-brand-orange">{{ request.user.name|default:request.user.email|truncatechars:20 }}</span>!
+        <h1 class="text-3xl font-bold cyberpunk-glow mb-2">
+          Welcome back, <span class="cyberpunk-neon">{{ request.user.name|default:request.user.email|truncatechars:20 }}</span>!
         </h1>
-        <p class="text-brand-primary/70">Track your learning progress and continue where you left off</p>
+        <p class="text-brand-blue">Track your learning progress and continue where you left off</p>
       </div>
       <div class="mt-4 md:mt-0 flex gap-3">
-        <a href="{% url 'academy_web:course_list' %}" class="inline-flex items-center bg-brand-primary text-brand-dark px-6 py-3 rounded-xl font-semibold hover:bg-brand-accent transition shadow-lg">
+        <a href="{% url 'academy_web:course_list' %}" class="inline-flex items-center btn-primary px-6 py-3 rounded-xl font-semibold transition shadow-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500" aria-label="Browse Courses">
           <i class="fas fa-plus mr-2"></i>Browse Courses
         </a>
       </div>
@@ -23,14 +23,14 @@
     
     <!-- Welcome Banner (for new users) -->
     {% if not enrollments %}
-    <div class="bg-brand-primary rounded-2xl p-6 lg:p-8 mb-8 text-brand-dark relative overflow-hidden">
+    <div class="bg-brand-accent rounded-2xl p-6 lg:p-8 mb-8 text-brand-dark relative overflow-hidden shadow-brand">
       <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
       <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
         <div>
-          <h2 class="text-2xl font-bold mb-2">🎉 Welcome to Veeru's Pro Academy!</h2>
+          <h2 class="text-2xl font-bold mb-2 cyberpunk-glow">🎉 Welcome to Veeru's Pro Academy!</h2>
           <p class="text-white/80">Start your learning journey today. Browse our courses and enroll in the one that excites you most!</p>
         </div>
-        <a href="{% url 'academy_web:course_list' %}" class="bg-brand-accent text-brand-dark px-6 py-3 rounded-xl font-semibold hover:bg-brand-primary transition whitespace-nowrap shadow-lg inline-flex items-center justify-center">
+        <a href="{% url 'academy_web:course_list' %}" class="btn-primary px-6 py-3 rounded-xl font-semibold transition whitespace-nowrap shadow-brand inline-flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500" aria-label="Get Started">
           <i class="fas fa-rocket mr-2"></i>Get Started
         </a>
       </div>

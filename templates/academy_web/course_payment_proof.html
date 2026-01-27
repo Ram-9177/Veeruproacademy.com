@@ -84,9 +84,25 @@
                         placeholder="Any additional information about your payment"></textarea>
             </div>
 
-            <button type="submit" class="w-full bg-brand-orange text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:scale-105 transition shadow-lg">
-              <i class="fas fa-paper-plane mr-2"></i>Submit Payment Proof
+            <button type="submit" class="w-full bg-brand-orange text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:scale-105 transition shadow-lg" id="submitProofBtn">
+              <span id="submitProofSpinner" class="hidden"><i class="fas fa-spinner fa-spin mr-2"></i></span>
+              <span id="submitProofText"><i class="fas fa-paper-plane mr-2"></i>Submit Payment Proof</span>
             </button>
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                var form = document.querySelector('form');
+                var btn = document.getElementById('submitProofBtn');
+                var spinner = document.getElementById('submitProofSpinner');
+                var text = document.getElementById('submitProofText');
+                if (form && btn && spinner && text) {
+                  form.addEventListener('submit', function() {
+                    btn.disabled = true;
+                    spinner.classList.remove('hidden');
+                    text.classList.add('opacity-50');
+                  });
+                }
+              });
+            </script>
           </form>
         </div>
       </div>

@@ -73,48 +73,75 @@
   </script>
   <style>
     body, html {
-      background: #181A20 !important;
-      color: #FACE68 !important;
+      background: #0f1021 !important;
+      color: #f5f5f5 !important;
+    }
+    .cyberpunk-glow {
+      text-shadow: 0 0 8px #ff00cc, 0 0 16px #00fff7, 0 0 2px #fff;
     }
     .btn-primary {
-      background: linear-gradient(90deg, #5A9CB5 0%, #FACE68 100%);
-      color: #181A20;
+      background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
+      color: #0f1021;
       border: none;
-      box-shadow: 0 2px 12px #5A9CB533;
-      transition: box-shadow 0.2s;
+      box-shadow: 0 0 16px #ff00cc99, 0 0 32px #00fff799;
+      transition: box-shadow 0.2s, background 0.2s;
+      font-weight: bold;
+      letter-spacing: 0.05em;
     }
     .btn-primary:hover {
-      background: linear-gradient(90deg, #FACE68 0%, #FA6868 100%);
-      color: #181A20;
-      box-shadow: 0 4px 24px #FA686833;
+      background: linear-gradient(90deg, #00fff7 0%, #ff00cc 100%);
+      color: #0f1021;
+      box-shadow: 0 0 32px #00fff799, 0 0 16px #ff00cc99;
     }
     .section-dark {
-      background: #181A20 !important;
-      color: #FACE68 !important;
+      background: #18132a !important;
+      color: #f5f5f5 !important;
+      border-top: 2px solid #ff00cc;
+      border-bottom: 2px solid #00fff7;
     }
     .card {
-      background: #23272F !important;
-      color: #FACE68 !important;
-      border: 2px solid #5A9CB5;
-      box-shadow: 0 2px 12px #5A9CB533;
+      background: #1a1530 !important;
+      color: #f5f5f5 !important;
+      border: 2px solid #00fff7;
+      box-shadow: 0 0 24px #ff00cc55, 0 0 8px #00fff755;
     }
     .card-accent {
-      border-color: #FACE68 !important;
+      border-color: #ff00cc !important;
     }
-    .text-brand-accent { color: #FACE68 !important; }
-    .text-brand-blue { color: #5A9CB5 !important; }
-    .text-brand-orange { color: #FAAC68 !important; }
-    .text-brand-red { color: #FA6868 !important; }
-    .bg-brand-dark { background: #181A20 !important; }
-    .bg-brand-card { background: #23272F !important; }
-    .bg-brand-accent { background: #FACE68 !important; }
-    .bg-brand-blue { background: #5A9CB5 !important; }
-    .bg-brand-orange { background: #FAAC68 !important; }
-    .bg-brand-red { background: #FA6868 !important; }
-    .shadow-brand { box-shadow: 0 2px 12px #5A9CB533; }
-    .shadow-accent { box-shadow: 0 2px 12px #FACE6833; }
-    .shadow-orange { box-shadow: 0 2px 12px #FAAC6833; }
-    .shadow-red { box-shadow: 0 2px 12px #FA686833; }
+    .text-brand-accent { color: #ff00cc !important; }
+    .text-brand-blue { color: #00fff7 !important; }
+    .text-brand-orange { color: #fffb00 !important; }
+    .text-brand-red { color: #ff003c !important; }
+    .bg-brand-dark { background: #0f1021 !important; }
+    .bg-brand-card { background: #1a1530 !important; }
+    .bg-brand-accent { background: #ff00cc !important; }
+    .bg-brand-blue { background: #00fff7 !important; }
+    .bg-brand-orange { background: #fffb00 !important; }
+    .bg-brand-red { background: #ff003c !important; }
+    .shadow-brand { box-shadow: 0 0 16px #ff00cc99, 0 0 32px #00fff799; }
+    .shadow-accent { box-shadow: 0 0 16px #ff00cc99; }
+    .shadow-orange { box-shadow: 0 0 16px #fffb0099; }
+    .shadow-red { box-shadow: 0 0 16px #ff003c99; }
+    a, .link {
+      color: #00fff7;
+      text-shadow: 0 0 4px #ff00cc99;
+      transition: color 0.2s;
+    }
+    a:hover, .link:hover {
+      color: #ff00cc;
+      text-shadow: 0 0 8px #00fff799;
+    }
+    .cyberpunk-border {
+      border: 2px solid #ff00cc;
+      box-shadow: 0 0 8px #ff00cc, 0 0 16px #00fff7;
+    }
+    .cyberpunk-bg {
+      background: linear-gradient(135deg, #0f1021 60%, #1a1530 100%);
+    }
+    .cyberpunk-neon {
+      color: #ff00cc;
+      text-shadow: 0 0 8px #ff00cc, 0 0 16px #00fff7;
+    }
   </style>
               sand: '#FAAC68',
               coral: '#FA6868',

@@ -46,16 +46,16 @@
 
       <!-- Enrollment Card -->
       <div class="lg:col-span-1">
-        <div class="bg-white dark:bg-dark-800 text-gray-900 dark:text-white rounded-2xl p-6 shadow-2xl border border-gray-100 dark:border-dark-700">
+        <div class="bg-brand-card text-white rounded-2xl p-6 shadow-brand border cyberpunk-border">
           <!-- Price -->
           <div class="flex items-center justify-between mb-4">
             <div>
               {% if course.price and course.price > 0 %}
-                <div class="text-3xl font-bold text-brand-orange">₹{{ course.price|floatformat:0 }}</div>
-                <p class="text-gray-500 dark:text-gray-400 text-sm">One-time payment</p>
+                <div class="text-3xl font-bold cyberpunk-neon">₹{{ course.price|floatformat:0 }}</div>
+                <p class="text-gray-400 text-sm">One-time payment</p>
               {% else %}
-                <div class="text-3xl font-bold text-green-500">Free</div>
-                <p class="text-gray-500 dark:text-gray-400 text-sm">No payment required</p>
+                <div class="text-3xl font-bold text-green-400">Free</div>
+                <p class="text-gray-400 text-sm">No payment required</p>
               {% endif %}
             </div>
             <span class="px-3 py-1 rounded-full bg-brand-blue/10 text-brand-blue text-xs font-semibold">Redirect-safe</span>
