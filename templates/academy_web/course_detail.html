@@ -1,5 +1,6 @@
 {% extends 'academy_web/base.html' %}
 {% load i18n %}
+{% load academy_filters %}
 
 {% block title %}{{ course.title }} - Veeru's Pro Academy{% endblock %}
 
@@ -100,7 +101,7 @@
             {% if course.price and course.price > 0 %}
               <div class="flex items-baseline gap-3 mb-2">
                 <div class="text-5xl font-black text-brand-orange">₹{{ course.price|floatformat:0 }}</div>
-                <div class="text-2xl text-gray-400 line-through">₹{{ course.price|floatformat:0|add:"2000" }}</div>
+                <div class="text-2xl text-gray-400 line-through">₹{{ course.price|add_value:2000|floatformat:0 }}</div>
               </div>
               <div class="flex items-center gap-2 mb-3">
                 <span class="px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-sm font-bold">
