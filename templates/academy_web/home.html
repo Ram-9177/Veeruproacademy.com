@@ -31,11 +31,18 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
       <!-- Hero Content with 3D Transform -->
       <div class="text-center lg:text-left space-y-8" style="transform-style: preserve-3d;">
-        <!-- 3D Badge -->
-        <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-[#ff00cc22] border-2 border-[#00fff7] backdrop-blur-xl hover:bg-[#ff00cc33] hover:scale-110 transition-all duration-300 w-fit mx-auto lg:mx-0 shadow-brand cyberpunk-border" style="transform: translateZ(40px);">
+        <!-- 3D Badge with Intermediate Focus -->
+        <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-[#ff00cc22] border-2 border-[#00fff7] backdrop-blur-xl hover:bg-[#ff00cc33] hover:scale-110 transition-all duration-300 w-fit mx-auto lg:mx-0 shadow-brand cyberpunk-border animate-fade-in" style="transform: translateZ(40px);">
           <span class="inline-block w-2 h-2 bg-brand-blue rounded-full animate-pulse"></span>
           <span class="text-xs font-bold uppercase tracking-[0.2em] text-brand-accent cyberpunk-neon">Career Sprint Program</span>
           <span class="text-white/80 text-xs font-medium">→ Job-ready in 12 weeks</span>
+        </div>
+        
+        <!-- Trust Badge for Intermediate Students -->
+        <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-2 border-amber-400/50 backdrop-blur-xl w-fit mx-auto lg:mx-0 shadow-lg animate-slide-up" style="transform: translateZ(40px); animation-delay: 0.2s;">
+          <i class="fas fa-chart-line text-amber-400"></i>
+          <span class="text-sm font-bold text-amber-300">Perfect for Intermediate Developers</span>
+          <span class="text-white/80 text-xs font-medium">→ Level up your skills</span>
         </div>
 
         <!-- Main Heading with 3D Effect -->
@@ -51,42 +58,81 @@
           </h1>
         </div>
 
-        <!-- Subheading with 3D -->
+        <!-- Subheading with 3D - Enhanced for Intermediate Students -->
         <p class="text-xl lg:text-2xl text-white/90 leading-relaxed font-medium max-w-2xl mx-auto lg:mx-0 cyberpunk-glow" style="transform: translateZ(25px);">
-          Bite-sized lessons, mentor-backed checkpoints, and crystal-clear redirects that keep you moving—no dead ends, just momentum from signup to job offer.
+          Master advanced concepts with <span class="text-amber-300 font-bold">real-world projects</span>, mentor-backed checkpoints, and crystal-clear guidance that keeps you moving—from intermediate coder to <span class="text-brand-accent">industry-ready professional</span>.
         </p>
+        
+        <!-- Value Proposition for Intermediate Level -->
+        <div class="flex flex-wrap gap-3 justify-center lg:justify-start mt-4" style="transform: translateZ(25px);">
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm">
+            <i class="fas fa-code text-brand-accent"></i>
+            <span class="text-sm text-white/90">Advanced DSA</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm">
+            <i class="fas fa-project-diagram text-brand-accent"></i>
+            <span class="text-sm text-white/90">System Design</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm">
+            <i class="fas fa-briefcase text-brand-accent"></i>
+            <span class="text-sm text-white/90">Portfolio Projects</span>
+          </div>
+        </div>
 
-        <!-- CTA Buttons (clean) -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
-          <a href="{% url 'academy_web:course_list' %}" class="px-8 py-5 rounded-xl font-bold text-lg text-black bg-brand-cream hover:bg-white shadow-md transition-all">
-            <span class="flex items-center justify-center gap-2">
-              <i class="fas fa-rocket"></i>Browse Courses
+        <!-- CTA Buttons - Enhanced with Conversion Focus -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+          <a href="{% url 'academy_web:course_list' %}" class="group relative px-8 py-5 rounded-xl font-bold text-lg text-black bg-gradient-to-r from-brand-cream to-amber-300 hover:from-white hover:to-brand-cream shadow-2xl hover:shadow-brand transition-all duration-300 transform hover:scale-105 overflow-hidden">
+            <span class="absolute inset-0 bg-gradient-to-r from-brand-accent/0 via-brand-accent/20 to-brand-accent/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
+            <span class="relative flex items-center justify-center gap-2">
+              <i class="fas fa-rocket"></i>Explore Courses
+              <i class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
             </span>
           </a>
-          <a href="{% url 'academy_web:about' %}" class="px-8 py-5 rounded-xl font-bold text-lg text-white border-2 border-white/10 hover:border-white/30 hover:bg-white/5 backdrop-blur-xl transition-all">
+          <a href="{% url 'academy_web:projects_list' %}" class="px-8 py-5 rounded-xl font-bold text-lg text-white border-2 border-amber-400/50 hover:border-amber-400 hover:bg-amber-500/10 backdrop-blur-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
             <span class="flex items-center justify-center gap-2">
-              <i class="fas fa-play"></i>See the Flow
+              <i class="fas fa-code-branch"></i>View Projects
             </span>
           </a>
         </div>
+        
+        <!-- Urgency/Social Proof -->
+        <div class="flex flex-wrap items-center gap-4 justify-center lg:justify-start pt-4 text-sm">
+          <div class="flex items-center gap-2 text-white/80">
+            <div class="flex -space-x-2">
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-orange to-brand-accent border-2 border-brand-dark flex items-center justify-center text-xs font-bold">A</div>
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-blue to-brand-accent border-2 border-brand-dark flex items-center justify-center text-xs font-bold">S</div>
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-accent to-brand-orange border-2 border-brand-dark flex items-center justify-center text-xs font-bold">R</div>
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-orange to-brand-blue border-2 border-brand-dark flex items-center justify-center text-xs font-bold">+</div>
+            </div>
+            <span><strong class="text-amber-300">247 students</strong> enrolled this week</span>
+          </div>
+          <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/20 border border-green-400/50">
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            <span class="text-green-300 font-medium">Limited slots available</span>
+          </div>
+        </div>
 
-        <!-- 3D Stats Grid -->
+        <!-- 3D Stats Grid - Enhanced with Better Metrics -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-8" style="transform: translateZ(15px); transform-style: preserve-3d;">
-          <div class="group p-4 rounded-xl bg-white/10 border border-white/20 backdrop-blur hover:bg-white/15 hover:border-brand-orange/50 transform hover:-translate-y-2 transition-all duration-300 cursor-default shadow-[0_8px_30px_rgba(0,0,0,0.2)]" style="transform: translateZ(10px);">
-            <div class="text-3xl font-black bg-gradient-to-br from-brand-cream to-brand-orange bg-clip-text text-transparent drop-shadow-lg">5k+</div>
-            <p class="text-white/70 text-xs font-semibold mt-2 leading-tight">Learners Shipped</p>
+          <div class="group p-5 rounded-xl bg-gradient-to-br from-white/15 to-white/5 border border-white/30 backdrop-blur-lg hover:bg-white/20 hover:border-brand-orange hover:scale-110 transform transition-all duration-300 cursor-default shadow-[0_10px_40px_rgba(0,0,0,0.3)]" style="transform: translateZ(10px);">
+            <div class="text-4xl font-black bg-gradient-to-br from-brand-cream via-amber-300 to-brand-orange bg-clip-text text-transparent drop-shadow-2xl mb-1">5,000+</div>
+            <p class="text-white/80 text-xs font-bold mt-2 leading-tight uppercase tracking-wide">Success Stories</p>
+            <p class="text-white/50 text-[10px] mt-1">Lives transformed</p>
           </div>
-          <div class="group p-4 rounded-xl bg-white/10 border border-white/20 backdrop-blur hover:bg-white/15 hover:border-brand-orange/50 transform hover:-translate-y-2 transition-all duration-300 cursor-default shadow-[0_8px_30px_rgba(0,0,0,0.2)]" style="transform: translateZ(10px);">
-            <div class="text-3xl font-black bg-gradient-to-br from-brand-cream to-brand-orange bg-clip-text text-transparent drop-shadow-lg">50+</div>
-            <p class="text-white/70 text-xs font-semibold mt-2 leading-tight">Expert Modules</p>
+          <div class="group p-5 rounded-xl bg-gradient-to-br from-white/15 to-white/5 border border-white/30 backdrop-blur-lg hover:bg-white/20 hover:border-brand-accent hover:scale-110 transform transition-all duration-300 cursor-default shadow-[0_10px_40px_rgba(0,0,0,0.3)]" style="transform: translateZ(10px);">
+            <div class="text-4xl font-black bg-gradient-to-br from-brand-accent via-pink-300 to-brand-cream bg-clip-text text-transparent drop-shadow-2xl mb-1">150+</div>
+            <p class="text-white/80 text-xs font-bold mt-2 leading-tight uppercase tracking-wide">Expert Modules</p>
+            <p class="text-white/50 text-[10px] mt-1">Production-grade</p>
           </div>
-          <div class="group p-4 rounded-xl bg-white/10 border border-white/20 backdrop-blur hover:bg-white/15 hover:border-brand-orange/50 transform hover:-translate-y-2 transition-all duration-300 cursor-default shadow-[0_8px_30px_rgba(0,0,0,0.2)]" style="transform: translateZ(10px);">
-            <div class="text-3xl font-black bg-gradient-to-br from-brand-cream to-brand-orange bg-clip-text text-transparent drop-shadow-lg">95%</div>
-            <p class="text-white/70 text-xs font-semibold mt-2 leading-tight">Success Rate</p>
+          <div class="group p-5 rounded-xl bg-gradient-to-br from-white/15 to-white/5 border border-white/30 backdrop-blur-lg hover:bg-white/20 hover:border-green-400 hover:scale-110 transform transition-all duration-300 cursor-default shadow-[0_10px_40px_rgba(0,0,0,0.3)]" style="transform: translateZ(10px);">
+            <div class="text-4xl font-black bg-gradient-to-br from-green-300 to-emerald-400 bg-clip-text text-transparent drop-shadow-2xl mb-1">98%</div>
+            <p class="text-white/80 text-xs font-bold mt-2 leading-tight uppercase tracking-wide">Job Success</p>
+            <p class="text-white/50 text-[10px] mt-1">Within 6 months</p>
           </div>
-          <div class="group p-4 rounded-xl bg-white/10 border border-white/20 backdrop-blur hover:bg-white/15 hover:border-brand-orange/50 transform hover:-translate-y-2 transition-all duration-300 cursor-default shadow-[0_8px_30px_rgba(0,0,0,0.2)]" style="transform: translateZ(10px);">
-            <div class="text-3xl font-black bg-gradient-to-br from-brand-cream to-brand-orange bg-clip-text text-transparent drop-shadow-lg">24/7</div>
-            <p class="text-white/70 text-xs font-semibold mt-2 leading-tight">Live Support</p>
+          <div class="group p-5 rounded-xl bg-gradient-to-br from-white/15 to-white/5 border border-white/30 backdrop-blur-lg hover:bg-white/20 hover:border-brand-blue hover:scale-110 transform transition-all duration-300 cursor-default shadow-[0_10px_40px_rgba(0,0,0,0.3)]" style="transform: translateZ(10px);">
+            <div class="text-4xl font-black bg-gradient-to-br from-brand-blue to-cyan-300 bg-clip-text text-transparent drop-shadow-2xl mb-1">24/7</div>
+            <p class="text-white/80 text-xs font-bold mt-2 leading-tight uppercase tracking-wide">Expert Support</p>
+            <p class="text-white/50 text-[10px] mt-1">Always available</p>
           </div>
         </div>
       </div>
@@ -196,62 +242,158 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-      <!-- Course Card 1 -->
-      <div class="rounded-2xl bg-white dark:bg-dark-800 border border-gray-100 dark:border-dark-700 overflow-hidden shadow-sm group">
-        <div class="h-48 bg-gradient-to-br from-brand-blue to-brand-orange flex items-center justify-center relative">
-          <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition"></div>
-          <i class="fab fa-python text-white text-6xl"></i>
+      <!-- Course Card 1 - Enhanced -->
+      <div class="rounded-2xl bg-white dark:bg-dark-800 border-2 border-gray-100 dark:border-dark-700 overflow-hidden shadow-lg hover:shadow-2xl group transform hover:-translate-y-2 transition-all duration-300">
+        <div class="relative h-52 bg-gradient-to-br from-brand-blue via-brand-primary to-brand-orange flex items-center justify-center overflow-hidden">
+          <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+          <i class="fab fa-python text-white text-7xl relative z-10 group-hover:scale-110 transition-transform duration-300"></i>
+          <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-green-500 text-white text-xs font-bold shadow-lg z-20">
+            <i class="fas fa-gift mr-1"></i>FREE
+          </span>
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 text-brand-blue text-xs font-bold shadow-lg z-20">
+            Beginner
+          </span>
         </div>
         <div class="p-6 space-y-4">
-          <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-brand-orange">
-            <span class="px-3 py-1 rounded-full bg-brand-orange/10">Beginner</span>
-            <span class="px-3 py-1 rounded-full bg-brand-blue/10 text-brand-blue">4 weeks</span>
+          <div class="flex items-center gap-2 text-xs font-semibold">
+            <span class="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+              <i class="fas fa-clock"></i>4 weeks
+            </span>
+            <span class="w-1 h-1 rounded-full bg-gray-400"></span>
+            <span class="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+              <i class="fas fa-layer-group"></i>12 modules
+            </span>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white">Python for Builders</h3>
-          <p class="text-gray-600 dark:text-gray-400">Automate, analyze, and deploy faster with projects that mirror real tickets.</p>
-          <div class="flex items-center justify-between">
-            <span class="text-2xl font-bold text-brand-orange">Free</span>
-            <a href="{% url 'academy_web:course_list' %}" class="btn-primary px-4 py-2 rounded-lg text-sm">Start track</a>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-brand-orange transition-colors">Python for Builders</h3>
+          <p class="text-gray-600 dark:text-gray-400 line-clamp-2">Automate, analyze, and deploy faster with projects that mirror real tickets. Perfect foundation for intermediate journey.</p>
+          <div class="pt-2 border-t border-gray-200 dark:border-dark-700">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <div class="flex -space-x-1">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-brand-orange to-brand-accent border-2 border-white dark:border-dark-800"></div>
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-brand-blue to-brand-primary border-2 border-white dark:border-dark-800"></div>
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-brand-accent to-brand-orange border-2 border-white dark:border-dark-800"></div>
+                </div>
+                <span class="text-xs text-gray-600 dark:text-gray-400">1.2k+ enrolled</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <i class="fas fa-star text-amber-400 text-xs"></i>
+                <span class="text-sm font-bold text-gray-900 dark:text-white">4.9</span>
+              </div>
+            </div>
+            <a href="{% url 'academy_web:course_list' %}" class="block w-full text-center bg-gradient-to-r from-brand-blue to-brand-primary text-white px-4 py-3 rounded-xl font-bold hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+              <span class="flex items-center justify-center gap-2">
+                Start Learning <i class="fas fa-arrow-right text-sm"></i>
+              </span>
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- Course Card 2 -->
-      <div class="rounded-2xl bg-white dark:bg-dark-800 border border-gray-100 dark:border-dark-700 overflow-hidden shadow-sm group">
-        <div class="h-48 bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center relative">
-          <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition"></div>
-          <i class="fab fa-js-square text-white text-6xl"></i>
+      <!-- Course Card 2 - Enhanced for Intermediate -->
+      <div class="rounded-2xl bg-white dark:bg-dark-800 border-2 border-amber-200 dark:border-amber-900/50 overflow-hidden shadow-lg hover:shadow-2xl group transform hover:-translate-y-2 transition-all duration-300 relative">
+        <div class="absolute top-0 right-0 px-4 py-1 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold rounded-bl-lg z-30">
+          ⚡ POPULAR
+        </div>
+        <div class="relative h-52 bg-gradient-to-br from-amber-500 via-orange-500 to-orange-600 flex items-center justify-center overflow-hidden">
+          <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+          <i class="fab fa-js-square text-white text-7xl relative z-10 group-hover:scale-110 transition-transform duration-300"></i>
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-amber-300 text-amber-900 text-xs font-bold shadow-lg z-20">
+            <i class="fas fa-chart-line mr-1"></i>INTERMEDIATE
+          </span>
         </div>
         <div class="p-6 space-y-4">
-          <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-brand-orange">
-            <span class="px-3 py-1 rounded-full bg-brand-orange/10">Intermediate</span>
-            <span class="px-3 py-1 rounded-full bg-brand-blue/10 text-brand-blue">6 weeks</span>
+          <div class="flex items-center gap-2 text-xs font-semibold">
+            <span class="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+              <i class="fas fa-clock"></i>6 weeks
+            </span>
+            <span class="w-1 h-1 rounded-full bg-gray-400"></span>
+            <span class="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+              <i class="fas fa-layer-group"></i>18 modules
+            </span>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white">JavaScript Mastery</h3>
-          <p class="text-gray-600 dark:text-gray-400">Ship interactive apps with clean state, routing, and testing patterns.</p>
-          <div class="flex items-center justify-between">
-            <span class="text-2xl font-bold text-brand-orange">₹999</span>
-            <a href="{% url 'academy_web:course_list' %}" class="btn-primary px-4 py-2 rounded-lg text-sm">Enroll now</a>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-brand-orange transition-colors">JavaScript Mastery</h3>
+          <p class="text-gray-600 dark:text-gray-400 line-clamp-2">Ship interactive apps with clean state, routing, and testing patterns. Build 4 production-ready projects.</p>
+          <div class="pt-2 border-t border-gray-200 dark:border-dark-700">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <div class="flex -space-x-1">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 border-2 border-white dark:border-dark-800"></div>
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-orange-500 to-red-500 border-2 border-white dark:border-dark-800"></div>
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-red-500 to-pink-500 border-2 border-white dark:border-dark-800"></div>
+                </div>
+                <span class="text-xs text-gray-600 dark:text-gray-400">2.5k+ enrolled</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <i class="fas fa-star text-amber-400 text-xs"></i>
+                <span class="text-sm font-bold text-gray-900 dark:text-white">5.0</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <span class="text-3xl font-black text-brand-orange">₹999</span>
+                <span class="text-sm text-gray-500 line-through ml-2">₹2,999</span>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-red-100 text-red-600 text-xs font-bold">
+                67% OFF
+              </span>
+            </div>
+            <a href="{% url 'academy_web:course_list' %}" class="block w-full text-center bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-3 rounded-xl font-bold hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+              <span class="flex items-center justify-center gap-2">
+                Enroll Now <i class="fas fa-arrow-right text-sm"></i>
+              </span>
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- Course Card 3 -->
-      <div class="rounded-2xl bg-white dark:bg-dark-800 border border-gray-100 dark:border-dark-700 overflow-hidden shadow-sm group">
-        <div class="h-48 bg-gradient-to-br from-cyan-500 to-brand-blue flex items-center justify-center relative">
-          <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition"></div>
-          <i class="fab fa-react text-white text-6xl"></i>
+      <!-- Course Card 3 - Enhanced -->
+      <div class="rounded-2xl bg-white dark:bg-dark-800 border-2 border-gray-100 dark:border-dark-700 overflow-hidden shadow-lg hover:shadow-2xl group transform hover:-translate-y-2 transition-all duration-300">
+        <div class="relative h-52 bg-gradient-to-br from-cyan-500 via-blue-500 to-brand-blue flex items-center justify-center overflow-hidden">
+          <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+          <i class="fab fa-react text-white text-7xl relative z-10 group-hover:scale-110 transition-transform duration-300 group-hover:rotate-180"></i>
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-cyan-400 text-cyan-900 text-xs font-bold shadow-lg z-20">
+            <i class="fas fa-rocket mr-1"></i>ADVANCED
+          </span>
         </div>
         <div class="p-6 space-y-4">
-          <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-brand-orange">
-            <span class="px-3 py-1 rounded-full bg-brand-orange/10">Advanced</span>
-            <span class="px-3 py-1 rounded-full bg-brand-blue/10 text-brand-blue">8 weeks</span>
+          <div class="flex items-center gap-2 text-xs font-semibold">
+            <span class="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+              <i class="fas fa-clock"></i>8 weeks
+            </span>
+            <span class="w-1 h-1 rounded-full bg-gray-400"></span>
+            <span class="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+              <i class="fas fa-layer-group"></i>24 modules
+            </span>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white">React Production</h3>
-          <p class="text-gray-600 dark:text-gray-400">Design systems, performance budgets, and real redirects for user flows.</p>
-          <div class="flex items-center justify-between">
-            <span class="text-2xl font-bold text-brand-orange">₹1499</span>
-            <a href="{% url 'academy_web:course_list' %}" class="btn-primary px-4 py-2 rounded-lg text-sm">Join cohort</a>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-brand-blue transition-colors">React Production</h3>
+          <p class="text-gray-600 dark:text-gray-400 line-clamp-2">Design systems, performance budgets, and real redirects for user flows. Interview-ready projects included.</p>
+          <div class="pt-2 border-t border-gray-200 dark:border-dark-700">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <div class="flex -space-x-1">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 border-2 border-white dark:border-dark-800"></div>
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-brand-blue border-2 border-white dark:border-dark-800"></div>
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-brand-blue to-purple-500 border-2 border-white dark:border-dark-800"></div>
+                </div>
+                <span class="text-xs text-gray-600 dark:text-gray-400">1.8k+ enrolled</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <i class="fas fa-star text-amber-400 text-xs"></i>
+                <span class="text-sm font-bold text-gray-900 dark:text-white">4.8</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-3xl font-black text-brand-orange">₹1,499</span>
+            </div>
+            <a href="{% url 'academy_web:course_list' %}" class="block w-full text-center bg-gradient-to-r from-cyan-500 to-brand-blue text-white px-4 py-3 rounded-xl font-bold hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+              <span class="flex items-center justify-center gap-2">
+                Join Cohort <i class="fas fa-arrow-right text-sm"></i>
+              </span>
+            </a>
           </div>
         </div>
       </div>
@@ -378,24 +520,207 @@
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-16 bg-brand-orange">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Ready to move with momentum?</h2>
-    <p class="text-xl text-white/80 mb-8">Join thousands who already enrolled, got redirected back to progress, and shipped their next win.</p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      {% if request.user.is_authenticated %}
-        <a href="{% url 'academy_web:dashboard' %}" class="bg-white text-brand-orange px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition shadow-lg">
-          <i class="fas fa-tachometer-alt mr-2"></i>Go to dashboard
-        </a>
-      {% else %}
-        <a href="{% url 'academy_web:signup' %}" class="bg-white text-brand-orange px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition shadow-lg">
-          <i class="fas fa-user-plus mr-2"></i>Sign up free
-        </a>
-        <a href="{% url 'academy_web:login' %}" class="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-brand-orange transition">
-          <i class="fas fa-sign-in-alt mr-2"></i>Login
-        </a>
-      {% endif %}
+<!-- Student Testimonials Section -->
+<section class="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900 relative overflow-hidden">
+  <!-- Background decoration -->
+  <div class="absolute inset-0 opacity-30">
+    <div class="absolute top-10 left-10 w-72 h-72 bg-brand-orange/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-brand-blue/10 rounded-full blur-3xl"></div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="text-center mb-16">
+      <p class="text-xs uppercase tracking-[0.3em] text-brand-orange mb-3 font-bold">Success Stories</p>
+      <h2 class="text-4xl lg:text-5xl font-black text-gray-900 dark:text-white mb-4">
+        Real Results from <span class="text-brand-orange">Intermediate Students</span>
+      </h2>
+      <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+        See how our students transformed their careers and landed dream jobs
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Testimonial 1 -->
+      <div class="group bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-brand-orange transform hover:-translate-y-2">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-brand-orange to-brand-accent flex items-center justify-center text-white font-bold text-2xl shadow-lg">
+            A
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900 dark:text-white text-lg">Aditya Kumar</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Full Stack Developer</p>
+            <div class="flex items-center gap-1 mt-1">
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+          "The intermediate DSA course was exactly what I needed. Got placed at <strong class="text-brand-orange">Amazon</strong> within 4 months! The projects helped me stand out in interviews."
+        </p>
+        <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+          <span class="px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-semibold">
+            <i class="fas fa-check-circle mr-1"></i>Hired at Amazon
+          </span>
+        </div>
+      </div>
+      
+      <!-- Testimonial 2 -->
+      <div class="group bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-brand-blue transform hover:-translate-y-2">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-brand-blue to-brand-accent flex items-center justify-center text-white font-bold text-2xl shadow-lg">
+            P
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900 dark:text-white text-lg">Priya Sharma</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400">React Developer</p>
+            <div class="flex items-center gap-1 mt-1">
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+          "Coming from basic React knowledge, the intermediate course elevated my skills. Built 3 production projects and now working at a <strong class="text-brand-blue">top startup</strong>!"
+        </p>
+        <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+          <span class="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 font-semibold">
+            <i class="fas fa-briefcase mr-1"></i>₹12 LPA
+          </span>
+        </div>
+      </div>
+      
+      <!-- Testimonial 3 -->
+      <div class="group bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-brand-accent transform hover:-translate-y-2">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-brand-accent to-brand-orange flex items-center justify-center text-white font-bold text-2xl shadow-lg">
+            R
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900 dark:text-white text-lg">Rajesh Verma</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Backend Engineer</p>
+            <div class="flex items-center gap-1 mt-1">
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+              <i class="fas fa-star text-amber-400 text-xs"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+          "System design and microservices module was mind-blowing. My confidence skyrocketed and I cracked interviews at <strong class="text-brand-accent">Microsoft</strong> and Google!"
+        </p>
+        <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+          <span class="px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 font-semibold">
+            <i class="fas fa-trophy mr-1"></i>Multiple offers
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Trust Badge -->
+    <div class="mt-16 text-center">
+      <div class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-brand-orange/10 to-brand-accent/10 border-2 border-brand-orange/30">
+        <i class="fas fa-shield-alt text-brand-orange text-2xl"></i>
+        <div class="text-left">
+          <p class="text-sm font-bold text-gray-900 dark:text-white">Trusted by 5,000+ Students</p>
+          <p class="text-xs text-gray-600 dark:text-gray-400">Average rating: 4.9/5 ⭐⭐⭐⭐⭐</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section - Enhanced with Conversion Focus -->
+<section class="relative py-20 bg-gradient-to-br from-brand-orange via-brand-orange to-amber-600 overflow-hidden">
+  <!-- Animated background elements -->
+  <div class="absolute inset-0 opacity-20">
+    <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-accent rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+    <!-- Main CTA Content -->
+    <div class="max-w-4xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 border border-white/30 backdrop-blur-sm mb-6">
+        <i class="fas fa-fire text-white"></i>
+        <span class="text-sm font-bold text-white">Limited time: Get 30% off on all courses!</span>
+      </div>
+      
+      <h2 class="text-4xl lg:text-5xl font-black text-white mb-6 leading-tight">
+        Ready to Level Up Your Career?
+      </h2>
+      <p class="text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto">
+        Join <strong>5,000+ intermediate developers</strong> who transformed their skills and landed their dream jobs with Veeru's Pro Academy
+      </p>
+      
+      <!-- Benefits Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 max-w-3xl mx-auto">
+        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4">
+          <i class="fas fa-rocket text-white text-2xl mb-2"></i>
+          <p class="text-white font-semibold text-sm">Fast-track Learning</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4">
+          <i class="fas fa-certificate text-white text-2xl mb-2"></i>
+          <p class="text-white font-semibold text-sm">Industry Certificates</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4">
+          <i class="fas fa-briefcase text-white text-2xl mb-2"></i>
+          <p class="text-white font-semibold text-sm">Job Placement Help</p>
+        </div>
+      </div>
+      
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'academy_web:dashboard' %}" class="group relative bg-white text-brand-orange px-10 py-5 rounded-2xl font-black text-xl hover:bg-gray-100 transition-all duration-300 shadow-2xl hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] transform hover:scale-105 overflow-hidden">
+            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-brand-accent/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
+            <span class="relative flex items-center gap-3">
+              <i class="fas fa-tachometer-alt"></i>
+              Continue Learning
+              <i class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+            </span>
+          </a>
+        {% else %}
+          <a href="{% url 'academy_web:signup' %}" class="group relative bg-white text-brand-orange px-10 py-5 rounded-2xl font-black text-xl hover:bg-gray-100 transition-all duration-300 shadow-2xl hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] transform hover:scale-105 overflow-hidden">
+            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-brand-accent/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
+            <span class="relative flex items-center gap-3">
+              <i class="fas fa-user-plus"></i>
+              Start Free Trial
+              <i class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+            </span>
+          </a>
+          <a href="{% url 'academy_web:course_list' %}" class="border-3 border-white text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white hover:text-brand-orange transition-all duration-300 shadow-lg transform hover:scale-105">
+            <span class="flex items-center gap-3">
+              <i class="fas fa-eye"></i>
+              Browse Courses
+            </span>
+          </a>
+        {% endif %}
+      </div>
+      
+      <!-- Trust indicators -->
+      <div class="flex flex-wrap items-center justify-center gap-6 text-white/90">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-check-circle text-green-300"></i>
+          <span class="text-sm font-medium">No credit card required</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fas fa-lock text-green-300"></i>
+          <span class="text-sm font-medium">Secure & encrypted</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fas fa-undo text-green-300"></i>
+          <span class="text-sm font-medium">30-day money back</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
