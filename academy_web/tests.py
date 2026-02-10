@@ -171,8 +171,8 @@ class SmokeFlowTests(TestCase):
 
         detail = self._get("academy_web:course_detail", slug=self.paid_course.slug)
         # Check for payment-related elements
-        self.assertContains(detail, "Enroll now")
-        self.assertContains(detail, "payment proof")
+        self.assertContains(detail, "Enroll Now")
+        self.assertContains(detail, "Secure payment")
 
         # Enroll should be blocked for paid courses until entitlement exists
         enroll_resp = self._post("academy_web:course_enroll", data={}, slug=self.paid_course.slug)
