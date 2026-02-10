@@ -4,14 +4,53 @@
 {% block title %}Projects - Veeru's Pro Academy{% endblock %}
 
 {% block content %}
-<!-- Hero -->
-<section class="bg-brand-orange text-white py-16">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center">
-      <h1 class="text-4xl lg:text-5xl font-bold mb-4">Student Projects</h1>
-      <p class="text-xl text-white/80 max-w-2xl mx-auto">
-        Explore real-world projects built by our students. Get inspired and see what you can achieve.
+<!-- Hero - Enhanced -->
+<section class="relative overflow-hidden bg-gradient-to-br from-brand-orange via-brand-orange to-amber-600 text-white py-20">
+  <!-- Animated background -->
+  <div class="absolute inset-0 opacity-20">
+    <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-accent rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="text-center max-w-4xl mx-auto">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/20 border-2 border-white/30 backdrop-blur-sm mb-6">
+        <i class="fas fa-code-branch text-white"></i>
+        <span class="text-sm font-bold text-white">Portfolio-Ready Projects</span>
+      </div>
+      
+      <h1 class="text-5xl lg:text-6xl font-black mb-6 leading-tight">
+        Build Projects That <span class="text-brand-accent">Impress Employers</span>
+      </h1>
+      <p class="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto mb-10 leading-relaxed">
+        Explore <strong>real-world projects</strong> built by our students and get inspired. Purchase complete project guides with <strong>source code, documentation, and deployment instructions</strong>.
       </p>
+      
+      <!-- Trust indicators -->
+      <div class="flex flex-wrap items-center justify-center gap-8 text-white/90">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-project-diagram text-2xl"></i>
+          <div class="text-left">
+            <p class="text-sm font-medium">50+ Projects</p>
+            <p class="text-xs text-white/70">Production-ready</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fas fa-download text-2xl"></i>
+          <div class="text-left">
+            <p class="text-sm font-medium">Full Source Code</p>
+            <p class="text-xs text-white/70">Well documented</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fas fa-rocket text-2xl"></i>
+          <div class="text-left">
+            <p class="text-sm font-medium">Deployment Guide</p>
+            <p class="text-xs text-white/70">Step-by-step</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -64,16 +103,29 @@
   // Auto-refresh projects every 30 seconds
   setInterval(loadProjects, 30000);
 </script>
-<!-- Filters -->
-<section class="py-8 bg-gray-50 dark:bg-dark-900 border-b border-gray-200 dark:border-dark-700">
+<!-- Filters - Enhanced -->
+<section class="py-8 bg-white dark:bg-dark-800 border-b-2 border-brand-orange/30 shadow-lg">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-wrap items-center gap-4">
-      <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Filter by:</span>
-      <div class="flex flex-wrap gap-2">
-        <button class="px-4 py-2 bg-brand-orange text-white rounded-full text-sm font-medium">All Projects</button>
-        <button class="px-4 py-2 bg-white dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium hover:bg-gray-100 dark:hover:bg-dark-600 transition">Web Development</button>
-        <button class="px-4 py-2 bg-white dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium hover:bg-gray-100 dark:hover:bg-dark-600 transition">Data Science</button>
-        <button class="px-4 py-2 bg-white dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium hover:bg-gray-100 dark:hover:bg-dark-600 transition">Mobile Apps</button>
+      <span class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wide flex items-center gap-2">
+        <i class="fas fa-filter"></i>Filter by Category:
+      </span>
+      <div class="flex flex-wrap gap-3">
+        <button class="px-6 py-3 bg-gradient-to-r from-brand-orange to-brand-accent text-white rounded-full text-sm font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
+          <i class="fas fa-globe mr-2"></i>All Projects
+        </button>
+        <button class="px-6 py-3 bg-white dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-full text-sm font-bold border-2 border-gray-200 dark:border-dark-600 hover:border-brand-orange hover:text-brand-orange transition-all shadow-md">
+          <i class="fas fa-laptop-code mr-2"></i>Web Development
+        </button>
+        <button class="px-6 py-3 bg-white dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-full text-sm font-bold border-2 border-gray-200 dark:border-dark-600 hover:border-brand-blue hover:text-brand-blue transition-all shadow-md">
+          <i class="fas fa-chart-bar mr-2"></i>Data Science
+        </button>
+        <button class="px-6 py-3 bg-white dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-full text-sm font-bold border-2 border-gray-200 dark:border-dark-600 hover:border-green-500 hover:text-green-600 transition-all shadow-md">
+          <i class="fas fa-mobile-alt mr-2"></i>Mobile Apps
+        </button>
+        <button class="px-6 py-3 bg-white dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-full text-sm font-bold border-2 border-gray-200 dark:border-dark-600 hover:border-purple-500 hover:text-purple-600 transition-all shadow-md">
+          <i class="fas fa-robot mr-2"></i>AI/ML
+        </button>
       </div>
     </div>
   </div>
@@ -88,16 +140,61 @@
   </div>
 </section>
 
-<!-- CTA -->
-<section class="py-16 bg-brand-orange">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Ready to Build Your Project?</h2>
-    <p class="text-xl text-white/80 mb-8">Learn the skills you need to create amazing projects.</p>
-    <a href="{% url 'academy_web:course_list' %}" class="inline-flex items-center px-8 py-4 bg-white text-brand-orange font-bold rounded-lg hover:bg-gray-100 transition shadow-lg">
-      Browse Courses
-      <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-      </svg>
+<!-- CTA - Enhanced -->
+<section class="relative py-20 bg-gradient-to-br from-brand-blue via-brand-primary to-brand-dark overflow-hidden">
+  <!-- Animated background -->
+  <div class="absolute inset-0 opacity-20">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-brand-accent rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+  </div>
+  
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+    <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-6">
+      <i class="fas fa-graduation-cap text-white"></i>
+      <span class="text-sm font-bold text-white">Build Your Portfolio</span>
+    </div>
+    
+    <h2 class="text-4xl lg:text-5xl font-black text-white mb-6 leading-tight">
+      Ready to Build <span class="text-brand-accent">Your Own Project?</span>
+    </h2>
+    <p class="text-xl lg:text-2xl text-white/90 mb-10 max-w-3xl mx-auto">
+      Learn the <strong>exact skills</strong> you need to create amazing projects that stand out in interviews and <strong>land you your dream job!</strong>
+    </p>
+    
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+      <a href="{% url 'academy_web:course_list' %}" class="group relative inline-flex items-center bg-white text-brand-blue px-10 py-5 rounded-2xl font-black text-xl hover:bg-gray-100 transition-all duration-300 shadow-2xl hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] transform hover:scale-105 overflow-hidden">
+        <span class="absolute inset-0 bg-gradient-to-r from-transparent via-brand-accent/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
+        <span class="relative flex items-center gap-3">
+          <i class="fas fa-book-open"></i>
+          Browse Courses
+          <i class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+        </span>
+      </a>
+      <a href="{% url 'academy_web:signup' %}" class="border-3 border-white text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-white hover:text-brand-blue transition-all duration-300 shadow-lg transform hover:scale-105">
+        <span class="flex items-center gap-3">
+          <i class="fas fa-user-plus"></i>
+          Start Free
+        </span>
+      </a>
+    </div>
+    
+    <!-- Benefits -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+      <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-5">
+        <i class="fas fa-code text-white text-3xl mb-2"></i>
+        <p class="text-white font-bold text-sm">Hands-on Projects</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-5">
+        <i class="fas fa-users text-white text-3xl mb-2"></i>
+        <p class="text-white font-bold text-sm">Expert Mentorship</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-5">
+        <i class="fas fa-briefcase text-white text-3xl mb-2"></i>
+        <p class="text-white font-bold text-sm">Job Placement</p>
+      </div>
+    </div>
+  </div>
+</section>
     </a>
   </div>
 </section>
