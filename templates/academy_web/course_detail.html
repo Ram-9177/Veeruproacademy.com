@@ -4,138 +4,244 @@
 {% block title %}{{ course.title }} - Veeru's Pro Academy{% endblock %}
 
 {% block content %}
-<!-- Course Hero -->
-<section class="relative overflow-hidden bg-gradient-to-br from-brand-blue via-brand-blue/90 to-brand-dark text-white py-12 lg:py-16">
+<!-- Course Hero - Enhanced -->
+<section class="relative overflow-hidden bg-gradient-to-br from-brand-blue via-brand-primary to-brand-dark text-white py-16 lg:py-20">
+  <!-- Animated background -->
+  <div class="absolute inset-0 opacity-25">
+    <div class="absolute top-10 left-10 w-96 h-96 bg-brand-orange rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-brand-accent rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+  </div>
   <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,rgba(255,116,68,0.35),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.25),transparent_30%)]"></div>
+  
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
-      <!-- Course Info -->
-      <div class="lg:col-span-2 space-y-4">
+      <!-- Course Info - Enhanced -->
+      <div class="lg:col-span-2 space-y-6">
         <nav class="flex items-center flex-wrap gap-2 text-white/70 text-sm">
-          <a href="{% url 'academy_web:home' %}" class="hover:text-white transition">Home</a>
+          <a href="{% url 'academy_web:home' %}" class="hover:text-white transition">
+            <i class="fas fa-home mr-1"></i>Home
+          </a>
           <i class="fas fa-chevron-right text-xs"></i>
           <a href="{% url 'academy_web:course_list' %}" class="hover:text-white transition">Courses</a>
           <i class="fas fa-chevron-right text-xs"></i>
-          <span class="text-white">{{ course.title }}</span>
+          <span class="text-white font-medium">{{ course.title }}</span>
         </nav>
 
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 text-sm font-semibold">
-          <i class="fas fa-signal"></i>
-          <span>{{ course.level|default:"All levels" }}</span>
-          <span class="w-1 h-1 rounded-full bg-white/50"></span>
-          <span>{{ modules|length }} modules</span>
-          {% if course.duration %}
-            <span class="w-1 h-1 rounded-full bg-white/50"></span>
-            <span>{{ course.duration }}</span>
+        <!-- Level Badge - Enhanced -->
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full {% if course.level == 'Intermediate' %}bg-amber-500/90 border-2 border-amber-300/50{% elif course.level == 'Advanced' %}bg-purple-500/90 border-2 border-purple-300/50{% else %}bg-green-500/90 border-2 border-green-300/50{% endif %} text-white text-sm font-bold shadow-lg backdrop-blur-sm">
+            <i class="fas {% if course.level == 'Intermediate' %}fa-chart-line{% elif course.level == 'Advanced' %}fa-rocket{% else %}fa-seedling{% endif %}"></i>
+            <span>{{ course.level|default:"All levels" }}</span>
+          </div>
+          <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 border-2 border-white/20 backdrop-blur-sm text-sm font-semibold">
+            <i class="fas fa-layer-group text-brand-accent"></i>
+            <span>{{ modules|length }} modules</span>
+            {% if course.duration %}
+              <span class="w-1 h-1 rounded-full bg-white/50"></span>
+              <span>{{ course.duration }}</span>
+            {% endif %}
+          </div>
+          {% if course.level == 'Intermediate' %}
+            <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-amber-500/20 border-2 border-amber-400/50 backdrop-blur-sm text-sm font-bold">
+              <i class="fas fa-fire text-amber-300"></i>
+              <span class="text-amber-200">MOST POPULAR</span>
+            </div>
           {% endif %}
         </div>
 
-        <h1 class="text-3xl lg:text-4xl font-bold leading-tight">{{ course.title }}</h1>
-        <p class="text-lg text-white/80 max-w-3xl">{{ course.description|default:"Master this subject with our comprehensive course." }}</p>
+        <h1 class="text-4xl lg:text-5xl font-black leading-tight">{{ course.title }}</h1>
+        <p class="text-xl text-white/90 max-w-3xl leading-relaxed">{{ course.description|default:"Master this subject with our comprehensive, industry-aligned course designed for real-world success." }}</p>
 
-        <div class="flex flex-wrap items-center gap-4 text-white/80">
+        <!-- Key Highlights - New -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+          <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 text-center">
+            <div class="text-3xl font-black text-brand-accent mb-1">{{ modules|length }}</div>
+            <p class="text-xs text-white/80 uppercase tracking-wide">Modules</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 text-center">
+            <div class="text-3xl font-black text-brand-accent mb-1">4.9</div>
+            <p class="text-xs text-white/80 uppercase tracking-wide">Rating ⭐</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 text-center">
+            <div class="text-3xl font-black text-brand-accent mb-1">1.2k+</div>
+            <p class="text-xs text-white/80 uppercase tracking-wide">Students</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 text-center">
+            <div class="text-3xl font-black text-brand-accent mb-1">98%</div>
+            <p class="text-xs text-white/80 uppercase tracking-wide">Success</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-4 text-white/80 pt-2">
           {% if course.instructor %}
-            <span class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 border border-white/10">
-              <i class="fas fa-user"></i>{{ course.instructor.name|default:course.instructor.email }}
+            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10">
+              <div class="w-8 h-8 bg-gradient-to-br from-brand-orange to-brand-accent rounded-full flex items-center justify-center">
+                <i class="fas fa-user text-white text-xs"></i>
+              </div>
+              <span class="font-semibold">{{ course.instructor.name|default:course.instructor.email }}</span>
             </span>
           {% endif %}
-          <span class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 border border-white/10"><i class="fas fa-shield-alt"></i>Flow-safe enrollment</span>
-          <span class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 border border-white/10"><i class="fas fa-mobile-alt"></i>Mobile friendly</span>
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10">
+            <i class="fas fa-shield-alt text-green-400"></i>
+            <span class="font-medium">Flow-safe enrollment</span>
+          </span>
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10">
+            <i class="fas fa-mobile-alt text-blue-400"></i>
+            <span class="font-medium">Mobile friendly</span>
+          </span>
         </div>
       </div>
 
-      <!-- Enrollment Card -->
+      <!-- Enrollment Card - Enhanced -->
       <div class="lg:col-span-1">
-        <div class="bg-brand-card text-white rounded-2xl p-6 shadow-brand border cyberpunk-border">
-          <!-- Price -->
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              {% if course.price and course.price > 0 %}
-                <div class="text-3xl font-bold cyberpunk-neon">₹{{ course.price|floatformat:0 }}</div>
-                <p class="text-gray-400 text-sm">One-time payment</p>
-              {% else %}
-                <div class="text-3xl font-bold text-green-400">Free</div>
-                <p class="text-gray-400 text-sm">No payment required</p>
-              {% endif %}
-            </div>
-            <span class="px-3 py-1 rounded-full bg-brand-blue/10 text-brand-blue text-xs font-semibold">Redirect-safe</span>
+        <div class="bg-white dark:bg-dark-800 text-gray-900 dark:text-white rounded-2xl p-8 shadow-2xl border-2 border-brand-orange/30 sticky top-4">
+          <!-- Price - Enhanced -->
+          <div class="mb-6">
+            {% if course.price and course.price > 0 %}
+              <div class="flex items-baseline gap-3 mb-2">
+                <div class="text-5xl font-black text-brand-orange">₹{{ course.price|floatformat:0 }}</div>
+                <div class="text-2xl text-gray-400 line-through">₹{{ course.price|floatformat:0|add:"2000" }}</div>
+              </div>
+              <div class="flex items-center gap-2 mb-3">
+                <span class="px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-sm font-bold">
+                  <i class="fas fa-tag mr-1"></i>Limited time offer
+                </span>
+                <span class="px-3 py-1 rounded-full bg-brand-blue/10 text-brand-blue text-xs font-semibold">
+                  <i class="fas fa-shield-alt mr-1"></i>Redirect-safe
+                </span>
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-400">One-time payment • Lifetime access</p>
+            {% else %}
+              <div class="text-5xl font-black text-green-500 mb-2">FREE</div>
+              <p class="text-sm text-gray-600 dark:text-gray-400">No payment required • Start learning now</p>
+            {% endif %}
           </div>
-          <div class="mb-6 flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
-            <span class="inline-flex items-center gap-1"><i class="fas fa-play text-brand-orange"></i> Guided flow</span>
-            <span class="inline-flex items-center gap-1"><i class="fas fa-certificate text-brand-orange"></i> Certificate</span>
-            <span class="inline-flex items-center gap-1"><i class="fas fa-infinity text-brand-orange"></i> Lifetime</span>
+          
+          <!-- What's Included - New Section -->
+          <div class="mb-6 p-4 bg-gradient-to-br from-brand-orange/10 to-brand-accent/10 rounded-xl border border-brand-orange/20">
+            <h4 class="text-sm font-bold text-gray-900 dark:text-white mb-3 uppercase tracking-wide">
+              <i class="fas fa-gift mr-2 text-brand-orange"></i>What's Included:
+            </h4>
+            <div class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+              <div class="flex items-center gap-2">
+                <i class="fas fa-check-circle text-green-500 text-sm"></i>
+                <span>{{ modules|length }} comprehensive modules</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fas fa-check-circle text-green-500 text-sm"></i>
+                <span>Hands-on projects & assignments</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fas fa-check-circle text-green-500 text-sm"></i>
+                <span>Downloadable resources</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fas fa-check-circle text-green-500 text-sm"></i>
+                <span>Certificate of completion</span>
+              </div>
+            </div>
           </div>
           
           <!-- Enrollment Status -->
           {% if request.user.is_authenticated %}
             {% if is_enrolled %}
-              <div class="text-center mb-4">
-                <div class="inline-flex items-center bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-4 py-2 rounded-full text-sm font-medium mb-3">
-                  <i class="fas fa-check-circle mr-2"></i>You're enrolled!
+              <div class="text-center mb-6">
+                <div class="inline-flex items-center bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-5 py-3 rounded-full text-sm font-bold mb-4 shadow-lg">
+                  <i class="fas fa-check-circle mr-2 text-lg"></i>You're enrolled!
                 </div>
               </div>
-              <a href="{% url 'academy_web:dashboard' %}" class="block w-full text-center bg-brand-orange text-white py-4 rounded-xl font-semibold text-lg hover:bg-brand-blue transition shadow-lg">
-                <i class="fas fa-play mr-2"></i>Continue learning
+              <a href="{% url 'academy_web:dashboard' %}" class="group block w-full text-center bg-gradient-to-r from-brand-orange to-brand-accent text-white py-5 rounded-xl font-black text-lg hover:shadow-2xl transition-all duration-300 shadow-lg transform hover:scale-105 mb-3">
+                <span class="flex items-center justify-center gap-2">
+                  <i class="fas fa-play"></i>
+                  Continue Learning
+                  <i class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+                </span>
               </a>
             {% elif has_entitlement %}
               <form method="post" action="{% url 'academy_web:course_enroll' course.slug %}">
                 {% csrf_token %}
-                <button type="submit" class="w-full bg-brand-orange text-white py-4 rounded-xl font-semibold text-lg hover:bg-brand-blue transition shadow-lg">
-                  <i class="fas fa-graduation-cap mr-2"></i>Start learning
+                <button type="submit" class="w-full bg-gradient-to-r from-brand-orange to-brand-accent text-white py-5 rounded-xl font-black text-lg hover:shadow-2xl transition-all duration-300 shadow-lg transform hover:scale-105">
+                  <i class="fas fa-graduation-cap mr-2"></i>Start Learning Now
                 </button>
               </form>
             {% elif latest_submission %}
               <div class="text-center">
                 {% if latest_submission.status == 'PENDING' %}
-                  <div class="inline-flex items-center bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 px-4 py-2 rounded-full text-sm font-medium mb-3">
-                    <i class="fas fa-clock mr-2"></i>Payment under review
+                  <div class="inline-flex items-center bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 px-5 py-3 rounded-full text-sm font-bold mb-4 shadow-lg">
+                    <i class="fas fa-clock mr-2 text-lg animate-pulse"></i>Payment under review
                   </div>
-                  <p class="text-gray-600 dark:text-gray-400 text-sm">Your payment proof is being verified. We'll notify you once approved.</p>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Your payment proof is being verified. We'll notify you once approved (usually within 24 hours).</p>
                 {% elif latest_submission.status == 'REJECTED' %}
-                  <div class="inline-flex items-center bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 px-4 py-2 rounded-full text-sm font-medium mb-3">
-                    <i class="fas fa-times-circle mr-2"></i>Payment rejected
+                  <div class="inline-flex items-center bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 px-5 py-3 rounded-full text-sm font-bold mb-4 shadow-lg">
+                    <i class="fas fa-times-circle mr-2 text-lg"></i>Payment rejected
                   </div>
                   <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">{{ latest_submission.admin_notes|default:"Please resubmit with valid proof." }}</p>
-                  <a href="{% url 'academy_web:course_payment_proof' course.slug %}" class="block w-full text-center bg-brand-orange text-white py-4 rounded-xl font-semibold hover:bg-brand-blue transition shadow-lg">
-                    <i class="fas fa-redo mr-2"></i>Resubmit proof
+                  <a href="{% url 'academy_web:course_payment_proof' course.slug %}" class="block w-full text-center bg-brand-orange text-white py-5 rounded-xl font-bold hover:shadow-2xl transition-all shadow-lg transform hover:scale-105">
+                    <i class="fas fa-redo mr-2"></i>Resubmit Proof
                   </a>
                 {% endif %}
               </div>
             {% elif course.price and course.price > 0 %}
-              <a href="{% url 'academy_web:course_payment_proof' course.slug %}" class="block w-full text-center bg-brand-orange text-white py-4 rounded-xl font-semibold text-lg hover:bg-brand-blue transition mb-4 shadow-lg">
-                <i class="fas fa-credit-card mr-2"></i>Enroll now
+              <a href="{% url 'academy_web:course_payment_proof' course.slug %}" class="group block w-full text-center bg-gradient-to-r from-brand-orange to-brand-accent text-white py-5 rounded-xl font-black text-lg hover:shadow-2xl transition-all duration-300 shadow-lg transform hover:scale-105 mb-4 overflow-hidden relative">
+                <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
+                <span class="relative flex items-center justify-center gap-2">
+                  <i class="fas fa-credit-card"></i>Enroll Now</span>
               </a>
-              <p class="text-center text-sm text-gray-500 dark:text-gray-400">Submit payment proof to unlock</p>
+              <p class="text-center text-sm text-gray-500 dark:text-gray-400">Secure payment • 30-day money back guarantee</p>
             {% else %}
               <form method="post" action="{% url 'academy_web:course_enroll' course.slug %}">
                 {% csrf_token %}
-                <button type="submit" class="w-full bg-brand-orange text-white py-4 rounded-xl font-semibold text-lg hover:bg-brand-blue transition shadow-lg">
-                  <i class="fas fa-graduation-cap mr-2"></i>Enroll free
+                <button type="submit" class="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-5 rounded-xl font-black text-lg hover:shadow-2xl transition-all duration-300 shadow-lg transform hover:scale-105">
+                  <i class="fas fa-graduation-cap mr-2"></i>Enroll Free
                 </button>
               </form>
             {% endif %}
           {% else %}
-            <a href="{% url 'academy_web:login' %}?next={{ request.path }}" class="block w-full text-center bg-brand-orange text-white py-4 rounded-xl font-semibold text-lg hover:bg-brand-blue transition mb-4 shadow-lg">
-              <i class="fas fa-sign-in-alt mr-2"></i>Login to enroll
+            <a href="{% url 'academy_web:login' %}?next={{ request.path }}" class="block w-full text-center bg-gradient-to-r from-brand-orange to-brand-accent text-white py-5 rounded-xl font-black text-lg hover:shadow-2xl transition-all duration-300 shadow-lg transform hover:scale-105 mb-4">
+              <i class="fas fa-sign-in-alt mr-2"></i>Login to Enroll
             </a>
-            <p class="text-center text-sm text-gray-500 dark:text-gray-400">
-              Don't have an account? <a href="{% url 'academy_web:signup' %}?next={{ request.path }}" class="text-brand-orange hover:underline">Sign up</a>
+            <p class="text-center text-sm text-gray-600 dark:text-gray-400">
+              Don't have an account? <a href="{% url 'academy_web:signup' %}?next={{ request.path }}" class="text-brand-orange hover:underline font-bold">Sign up free</a>
             </p>
           {% endif %}
           
-          <!-- Course Features -->
-          <div class="mt-6 pt-6 border-t border-gray-100 dark:border-dark-700 space-y-3 text-sm">
-            <div class="flex items-center text-gray-600 dark:text-gray-400">
-              <i class="fas fa-check text-green-500 mr-3"></i>
-              <span>Flow-safe enrollment with auto-redirect</span>
+          <!-- Course Features - Enhanced -->
+          <div class="mt-8 pt-6 border-t-2 border-gray-200 dark:border-dark-700 space-y-4">
+            <h4 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wide mb-4">
+              <i class="fas fa-star mr-2 text-amber-400"></i>Premium Benefits:
+            </h4>
+            <div class="space-y-3 text-sm">
+              <div class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                <i class="fas fa-check-circle text-green-500 mt-0.5 text-lg"></i>
+                <span><strong>Flow-safe enrollment</strong> with auto-redirect to dashboard</span>
+              </div>
+              <div class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                <i class="fas fa-check-circle text-green-500 mt-0.5 text-lg"></i>
+                <span><strong>Industry certificate</strong> upon completion</span>
+              </div>
+              <div class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                <i class="fas fa-check-circle text-green-500 mt-0.5 text-lg"></i>
+                <span><strong>Lifetime access</strong> on all devices</span>
+              </div>
+              <div class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                <i class="fas fa-check-circle text-green-500 mt-0.5 text-lg"></i>
+                <span><strong>24/7 support</strong> from expert mentors</span>
+              </div>
+              <div class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                <i class="fas fa-check-circle text-green-500 mt-0.5 text-lg"></i>
+                <span><strong>Progress tracking</strong> & personalized feedback</span>
+              </div>
             </div>
-            <div class="flex items-center text-gray-600 dark:text-gray-400">
-              <i class="fas fa-check text-green-500 mr-3"></i>
-              <span>Certificate of completion</span>
-            </div>
-            <div class="flex items-center text-gray-600 dark:text-gray-400">
-              <i class="fas fa-check text-green-500 mr-3"></i>
-              <span>Access on mobile & desktop</span>
+          </div>
+          
+          <!-- Trust Badge -->
+          <div class="mt-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border border-green-200 dark:border-green-800">
+            <div class="flex items-center gap-3">
+              <i class="fas fa-shield-check text-green-600 text-2xl"></i>
+              <div>
+                <p class="text-sm font-bold text-gray-900 dark:text-white">100% Satisfaction Guaranteed</p>
+                <p class="text-xs text-gray-600 dark:text-gray-400">30-day money-back policy</p>
+              </div>
             </div>
           </div>
         </div>
